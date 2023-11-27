@@ -4,10 +4,39 @@
  */
 package main;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
 /**
  *
  * @author acer_
  */
 public class KoneksiDatabase {
-    
+    private static KoneksiDatabase instance;
+    private Connection connection;
+
+    private KoneksiDatabase() {
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            String url = "jdbc:mysql://localhost:3306/pointofsales";
+            String username = "root";
+            String password = "";
+            connection = DriverManager.getConnection(url, username, password);
+        }catch (ClassNotFoundException | SQLException ex) {
+            System.out.println("Koneksi gagal!");
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    public static KoneksiDatabase getInstance() {
+        if (instance == null) {
+            instance = new KoneksiDatabase();
+        }
+        return instance;
+    }
+
+    public Connection getConnection() {
+        return connection;
+    }
 }
