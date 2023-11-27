@@ -25,7 +25,7 @@ public class KoneksiDatabase {
             connection = DriverManager.getConnection(url, username, password);
         }catch (ClassNotFoundException | SQLException ex) {
             System.out.println("Koneksi gagal!");
-            System.out.println(ex.getMessage());
+            ex.printStackTrace();
         }
     }
 
