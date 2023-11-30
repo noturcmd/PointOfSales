@@ -5,21 +5,24 @@
 package main;
 
 import java.awt.Color;
-import org.tinygroup.placeholder.PlaceholderMainClass;
+import java.sql.*;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author acer_
  */
 public class login extends javax.swing.JFrame {
-    /**
-     * Creates new form login
-     */
+    private KoneksiDatabase dbConnection;
+    
+    
     public login() {
+        dbConnection = KoneksiDatabase.getInstance();
         initComponents();
         setLocationRelativeTo(null);
         inputIDLogin.setForeground(new Color(153, 153, 153));
         inputPasswordLogin.setForeground(new Color(153, 153, 153));
+        inputPasswordLogin.setEchoChar((char)0);
     }
 
     /**
@@ -34,10 +37,11 @@ public class login extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         idLogin = new javax.swing.JLabel();
         inputIDLogin = new javax.swing.JTextField();
-        inputPasswordLogin = new javax.swing.JTextField();
         idLogin1 = new javax.swing.JLabel();
         buttonLogin = new javax.swing.JButton();
         buttonExit = new javax.swing.JButton();
+        tampilkanPass = new javax.swing.JCheckBox();
+        inputPasswordLogin = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Login Admin");
@@ -59,7 +63,30 @@ public class login extends javax.swing.JFrame {
             }
         });
 
-        inputPasswordLogin.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
+        idLogin1.setFont(new java.awt.Font("Tw Cen MT", 1, 18)); // NOI18N
+        idLogin1.setText("Password");
+
+        buttonLogin.setText("Login");
+        buttonLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonLoginActionPerformed(evt);
+            }
+        });
+
+        buttonExit.setText("Keluar");
+        buttonExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonExitActionPerformed(evt);
+            }
+        });
+
+        tampilkanPass.setText("tampilkan password");
+        tampilkanPass.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tampilkanPassActionPerformed(evt);
+            }
+        });
+
         inputPasswordLogin.setText("Masukkan Password");
         inputPasswordLogin.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -67,23 +94,6 @@ public class login extends javax.swing.JFrame {
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
                 inputPasswordLoginFocusLost(evt);
-            }
-        });
-        inputPasswordLogin.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                inputPasswordLoginActionPerformed(evt);
-            }
-        });
-
-        idLogin1.setFont(new java.awt.Font("Tw Cen MT", 1, 18)); // NOI18N
-        idLogin1.setText("Password");
-
-        buttonLogin.setText("Login");
-
-        buttonExit.setText("Keluar");
-        buttonExit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonExitActionPerformed(evt);
             }
         });
 
@@ -97,19 +107,20 @@ public class login extends javax.swing.JFrame {
                         .addGap(161, 161, 161)
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(174, 174, 174)
+                        .addComponent(buttonExit)
+                        .addGap(18, 18, 18)
+                        .addComponent(buttonLogin))
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(72, 72, 72)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(idLogin)
                             .addComponent(idLogin1))
                         .addGap(41, 41, 41)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(inputIDLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(inputPasswordLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(174, 174, 174)
-                        .addComponent(buttonExit)
-                        .addGap(18, 18, 18)
-                        .addComponent(buttonLogin)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(inputIDLogin, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
+                            .addComponent(tampilkanPass)
+                            .addComponent(inputPasswordLogin))))
                 .addContainerGap(69, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -121,15 +132,20 @@ public class login extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(idLogin)
                     .addComponent(inputIDLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(31, 31, 31)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(inputPasswordLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(idLogin1))
-                .addGap(40, 40, 40)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(37, 37, 37)
+                        .addComponent(idLogin1))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addComponent(inputPasswordLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(7, 7, 7)
+                .addComponent(tampilkanPass)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(buttonLogin)
                     .addComponent(buttonExit))
-                .addContainerGap(45, Short.MAX_VALUE))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
 
         pack();
@@ -151,14 +167,50 @@ public class login extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_inputIDLoginFocusLost
 
-    private void inputPasswordLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputPasswordLoginActionPerformed
+    private void buttonExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonExitActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_inputPasswordLoginActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_buttonExitActionPerformed
+
+    private void buttonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLoginActionPerformed
+        // TODO add your handling code here:
+        try{
+            Statement st1 = dbConnection.getConnection().createStatement();
+            String getAdmin = String.format("select * from data_admin where id=\"%s\" and password=\"%s\";", this.inputIDLogin.getText(), this.inputPasswordLogin.getText());
+            ResultSet rs1 = st1.executeQuery(getAdmin);
+            if(rs1.next()){
+                dispose();
+                MainPage mp = new MainPage();
+                mp.getAdminBio(rs1.getString("nama"), Integer.parseInt(rs1.getString("id")));
+                mp.setVisible(true);
+            }else{
+                JOptionPane.showMessageDialog(this, "Maaf, data tersebut tidak tersedia di data admin!");
+            }
+        }catch(SQLException e){
+            
+        }
+        
+    }//GEN-LAST:event_buttonLoginActionPerformed
+
+    private void tampilkanPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tampilkanPassActionPerformed
+        // TODO add your handling code here:
+        if(inputPasswordLogin.getText().equals("Masukkan Password") && tampilkanPass.isSelected()){
+            this.inputPasswordLogin.setEchoChar((char)0);
+        }else if(!inputPasswordLogin.getText().equals("Masukkan Password") && tampilkanPass.isSelected()){
+            this.inputPasswordLogin.setEchoChar((char)0);
+        }else if(!inputPasswordLogin.getText().equals("Masukkan Password") && !tampilkanPass.isSelected()){
+            this.inputPasswordLogin.setEchoChar('*');
+        }
+    }//GEN-LAST:event_tampilkanPassActionPerformed
 
     private void inputPasswordLoginFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputPasswordLoginFocusGained
         // TODO add your handling code here:
         if(inputPasswordLogin.getText().equals("Masukkan Password")){
             inputPasswordLogin.setText("");
+            if(inputPasswordLogin.getText().isBlank()){
+                System.out.println("Kosong");
+                inputPasswordLogin.setEchoChar('*');
+            }
             inputPasswordLogin.setForeground(new Color(0,0,0));
         }
     }//GEN-LAST:event_inputPasswordLoginFocusGained
@@ -167,14 +219,12 @@ public class login extends javax.swing.JFrame {
         // TODO add your handling code here:
         if(inputPasswordLogin.getText().equals("")){
             inputPasswordLogin.setText("Masukkan Password");
+            if(this.inputPasswordLogin.getText().equals("Masukkan Password")){
+                this.inputPasswordLogin.setEchoChar((char)0);
+            }
             inputPasswordLogin.setForeground(new Color(153, 153, 153));
         }
     }//GEN-LAST:event_inputPasswordLoginFocusLost
-
-    private void buttonExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonExitActionPerformed
-        // TODO add your handling code here:
-        System.exit(0);
-    }//GEN-LAST:event_buttonExitActionPerformed
 
     /**
      * @param args the command line arguments
@@ -217,7 +267,8 @@ public class login extends javax.swing.JFrame {
     private javax.swing.JLabel idLogin;
     private javax.swing.JLabel idLogin1;
     private javax.swing.JTextField inputIDLogin;
-    private javax.swing.JTextField inputPasswordLogin;
+    private javax.swing.JPasswordField inputPasswordLogin;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JCheckBox tampilkanPass;
     // End of variables declaration//GEN-END:variables
 }
