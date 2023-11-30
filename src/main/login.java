@@ -181,7 +181,7 @@ public class login extends javax.swing.JFrame {
             ResultSet rs1 = st1.executeQuery(getAdmin);
             if(rs1.next()){
                 dispose();
-                MainPage mp = new MainPage();
+                Pembayaran mp = new Pembayaran();
                 mp.getAdminBio(rs1.getString("nama"), Integer.parseInt(rs1.getString("id")));
                 mp.setVisible(true);
                 mp.setExtendedState(mp.getExtendedState() | JFrame.MAXIMIZED_BOTH);
