@@ -6,6 +6,7 @@ package main;
 
 import java.awt.Color;
 import java.sql.*;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
@@ -183,6 +184,7 @@ public class login extends javax.swing.JFrame {
                 MainPage mp = new MainPage();
                 mp.getAdminBio(rs1.getString("nama"), Integer.parseInt(rs1.getString("id")));
                 mp.setVisible(true);
+                mp.setExtendedState(mp.getExtendedState() | JFrame.MAXIMIZED_BOTH);
             }else{
                 JOptionPane.showMessageDialog(this, "Maaf, data tersebut tidak tersedia di data admin!");
             }

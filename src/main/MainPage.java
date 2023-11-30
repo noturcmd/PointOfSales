@@ -58,7 +58,7 @@ public class MainPage extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(idAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(namaAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(242, Short.MAX_VALUE))
+                .addContainerGap(1610, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -69,7 +69,7 @@ public class MainPage extends javax.swing.JFrame {
                 .addComponent(namaAdmin)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(idAdmin)
-                .addContainerGap(208, Short.MAX_VALUE))
+                .addContainerGap(935, Short.MAX_VALUE))
         );
 
         pack();

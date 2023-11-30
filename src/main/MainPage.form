@@ -37,7 +37,7 @@
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace pref="242" max="32767" attributes="0"/>
+              <EmptySpace pref="1610" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -50,7 +50,7 @@
               <Component id="namaAdmin" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="idAdmin" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="208" max="32767" attributes="0"/>
+              <EmptySpace pref="935" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
