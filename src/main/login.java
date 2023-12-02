@@ -202,6 +202,7 @@ public class login extends javax.swing.JFrame {
                 mp.getAdminBio(rs1.getString("nama_admin"), Integer.parseInt(rs1.getString("id_admin")));
                 mp.setVisible(true);
                 mp.setExtendedState(mp.getExtendedState() | JFrame.MAXIMIZED_BOTH);
+//                mp.setSize(1414, 986);
             }else{
                 JOptionPane.showMessageDialog(this, "Maaf, data tersebut tidak tersedia di data admin!");
             }
