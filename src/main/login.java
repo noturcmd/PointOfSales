@@ -89,7 +89,7 @@ public class login extends javax.swing.JFrame {
         inputIDLogin.setForeground(new java.awt.Color(241, 218, 196));
         inputIDLogin.setText("Masukkan ID");
         inputIDLogin.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(170, 165, 159)));
-        inputIDLogin.setCaretColor(new java.awt.Color(255, 255, 0));
+        inputIDLogin.setCaretColor(new java.awt.Color(241, 218, 196));
         inputIDLogin.setSelectedTextColor(new java.awt.Color(12, 53, 106));
         inputIDLogin.setSelectionColor(new java.awt.Color(255, 153, 0));
         inputIDLogin.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -111,7 +111,7 @@ public class login extends javax.swing.JFrame {
         inputPasswordLogin.setForeground(new java.awt.Color(241, 218, 196));
         inputPasswordLogin.setText("Masukkan Password");
         inputPasswordLogin.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(170, 165, 159)));
-        inputPasswordLogin.setCaretColor(new java.awt.Color(255, 255, 0));
+        inputPasswordLogin.setCaretColor(new java.awt.Color(241, 218, 196));
         inputPasswordLogin.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 inputPasswordLoginFocusGained(evt);
@@ -242,7 +242,7 @@ public class login extends javax.swing.JFrame {
         if(inputPasswordLogin.getText().equals("Masukkan Password")){
             inputPasswordLogin.setText("");
             inputPasswordLogin.setForeground(new java.awt.Color(241, 218, 196));
-            if(inputPasswordLogin.getText().isBlank()){
+            if(inputPasswordLogin.getText().isBlank() && !this.tampilkanPass.isSelected()){
                 inputPasswordLogin.setEchoChar('*');
             }
         }
