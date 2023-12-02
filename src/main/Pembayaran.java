@@ -320,19 +320,14 @@ public class Pembayaran extends javax.swing.JFrame {
             Statement st1 = dbConnection.getConnection().createStatement();
             String query1 = String.format("Select id_barang, kategori_barang, harga_barang from tabel_barang where nama_barang = \"%s\";", this.listNamaBarang.getSelectedItem().toString());
             ResultSet rs1 = st1.executeQuery(query1);
+            int hargaSeluruh = 0;
             if(rs1.next()){
                 modelTblPbl.addRow(new Object[]{rs1.getString("id_barang"), this.listNamaBarang.getSelectedItem().toString(),rs1.getString("kategori_barang"), this.jumlahBarangYangDibeli.getText(),df.format(Integer.parseInt(rs1.getString("harga_barang")) * Integer.parseInt(jumlahBarangYangDibeli.getText()))});
             }
-            
-            int hargaSeluruh = 0;
-            int jumlahData = modelTblPbl.getRowCount();
-            for(int i = 0; i < jumlahData; i++){
-                hargaSeluruh = hargaSeluruh + Integer.parseInt(rs1.getString("harga_barang")) * Integer.parseInt(jumlahBarangYangDibeli.getText());
-                System.out.println(Integer.parseInt(rs1.getString("harga_barang")) * Integer.parseInt(jumlahBarangYangDibeli.getText()));
-            }
-            
-            
+
+            System.out.println("Harga seluruh : " + hargaSeluruh);
             this.totalHargaKeseluruhan.setText("Rp"+df.format(hargaSeluruh));
+            
         }catch(SQLException e){
             e.printStackTrace();
         }
