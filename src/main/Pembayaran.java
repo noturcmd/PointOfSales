@@ -68,7 +68,7 @@ public class Pembayaran extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(71, 73, 115));
 
-        jPanel1.setBackground(new java.awt.Color(71, 73, 115));
+        jPanel1.setBackground(new java.awt.Color(14, 41, 84));
 
         jLabel1.setFont(new java.awt.Font("Tw Cen MT", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(166, 156, 172));
@@ -186,7 +186,13 @@ public class Pembayaran extends javax.swing.JFrame {
         jLabel6.setForeground(new java.awt.Color(166, 156, 172));
         jLabel6.setText("Nama Barang");
 
+        listNamaBarang.setBackground(new java.awt.Color(31, 110, 140));
         listNamaBarang.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        listNamaBarang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                listNamaBarangActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -376,6 +382,10 @@ public class Pembayaran extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }//GEN-LAST:event_buttonTambahActionPerformed
+
+    private void listNamaBarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listNamaBarangActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_listNamaBarangActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
