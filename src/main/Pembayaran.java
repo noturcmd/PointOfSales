@@ -25,38 +25,12 @@ public class Pembayaran extends javax.swing.JFrame {
         this.idAdmin.setText(String.valueOf(id));
     }
     
+    public static void main(String[] args) {
+        new Pembayaran().show();
+    }
+    
     void getDataBarang(){
-        try{
-            listKategoriBarang.addItem("Semua");
-            if(listKategoriBarang.getSelectedItem().toString().equals("Semua")){
-                Statement st1 = dbConnection.getConnection().createStatement();
-                String query1 = String.format("Select distinct(kategori_barang) as kb from tabel_barang;");
-                ResultSet rs1 = st1.executeQuery(query1);
-                while(rs1.next()){
-                    listKategoriBarang.addItem(rs1.getString("kb"));
-                }
-                String query2 = String.format("Select nama_barang from tabel_barang;");
-                ResultSet rs2 = st1.executeQuery(query2);
-                while(rs2.next()){
-                    listNamaBarang.addItem(rs2.getString("nama_barang"));
-                    System.out.println("Hehehehe");
-                }
-            }else{
-                System.out.println("Hahahah");
-                Statement st1 = dbConnection.getConnection().createStatement();
-                String query2 = String.format("Select nama_barang from tabel_barang where kategori_barang = \"%s\";", this.listKategoriBarang.getSelectedItem().toString());
-                System.out.println(this.listKategoriBarang.getSelectedItem().toString());
-                ResultSet rs2 = st1.executeQuery(query2);
-                listNamaBarang.setModel(new javax.swing.DefaultComboBoxModel<>());
-                while(rs2.next()){
-                    listNamaBarang.addItem(rs2.getString("nama_barang"));
-                    System.out.println("HAHAHAH");
-                }
-            }
-            
-        }catch(SQLException e){
-            e.printStackTrace();
-        }
+        listKategoriBarang.addItem("Semua");
     }
 
     
@@ -228,22 +202,23 @@ public class Pembayaran extends javax.swing.JFrame {
                 .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(8, 8, 8)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(namaAdmin)
                             .addComponent(jLabel2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(idAdmin)
                             .addComponent(jLabel3))
-                        .addGap(18, 18, 18)
+                        .addGap(70, 70, 70)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
                             .addComponent(listKategoriBarang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
                             .addComponent(listNamaBarang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
                             .addComponent(jumlahBarangYangDibeli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -269,15 +244,34 @@ public class Pembayaran extends javax.swing.JFrame {
     private void listKategoriBarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listKategoriBarangActionPerformed
         // TODO add your handling code here:
         try{
-            System.out.println("Hahahah");
-            Statement st1 = dbConnection.getConnection().createStatement();
-            String query2 = String.format("Select nama_barang from tabel_barang where kategori_barang = \"%s\";", this.listKategoriBarang.getSelectedItem().toString());
-            System.out.println(this.listKategoriBarang.getSelectedItem().toString());
-            ResultSet rs2 = st1.executeQuery(query2);
-            listNamaBarang.setModel(new javax.swing.DefaultComboBoxModel<>());
-            while(rs2.next()){
-                listNamaBarang.addItem(rs2.getString("nama_barang"));
-                System.out.println("HAHAHAH");
+            System.out.println("Ridwan");
+            if(listKategoriBarang.getSelectedItem().toString().equals("Semua")){
+                Statement st1 = dbConnection.getConnection().createStatement();
+                String query1 = String.format("Select distinct(kategori_barang) as kb from tabel_barang;");
+                ResultSet rs1 = st1.executeQuery(query1);
+                listKategoriBarang.setModel(new javax.swing.DefaultComboBoxModel<>());
+                getDataBarang();
+                listNamaBarang.setModel(new javax.swing.DefaultComboBoxModel<>());
+                while(rs1.next()){
+                    listKategoriBarang.addItem(rs1.getString("kb"));
+                }
+                String query2 = String.format("Select nama_barang from tabel_barang;");
+                ResultSet rs2 = st1.executeQuery(query2);
+                while(rs2.next()){
+                    listNamaBarang.addItem(rs2.getString("nama_barang"));
+                    System.out.println("Hehehehe");
+                }
+            }else{
+                System.out.println("Hahahah");
+                Statement st1 = dbConnection.getConnection().createStatement();
+                String query2 = String.format("Select nama_barang from tabel_barang where kategori_barang = \"%s\";", this.listKategoriBarang.getSelectedItem().toString());
+                System.out.println(this.listKategoriBarang.getSelectedItem().toString());
+                ResultSet rs2 = st1.executeQuery(query2);
+                listNamaBarang.setModel(new javax.swing.DefaultComboBoxModel<>());
+                while(rs2.next()){
+                    listNamaBarang.addItem(rs2.getString("nama_barang"));
+                    System.out.println("HAHAHAH");
+                }
             }
         }catch(SQLException e){
             e.printStackTrace();
