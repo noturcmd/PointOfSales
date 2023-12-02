@@ -64,6 +64,11 @@ public class Pembayaran extends javax.swing.JFrame {
         listKategoriBarang = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
         listNamaBarang = new javax.swing.JComboBox<>();
+        jLabel10 = new javax.swing.JLabel();
+        tombolUbah = new javax.swing.JButton();
+        tombolHapus = new javax.swing.JButton();
+        jRadioButton1 = new javax.swing.JRadioButton();
+        jRadioButton2 = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(71, 73, 115));
@@ -194,6 +199,32 @@ public class Pembayaran extends javax.swing.JFrame {
             }
         });
 
+        jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(166, 156, 172));
+        jLabel10.setText("Member");
+
+        tombolUbah.setBackground(new java.awt.Color(241, 218, 196));
+        tombolUbah.setText("Ubah");
+        tombolUbah.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tombolUbahActionPerformed(evt);
+            }
+        });
+
+        tombolHapus.setBackground(new java.awt.Color(241, 218, 196));
+        tombolHapus.setText("Hapus");
+        tombolHapus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tombolHapusActionPerformed(evt);
+            }
+        });
+
+        jRadioButton1.setForeground(new java.awt.Color(241, 218, 196));
+        jRadioButton1.setText("Ya");
+
+        jRadioButton2.setForeground(new java.awt.Color(241, 218, 196));
+        jRadioButton2.setText("Tidak");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -216,28 +247,40 @@ public class Pembayaran extends javax.swing.JFrame {
                             .addComponent(potonganDiskon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(hargaAkhir, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(37, 37, 37)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(153, 153, 153)
-                                .addComponent(buttonTambah)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(37, 37, 37)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(idAdmin, javax.swing.GroupLayout.DEFAULT_SIZE, 366, Short.MAX_VALUE)
                                     .addComponent(namaAdmin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(jumlahBarangYangDibeli, javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(listNamaBarang, javax.swing.GroupLayout.Alignment.LEADING, 0, 334, Short.MAX_VALUE)
-                                        .addComponent(listKategoriBarang, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                                .addGap(30, 30, 30)))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                                .addComponent(jumlahBarangYangDibeli, javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(listNamaBarang, javax.swing.GroupLayout.Alignment.LEADING, 0, 334, Short.MAX_VALUE)
+                                                .addComponent(listKategoriBarang, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addComponent(jRadioButton1)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(jRadioButton2)))
+                                        .addGap(0, 0, Short.MAX_VALUE))))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(104, 104, 104)
+                                .addComponent(buttonTambah, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(tombolUbah, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(tombolHapus, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(30, 30, 30)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1159, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(229, 229, 229))
         );
@@ -247,7 +290,7 @@ public class Pembayaran extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addGap(84, 84, 84)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(namaAdmin)
@@ -268,8 +311,16 @@ public class Pembayaran extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
                             .addComponent(jumlahBarangYangDibeli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(34, 34, 34)
-                        .addComponent(buttonTambah))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel10)
+                            .addComponent(jRadioButton1)
+                            .addComponent(jRadioButton2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(buttonTambah)
+                            .addComponent(tombolUbah)
+                            .addComponent(tombolHapus)))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(32, 32, 32)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -283,7 +334,7 @@ public class Pembayaran extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel9)
                     .addComponent(hargaAkhir, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(488, Short.MAX_VALUE))
+                .addContainerGap(476, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -294,7 +345,10 @@ public class Pembayaran extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -368,14 +422,13 @@ public class Pembayaran extends javax.swing.JFrame {
             ResultSet rs1 = st1.executeQuery(query1);
             int hargaSeluruh = 0;
             while(rs1.next()){
-                modelTblPbl.addRow(new Object[]{rs1.getString("id_barang"), this.listNamaBarang.getSelectedItem().toString(),rs1.getString("kategori_barang"), this.jumlahBarangYangDibeli.getText(),df.format(Integer.parseInt(rs1.getString("harga_barang")) * Integer.parseInt(jumlahBarangYangDibeli.getText()))});
+                modelTblPbl.addRow(new Object[]{rs1.getString("id_barang"), this.listNamaBarang.getSelectedItem().toString(),rs1.getString("kategori_barang"), this.jumlahBarangYangDibeli.getText(),Integer.parseInt(rs1.getString("harga_barang")) * Integer.parseInt(jumlahBarangYangDibeli.getText())});
             }
 
             int jumlahData = modelTblPbl.getRowCount();
             for(int i = 0; i < jumlahData; i++){
-                String nama = (String) modelTblPbl.getValueAt(i, 4);;
-                String[] angka = nama.split(",");
-                hargaSeluruh += Integer.parseInt(angka[0] + angka[1]);
+                int tabel = (int) modelTblPbl.getValueAt(i, 4);
+                hargaSeluruh += tabel;
             }
 
             System.out.println("Harga seluruh : " + hargaSeluruh);
@@ -386,12 +439,21 @@ public class Pembayaran extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_buttonTambahActionPerformed
 
+    private void tombolUbahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tombolUbahActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tombolUbahActionPerformed
+
+    private void tombolHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tombolHapusActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tombolHapusActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonTambah;
     private javax.swing.JLabel hargaAkhir;
     private javax.swing.JLabel idAdmin;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -401,6 +463,8 @@ public class Pembayaran extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JRadioButton jRadioButton1;
+    private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jumlahBarangYangDibeli;
     private javax.swing.JComboBox<String> listKategoriBarang;
@@ -408,6 +472,8 @@ public class Pembayaran extends javax.swing.JFrame {
     private javax.swing.JLabel namaAdmin;
     private javax.swing.JLabel potonganDiskon;
     private javax.swing.JTable tabelPembelianBarang;
+    private javax.swing.JButton tombolHapus;
+    private javax.swing.JButton tombolUbah;
     private javax.swing.JLabel totalHargaKeseluruhan;
     // End of variables declaration//GEN-END:variables
 }
