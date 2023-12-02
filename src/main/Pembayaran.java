@@ -9,6 +9,8 @@ import javax.swing.table.DefaultTableModel;
 import java.sql.*;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
+import javax.swing.JOptionPane;
 
 
 public class Pembayaran extends javax.swing.JFrame {
@@ -421,26 +423,37 @@ public class Pembayaran extends javax.swing.JFrame {
     private void buttonTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTambahActionPerformed
         // TODO add your handling code here:
         modelTblPbl = (DefaultTableModel) tabelPembelianBarang.getModel();
-        try{
-            Statement st1 = dbConnection.getConnection().createStatement();
-            String query1 = String.format("Select id_barang, kategori_barang, harga_barang from tabel_barang where nama_barang = \"%s\";", this.listNamaBarang.getSelectedItem().toString());
-            ResultSet rs1 = st1.executeQuery(query1);
-            int hargaSeluruh = 0;
-            while(rs1.next()){
-                modelTblPbl.addRow(new Object[]{rs1.getString("id_barang"), this.listNamaBarang.getSelectedItem().toString(),rs1.getString("kategori_barang"), this.jumlahBarangYangDibeli.getText(),Integer.parseInt(rs1.getString("harga_barang")) * Integer.parseInt(jumlahBarangYangDibeli.getText())});
+        System.out.println(this.jumlahBarangYangDibeli.getText());
+        System.out.println(this.jumlahBarangYangDibeli.getText().matches("\\d*"));
+        if(!this.jumlahBarangYangDibeli.getText().matches("\\d*")){
+            JOptionPane.showMessageDialog(this, "Mohon input jumlah yang valid!");
+        }else if (this.jumlahBarangYangDibeli.getText().matches("\\d*") && Integer.parseInt(this.jumlahBarangYangDibeli.getText()) <= 0) {
+            JOptionPane.showMessageDialog(this, "Mohon input jumlah yang valid!");
+        } else if(this.jumlahBarangYangDibeli.getText().matches("\\d*") && Integer.parseInt(this.jumlahBarangYangDibeli.getText()) > 0){
+            try{
+                Statement st1 = dbConnection.getConnection().createStatement();
+                String query1 = String.format("Select id_barang, kategori_barang, harga_barang from tabel_barang where nama_barang = \"%s\";", this.listNamaBarang.getSelectedItem().toString());
+                ResultSet rs1 = st1.executeQuery(query1);
+                int hargaSeluruh = 0;
+                while(rs1.next()){
+                    modelTblPbl.addRow(new Object[]{rs1.getString("id_barang"), this.listNamaBarang.getSelectedItem().toString(),rs1.getString("kategori_barang"), this.jumlahBarangYangDibeli.getText(),df.format(Integer.parseInt(rs1.getString("harga_barang")) * Integer.parseInt(jumlahBarangYangDibeli.getText()))});
+                }
+
+                ArrayList<String> harga1 = new ArrayList<String>();
+                int jumlahData = modelTblPbl.getRowCount();
+                for(int i = 0; i < jumlahData; i++){
+                    String harga2 = String.valueOf( modelTblPbl.getValueAt(i, 4));
+                    String[] jumlahHarga = harga2.split(",");
+                    for(String harga3: jumlahHarga){
+                        harga1.add(harga3);
+                    }
+                }
+
+                this.totalHargaKeseluruhan.setText("Rp"+df.format(Integer.parseInt(String.join("", harga1))));
+
+            }catch(SQLException e){
+                e.printStackTrace();
             }
-
-            int jumlahData = modelTblPbl.getRowCount();
-            for(int i = 0; i < jumlahData; i++){
-                int tabel = (int) modelTblPbl.getValueAt(i, 4);
-                hargaSeluruh += tabel;
-            }
-
-            System.out.println("Harga seluruh : " + hargaSeluruh);
-            this.totalHargaKeseluruhan.setText("Rp"+df.format(hargaSeluruh));
-
-        }catch(SQLException e){
-            e.printStackTrace();
         }
     }//GEN-LAST:event_buttonTambahActionPerformed
 
