@@ -18,13 +18,16 @@ public class login extends javax.swing.JFrame {
     
     
     public login() {
+        
         dbConnection = KoneksiDatabase.getInstance();
-        initComponents();
-        setLocationRelativeTo(null);
-        inputIDLogin.setForeground(new Color(153, 153, 153));
-        inputIDLogin.setForeground(new java.awt.Color(241, 218, 196));
-        inputPasswordLogin.setForeground(new java.awt.Color(241, 218, 196));
-        inputPasswordLogin.setEchoChar((char)0);
+            initComponents();
+            setLocationRelativeTo(null);
+            inputIDLogin.setForeground(new Color(153, 153, 153));
+            inputIDLogin.setForeground(new java.awt.Color(241, 218, 196));
+            inputPasswordLogin.setForeground(new java.awt.Color(241, 218, 196));
+            inputPasswordLogin.setEchoChar((char)0);
+        
+        
     }
 
     

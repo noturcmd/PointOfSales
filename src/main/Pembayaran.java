@@ -240,6 +240,11 @@ public class Pembayaran extends javax.swing.JFrame {
         searchByTelp.setBackground(new java.awt.Color(14, 41, 84));
         searchByTelp.setForeground(new java.awt.Color(241, 218, 196));
         searchByTelp.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(170, 165, 159)));
+        searchByTelp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchByTelpActionPerformed(evt);
+            }
+        });
 
         statusMember.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         statusMember.setForeground(new java.awt.Color(166, 156, 172));
@@ -488,6 +493,11 @@ public class Pembayaran extends javax.swing.JFrame {
     private void tombolHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tombolHapusActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tombolHapusActionPerformed
+
+    private void searchByTelpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchByTelpActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_searchByTelpActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
