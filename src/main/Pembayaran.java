@@ -76,6 +76,7 @@ public class Pembayaran extends javax.swing.JFrame {
         searchByID = new javax.swing.JTextField();
         statusMember = new javax.swing.JLabel();
         tombolSearch = new javax.swing.JButton();
+        tombolRefresh = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(71, 73, 115));
@@ -264,6 +265,14 @@ public class Pembayaran extends javax.swing.JFrame {
             }
         });
 
+        tombolRefresh.setBackground(new java.awt.Color(241, 218, 196));
+        tombolRefresh.setText("Refresh");
+        tombolRefresh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tombolRefreshActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -319,7 +328,9 @@ public class Pembayaran extends javax.swing.JFrame {
                                                     .addComponent(searchByID, javax.swing.GroupLayout.Alignment.LEADING)
                                                     .addComponent(statusMember, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE))
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(tombolSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                    .addComponent(tombolSearch, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                    .addComponent(tombolRefresh, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE))))))
                                 .addGap(0, 0, Short.MAX_VALUE)))
                         .addGap(30, 30, 30)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1036, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -365,10 +376,15 @@ public class Pembayaran extends javax.swing.JFrame {
                                     .addComponent(searchByID)))
                             .addComponent(tombolSearch))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(statusMember, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(4, 4, 4)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(statusMember, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(4, 4, 4))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(tombolRefresh)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                         .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -504,6 +520,7 @@ public class Pembayaran extends javax.swing.JFrame {
                     int diskon = (int) (0.1 * harga5);
                     System.out.println("Diskon : " + diskon);
                     this.potonganDiskon.setText("Rp" + df.format(diskon));
+                    this.hargaAkhir.setText("Rp" + String.valueOf(df.format(harga5 - diskon)));
                 }
             }catch(SQLException e){
                 e.printStackTrace();
@@ -537,17 +554,6 @@ public class Pembayaran extends javax.swing.JFrame {
                 ResultSet rs1 = st1.executeQuery(query1);
                 if(rs1.next()){
                     this.statusMember.setText("Member");
-                    ArrayList<String> harga1 = new ArrayList<String>();
-                    int harga5 = 0;
-                    
-                    String harga4 = "";
-                    String[] jumlahHarga2 = this.totalHargaKeseluruhan.getText().split("Rp");   
-                    String[] jumlahHarga3 = jumlahHarga2[1].split(",");
-                    for(String tes: jumlahHarga3){
-                        harga4 += tes;
-                    }
-                    int diskon = (int)(0.1 * Integer.parseInt(harga4));
-                    this.potonganDiskon.setText("Rp" + df.format(diskon));
                 }else{
                     this.statusMember.setText("Bukan Member");
                 }
@@ -565,6 +571,20 @@ public class Pembayaran extends javax.swing.JFrame {
         
         this.dfm.setVisible(true);
     }//GEN-LAST:event_daftarMemberActionPerformed
+
+    private void tombolRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tombolRefreshActionPerformed
+        // TODO add your handling code here:
+        ArrayList<String> harga1 = new ArrayList<String>();
+        String harga4 = "";
+        String[] jumlahHarga2 = this.totalHargaKeseluruhan.getText().split("Rp");   
+        String[] jumlahHarga3 = jumlahHarga2[1].split(",");
+        for(String tes: jumlahHarga3){
+            harga4 += tes;
+        }
+        int diskon = (int)(0.1 * Integer.parseInt(harga4));
+        this.potonganDiskon.setText("Rp" + df.format(diskon));
+        this.hargaAkhir.setText("Rp" + String.valueOf(df.format(Integer.parseInt(harga4) - diskon)));
+    }//GEN-LAST:event_tombolRefreshActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -595,6 +615,7 @@ public class Pembayaran extends javax.swing.JFrame {
     private javax.swing.JLabel statusMember;
     private javax.swing.JTable tabelPembelianBarang;
     private javax.swing.JButton tombolHapus;
+    private javax.swing.JButton tombolRefresh;
     private javax.swing.JButton tombolSearch;
     private javax.swing.JButton tombolUbah;
     private javax.swing.JLabel totalHargaKeseluruhan;
