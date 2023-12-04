@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
 public class KoneksiDatabase {
     private static KoneksiDatabase instance;
     private Connection connection;
-    String isOn;
+    
 
     private KoneksiDatabase() {
         try{
