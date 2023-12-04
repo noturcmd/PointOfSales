@@ -73,7 +73,7 @@ public class Pembayaran extends javax.swing.JFrame {
         daftarMember = new javax.swing.JToggleButton();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        searchByTelp = new javax.swing.JTextField();
+        searchByID = new javax.swing.JTextField();
         statusMember = new javax.swing.JLabel();
         tombolSearch = new javax.swing.JButton();
 
@@ -244,12 +244,12 @@ public class Pembayaran extends javax.swing.JFrame {
 
         jLabel12.setForeground(new java.awt.Color(241, 218, 196));
 
-        searchByTelp.setBackground(new java.awt.Color(14, 41, 84));
-        searchByTelp.setForeground(new java.awt.Color(241, 218, 196));
-        searchByTelp.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(170, 165, 159)));
-        searchByTelp.addActionListener(new java.awt.event.ActionListener() {
+        searchByID.setBackground(new java.awt.Color(14, 41, 84));
+        searchByID.setForeground(new java.awt.Color(241, 218, 196));
+        searchByID.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(170, 165, 159)));
+        searchByID.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                searchByTelpActionPerformed(evt);
+                searchByIDActionPerformed(evt);
             }
         });
 
@@ -316,13 +316,14 @@ public class Pembayaran extends javax.swing.JFrame {
                                             .addComponent(jumlahBarangYangDibeli)
                                             .addGroup(jPanel1Layout.createSequentialGroup()
                                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                                    .addComponent(searchByTelp, javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(searchByID, javax.swing.GroupLayout.Alignment.LEADING)
                                                     .addComponent(statusMember, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE))
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                 .addComponent(tombolSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                                 .addGap(0, 0, Short.MAX_VALUE)))
                         .addGap(30, 30, 30)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1159, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1036, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(123, 123, 123)))
                 .addGap(229, 229, 229))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(768, 768, 768)
@@ -361,7 +362,7 @@ public class Pembayaran extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(searchByTelp)))
+                                    .addComponent(searchByID)))
                             .addComponent(tombolSearch))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -472,9 +473,11 @@ public class Pembayaran extends javax.swing.JFrame {
         modelTblPbl = (DefaultTableModel) tabelPembelianBarang.getModel();
         if(!this.jumlahBarangYangDibeli.getText().matches("\\d*")){
             JOptionPane.showMessageDialog(this, "Mohon input jumlah yang valid!");
+        }else if (this.jumlahBarangYangDibeli.getText().isBlank()) {
+            JOptionPane.showMessageDialog(this, "Input jumlah kosong!");
         }else if (this.jumlahBarangYangDibeli.getText().matches("\\d*") && Integer.parseInt(this.jumlahBarangYangDibeli.getText()) <= 0) {
             JOptionPane.showMessageDialog(this, "Mohon input jumlah yang valid!");
-        } else if(this.jumlahBarangYangDibeli.getText().matches("\\d*") && Integer.parseInt(this.jumlahBarangYangDibeli.getText()) > 0){
+        }else if(this.jumlahBarangYangDibeli.getText().matches("\\d*") && Integer.parseInt(this.jumlahBarangYangDibeli.getText()) > 0){
             try{
                 Statement st1 = dbConnection.getConnection().createStatement();
                 String query1 = String.format("Select id_barang, kategori_barang, harga_barang from tabel_barang where nama_barang = \"%s\";", this.listNamaBarang.getSelectedItem().toString());
@@ -494,19 +497,14 @@ public class Pembayaran extends javax.swing.JFrame {
                     for(String harga3: jumlahHarga){
                         harga4 += harga3;
                     }
-                    
                     harga5 += Integer.parseInt(harga4);
                 }
-                
-                
-                
-                
-                
-                
-                
-
                 this.totalHargaKeseluruhan.setText("Rp"+df.format(harga5));
-
+                if(this.statusMember.getText().equals("Member")){
+                    int diskon = (int) (0.1 * harga5);
+                    System.out.println("Diskon : " + diskon);
+                    this.potonganDiskon.setText("Rp" + df.format(diskon));
+                }
             }catch(SQLException e){
                 e.printStackTrace();
             }
@@ -521,24 +519,41 @@ public class Pembayaran extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_tombolHapusActionPerformed
 
-    private void searchByTelpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchByTelpActionPerformed
+    private void searchByIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchByIDActionPerformed
         // TODO add your handling code here:
         
-    }//GEN-LAST:event_searchByTelpActionPerformed
+    }//GEN-LAST:event_searchByIDActionPerformed
 
     private void tombolSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tombolSearchActionPerformed
         // TODO add your handling code here:
-        try{
-            Statement st1 = dbConnection.getConnection().createStatement();
-            String query1 = String.format("Select * from tabel_member where id_member = \"%s\";", this.searchByTelp.getText());
-            ResultSet rs1 = st1.executeQuery(query1);
-            if(rs1.next()){
-                this.statusMember.setText("Member");
-            }else{
-                this.statusMember.setText("Bukan Member");
+        if(this.searchByID.getText().isBlank()){
+            JOptionPane.showMessageDialog(this, "Input ID kosong!");
+        }else if(Integer.parseInt(this.searchByID.getText()) <= 0){
+            JOptionPane.showMessageDialog(this, "Input ID tidak valid!");
+        }else{
+            try{
+                Statement st1 = dbConnection.getConnection().createStatement();
+                String query1 = String.format("Select * from tabel_member where id_member = \"%s\";", this.searchByID.getText());
+                ResultSet rs1 = st1.executeQuery(query1);
+                if(rs1.next()){
+                    this.statusMember.setText("Member");
+                    ArrayList<String> harga1 = new ArrayList<String>();
+                    int harga5 = 0;
+                    
+                    String harga4 = "";
+                    String[] jumlahHarga2 = this.totalHargaKeseluruhan.getText().split("Rp");   
+                    String[] jumlahHarga3 = jumlahHarga2[1].split(",");
+                    for(String tes: jumlahHarga3){
+                        harga4 += tes;
+                    }
+                    int diskon = (int)(0.1 * Integer.parseInt(harga4));
+                    this.potonganDiskon.setText("Rp" + df.format(diskon));
+                }else{
+                    this.statusMember.setText("Bukan Member");
+                }
+            }catch(SQLException e){
+                e.printStackTrace();
             }
-        }catch(SQLException e){
-            e.printStackTrace();
         }
     }//GEN-LAST:event_tombolSearchActionPerformed
 
@@ -576,7 +591,7 @@ public class Pembayaran extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> listNamaBarang;
     private javax.swing.JLabel namaAdmin;
     private javax.swing.JLabel potonganDiskon;
-    private javax.swing.JTextField searchByTelp;
+    private javax.swing.JTextField searchByID;
     private javax.swing.JLabel statusMember;
     private javax.swing.JTable tabelPembelianBarang;
     private javax.swing.JButton tombolHapus;

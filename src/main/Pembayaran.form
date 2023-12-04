@@ -104,7 +104,7 @@
                                               <Component id="jumlahBarangYangDibeli" max="32767" attributes="0"/>
                                               <Group type="102" alignment="0" attributes="0">
                                                   <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                                      <Component id="searchByTelp" alignment="0" max="32767" attributes="0"/>
+                                                      <Component id="searchByID" alignment="0" max="32767" attributes="0"/>
                                                       <Component id="statusMember" alignment="0" pref="155" max="32767" attributes="0"/>
                                                   </Group>
                                                   <EmptySpace max="32767" attributes="0"/>
@@ -117,7 +117,8 @@
                               </Group>
                           </Group>
                           <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-                          <Component id="jScrollPane1" min="-2" pref="1159" max="-2" attributes="0"/>
+                          <Component id="jScrollPane1" min="-2" pref="1036" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="123" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace min="-2" pref="229" max="-2" attributes="0"/>
@@ -166,7 +167,7 @@
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                       <Component id="jLabel11" min="-2" pref="28" max="-2" attributes="0"/>
-                                      <Component id="searchByTelp" max="32767" attributes="0"/>
+                                      <Component id="searchByID" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                               <Component id="tombolSearch" min="-2" max="-2" attributes="0"/>
@@ -540,7 +541,7 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="searchByTelp">
+        <Component class="javax.swing.JTextField" name="searchByID">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="54" green="29" red="e" type="rgb"/>
@@ -557,7 +558,7 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="searchByTelpActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="searchByIDActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="statusMember">
