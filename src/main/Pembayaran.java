@@ -498,7 +498,7 @@ public class Pembayaran extends javax.swing.JFrame {
                 ResultSet rs1 = st1.executeQuery(query1);
                 int hargaSeluruh = 0;
                 int jumlahBaris = modelTblPbl.getRowCount();
-                while(rs1.next()){
+                if(rs1.next()){
                     if(jumlahBaris > 0){
                         for(int i = 0; i < jumlahBaris; i++){
                             System.out.println("Masuk lebih dalam");
@@ -514,11 +514,12 @@ public class Pembayaran extends javax.swing.JFrame {
                                 int harga123 = Integer.parseInt(String.valueOf(modelTblPbl.getValueAt(i, 3))) * Integer.parseInt(rs1.getString("harga_barang"));
                                 modelTblPbl.setValueAt(df.format(harga123), i, 4);
                                 
-                            }else if(Integer.parseInt((String) this.modelTblPbl.getValueAt(i, 0)) != Integer.parseInt(rs1.getString("id_barang"))){
-                                System.out.println(Integer.parseInt((String) this.modelTblPbl.getValueAt(i, 0)) != Integer.parseInt(rs1.getString("id_barang")));
-                                System.out.println("Kondisi 22222");
-                                modelTblPbl.addRow(new Object[]{rs1.getString("id_barang"), this.listNamaBarang.getSelectedItem().toString(),rs1.getString("kategori_barang"), this.jumlahBarangYangDibeli.getText(),df.format(Integer.parseInt(rs1.getString("harga_barang")) * Integer.parseInt(jumlahBarangYangDibeli.getText()))});
                             }
+//                            else if(Integer.parseInt((String) this.modelTblPbl.getValueAt(i, 0)) != Integer.parseInt(rs1.getString("id_barang"))){
+//                                System.out.println(Integer.parseInt((String) this.modelTblPbl.getValueAt(i, 0)) != Integer.parseInt(rs1.getString("id_barang")));
+//                                System.out.println("Kondisi 22222");
+//                                modelTblPbl.addRow(new Object[]{rs1.getString("id_barang"), this.listNamaBarang.getSelectedItem().toString(),rs1.getString("kategori_barang"), this.jumlahBarangYangDibeli.getText(),df.format(Integer.parseInt(rs1.getString("harga_barang")) * Integer.parseInt(jumlahBarangYangDibeli.getText()))});
+//                            }
                         }
                     }else{
                         System.out.println("Kondisi 3333");
