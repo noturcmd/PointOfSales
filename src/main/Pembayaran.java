@@ -498,34 +498,37 @@ public class Pembayaran extends javax.swing.JFrame {
                 ResultSet rs1 = st1.executeQuery(query1);
                 int hargaSeluruh = 0;
                 int jumlahBaris = modelTblPbl.getRowCount();
+                int index = 0;
                 if(rs1.next()){
-                    if(jumlahBaris > 0){
-                        for(int i = 0; i < jumlahBaris; i++){
-                            System.out.println("Masuk lebih dalam");
-                            if(Integer.parseInt((String) this.modelTblPbl.getValueAt(i, 0)) == Integer.parseInt(rs1.getString("id_barang"))){
-                                System.out.println(Integer.parseInt((String) this.modelTblPbl.getValueAt(i, 0)) == Integer.parseInt(rs1.getString("id_barang")));
-                                System.out.println("Kondisi 11111");
-                                String jumlah = String.valueOf(Integer.parseInt((String) this.modelTblPbl.getValueAt(i, 3)) + Integer.parseInt(this.jumlahBarangYangDibeli.getText()));
-                                
-                                modelTblPbl.setValueAt(rs1.getString("id_barang"), i, 0);
-                                modelTblPbl.setValueAt(this.listNamaBarang.getSelectedItem().toString(), i, 1);
-                                modelTblPbl.setValueAt(rs1.getString("kategori_barang"), i, 2);
-                                modelTblPbl.setValueAt(jumlah, i, 3);
-                                int harga123 = Integer.parseInt(String.valueOf(modelTblPbl.getValueAt(i, 3))) * Integer.parseInt(rs1.getString("harga_barang"));
-                                modelTblPbl.setValueAt(df.format(harga123), i, 4);
-                                
-                            }
-//                            else if(Integer.parseInt((String) this.modelTblPbl.getValueAt(i, 0)) != Integer.parseInt(rs1.getString("id_barang"))){
-//                                System.out.println(Integer.parseInt((String) this.modelTblPbl.getValueAt(i, 0)) != Integer.parseInt(rs1.getString("id_barang")));
-//                                System.out.println("Kondisi 22222");
-//                                modelTblPbl.addRow(new Object[]{rs1.getString("id_barang"), this.listNamaBarang.getSelectedItem().toString(),rs1.getString("kategori_barang"), this.jumlahBarangYangDibeli.getText(),df.format(Integer.parseInt(rs1.getString("harga_barang")) * Integer.parseInt(jumlahBarangYangDibeli.getText()))});
-//                            }
-                        }
-                    }else{
-                        System.out.println("Kondisi 3333");
+                    if(jumlahBaris == 0){
+                        System.out.println("Kondisi 1");
                         modelTblPbl.addRow(new Object[]{rs1.getString("id_barang"), this.listNamaBarang.getSelectedItem().toString(),rs1.getString("kategori_barang"), this.jumlahBarangYangDibeli.getText(),df.format(Integer.parseInt(rs1.getString("harga_barang")) * Integer.parseInt(jumlahBarangYangDibeli.getText()))});
+                    }else if(jumlahBaris > 0){
+                        while(index < jumlahBaris){
+                            if(Integer.parseInt(String.valueOf(modelTblPbl.getValueAt(index, 0))) == index){
+                                System.out.println(Integer.parseInt((String) this.modelTblPbl.getValueAt(index, 0)) == Integer.parseInt(rs1.getString("id_barang")));
+                                System.out.println("Kondisi 2");
+                                String jumlah = String.valueOf(Integer.parseInt((String) this.modelTblPbl.getValueAt(index, 3)) + Integer.parseInt(this.jumlahBarangYangDibeli.getText()));
+                                modelTblPbl.setValueAt(rs1.getString("id_barang"), index, 0);
+                                modelTblPbl.setValueAt(this.listNamaBarang.getSelectedItem().toString(), index, 1);
+                                modelTblPbl.setValueAt(rs1.getString("kategori_barang"), index, 2);
+                                modelTblPbl.setValueAt(jumlah, index, 3);
+                                int harga123 = Integer.parseInt(String.valueOf(modelTblPbl.getValueAt(index, 3))) * Integer.parseInt(rs1.getString("harga_barang"));
+                                modelTblPbl.setValueAt(df.format(harga123), index, 4);
+                                System.out.println("Index1 : " + index);
+                                break;
+                            }else if(Integer.parseInt(String.valueOf(modelTblPbl.getValueAt(index, 0))) != index){
+                                System.out.println("Kondisi 3");
+                                modelTblPbl.addRow(new Object[]{rs1.getString("id_barang"), this.listNamaBarang.getSelectedItem().toString(),rs1.getString("kategori_barang"), this.jumlahBarangYangDibeli.getText(),df.format(Integer.parseInt(rs1.getString("harga_barang")) * Integer.parseInt(jumlahBarangYangDibeli.getText()))});
+                                index++;
+                            }
+                        }
                     }
+                    
+                    
                 }
+                
+                JOptionPane.showMessageDialog(this, "Index : " + index);
 
                 ArrayList<String> harga1 = new ArrayList<String>();
                 int jumlahData = modelTblPbl.getRowCount();
