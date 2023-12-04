@@ -104,7 +104,7 @@
                                               <Component id="jumlahBarangYangDibeli" max="32767" attributes="0"/>
                                               <Group type="102" alignment="0" attributes="0">
                                                   <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                                      <Component id="searchByID" alignment="0" max="32767" attributes="0"/>
+                                                      <Component id="searchByTelp" alignment="0" max="32767" attributes="0"/>
                                                       <Component id="statusMember" alignment="0" pref="155" max="32767" attributes="0"/>
                                                   </Group>
                                                   <EmptySpace max="32767" attributes="0"/>
@@ -166,7 +166,7 @@
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                       <Component id="jLabel11" min="-2" pref="28" max="-2" attributes="0"/>
-                                      <Component id="searchByID" max="32767" attributes="0"/>
+                                      <Component id="searchByTelp" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                               <Component id="tombolSearch" min="-2" max="-2" attributes="0"/>
@@ -518,9 +518,6 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Daftar"/>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jToggleButton1ActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel11">
           <Properties>
@@ -540,7 +537,7 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="searchByID">
+        <Component class="javax.swing.JTextField" name="searchByTelp">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="54" green="29" red="e" type="rgb"/>
@@ -557,7 +554,7 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="searchByIDActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="searchByTelpActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="statusMember">

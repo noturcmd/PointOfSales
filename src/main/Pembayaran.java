@@ -73,7 +73,7 @@ public class Pembayaran extends javax.swing.JFrame {
         jToggleButton1 = new javax.swing.JToggleButton();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        searchByID = new javax.swing.JTextField();
+        searchByTelp = new javax.swing.JTextField();
         statusMember = new javax.swing.JLabel();
         tombolSearch = new javax.swing.JButton();
 
@@ -232,11 +232,6 @@ public class Pembayaran extends javax.swing.JFrame {
 
         jToggleButton1.setBackground(new java.awt.Color(241, 218, 196));
         jToggleButton1.setText("Daftar");
-        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton1ActionPerformed(evt);
-            }
-        });
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(166, 156, 172));
@@ -244,12 +239,12 @@ public class Pembayaran extends javax.swing.JFrame {
 
         jLabel12.setForeground(new java.awt.Color(241, 218, 196));
 
-        searchByID.setBackground(new java.awt.Color(14, 41, 84));
-        searchByID.setForeground(new java.awt.Color(241, 218, 196));
-        searchByID.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(170, 165, 159)));
-        searchByID.addActionListener(new java.awt.event.ActionListener() {
+        searchByTelp.setBackground(new java.awt.Color(14, 41, 84));
+        searchByTelp.setForeground(new java.awt.Color(241, 218, 196));
+        searchByTelp.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(170, 165, 159)));
+        searchByTelp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                searchByIDActionPerformed(evt);
+                searchByTelpActionPerformed(evt);
             }
         });
 
@@ -316,7 +311,7 @@ public class Pembayaran extends javax.swing.JFrame {
                                             .addComponent(jumlahBarangYangDibeli)
                                             .addGroup(jPanel1Layout.createSequentialGroup()
                                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                                    .addComponent(searchByID, javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(searchByTelp, javax.swing.GroupLayout.Alignment.LEADING)
                                                     .addComponent(statusMember, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE))
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                 .addComponent(tombolSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))))
@@ -361,7 +356,7 @@ public class Pembayaran extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(searchByID)))
+                                    .addComponent(searchByTelp)))
                             .addComponent(tombolSearch))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -521,16 +516,16 @@ public class Pembayaran extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_tombolHapusActionPerformed
 
-    private void searchByIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchByIDActionPerformed
+    private void searchByTelpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchByTelpActionPerformed
         // TODO add your handling code here:
         
-    }//GEN-LAST:event_searchByIDActionPerformed
+    }//GEN-LAST:event_searchByTelpActionPerformed
 
     private void tombolSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tombolSearchActionPerformed
         // TODO add your handling code here:
         try{
             Statement st1 = dbConnection.getConnection().createStatement();
-            String query1 = String.format("Select * from tabel_member where id_member = \"%s\";", this.searchByID.getText());
+            String query1 = String.format("Select * from tabel_member where id_member = \"%s\";", this.searchByTelp.getText());
             ResultSet rs1 = st1.executeQuery(query1);
             if(rs1.next()){
                 this.statusMember.setText("Member");
@@ -541,17 +536,6 @@ public class Pembayaran extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }//GEN-LAST:event_tombolSearchActionPerformed
-
-    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
-        // TODO add your handling code here:
-        if(this.dfm == null){
-            this.dfm = new DaftarMember();
-        }
-        
-        this.dfm.setVisible(true);
-        this.dfm.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        this.dfm.setLocationRelativeTo(null);
-    }//GEN-LAST:event_jToggleButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -578,7 +562,7 @@ public class Pembayaran extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> listNamaBarang;
     private javax.swing.JLabel namaAdmin;
     private javax.swing.JLabel potonganDiskon;
-    private javax.swing.JTextField searchByID;
+    private javax.swing.JTextField searchByTelp;
     private javax.swing.JLabel statusMember;
     private javax.swing.JTable tabelPembelianBarang;
     private javax.swing.JButton tombolHapus;
