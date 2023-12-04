@@ -35,6 +35,7 @@ public class MainMenu extends javax.swing.JFrame {
         jButton7 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(241, 218, 196));
         jPanel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(71, 73, 115), 10, true));

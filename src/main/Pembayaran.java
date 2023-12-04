@@ -70,7 +70,7 @@ public class Pembayaran extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         tombolUbah = new javax.swing.JButton();
         tombolHapus = new javax.swing.JButton();
-        jToggleButton1 = new javax.swing.JToggleButton();
+        daftarMember = new javax.swing.JToggleButton();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         searchByTelp = new javax.swing.JTextField();
@@ -230,8 +230,13 @@ public class Pembayaran extends javax.swing.JFrame {
             }
         });
 
-        jToggleButton1.setBackground(new java.awt.Color(241, 218, 196));
-        jToggleButton1.setText("Daftar");
+        daftarMember.setBackground(new java.awt.Color(241, 218, 196));
+        daftarMember.setText("Daftar");
+        daftarMember.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                daftarMemberActionPerformed(evt);
+            }
+        });
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(166, 156, 172));
@@ -295,7 +300,7 @@ public class Pembayaran extends javax.swing.JFrame {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                         .addGroup(jPanel1Layout.createSequentialGroup()
-                                            .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(daftarMember, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                             .addComponent(buttonTambah, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addGap(9, 9, 9)
@@ -369,7 +374,7 @@ public class Pembayaran extends javax.swing.JFrame {
                             .addComponent(buttonTambah)
                             .addComponent(tombolUbah)
                             .addComponent(tombolHapus)
-                            .addComponent(jToggleButton1)))
+                            .addComponent(daftarMember)))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(32, 32, 32)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -537,9 +542,19 @@ public class Pembayaran extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_tombolSearchActionPerformed
 
+    private void daftarMemberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_daftarMemberActionPerformed
+        // TODO add your handling code here:
+        if(this.dfm == null){
+            this.dfm = new DaftarMember();
+        }
+        
+        this.dfm.setVisible(true);
+    }//GEN-LAST:event_daftarMemberActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonTambah;
+    private javax.swing.JToggleButton daftarMember;
     private javax.swing.JLabel hargaAkhir;
     private javax.swing.JLabel idAdmin;
     private javax.swing.JLabel jLabel1;
@@ -556,7 +571,6 @@ public class Pembayaran extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JTextField jumlahBarangYangDibeli;
     private javax.swing.JComboBox<String> listKategoriBarang;
     private javax.swing.JComboBox<String> listNamaBarang;

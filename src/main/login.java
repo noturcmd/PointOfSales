@@ -18,16 +18,13 @@ public class login extends javax.swing.JFrame {
     
     
     public login() {
-        
         dbConnection = KoneksiDatabase.getInstance();
-            initComponents();
-            setLocationRelativeTo(null);
-            inputIDLogin.setForeground(new Color(153, 153, 153));
-            inputIDLogin.setForeground(new java.awt.Color(241, 218, 196));
-            inputPasswordLogin.setForeground(new java.awt.Color(241, 218, 196));
-            inputPasswordLogin.setEchoChar((char)0);
-        
-        
+        initComponents();
+        setLocationRelativeTo(null);
+        inputIDLogin.setForeground(new Color(153, 153, 153));
+        inputIDLogin.setForeground(new java.awt.Color(241, 218, 196));
+        inputPasswordLogin.setForeground(new java.awt.Color(241, 218, 196));
+        inputPasswordLogin.setEchoChar((char)0);
     }
 
     
@@ -47,6 +44,7 @@ public class login extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Login Admin");
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(71, 73, 115));
 
@@ -195,22 +193,41 @@ public class login extends javax.swing.JFrame {
 
     private void buttonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLoginActionPerformed
         // TODO add your handling code here:
-        try{
-            Statement st1 = dbConnection.getConnection().createStatement();
-            String getAdmin = String.format("select * from data_admin where id_admin=\"%s\" and password_admin=\"%s\";", this.inputIDLogin.getText(), this.inputPasswordLogin.getText());
-            ResultSet rs1 = st1.executeQuery(getAdmin);
-            if(rs1.next()){
-                dispose();
-                Pembayaran mp = new Pembayaran();
-                mp.getAdminBio(rs1.getString("nama_admin"), Integer.parseInt(rs1.getString("id_admin")));
-                mp.setVisible(true);
-                mp.setExtendedState(mp.getExtendedState() | JFrame.MAXIMIZED_BOTH);
-//                mp.setSize(1414, 986);
-            }else{
-                JOptionPane.showMessageDialog(this, "Maaf, data tersebut tidak tersedia di data admin!");
+        if(this.inputIDLogin.getText().equals("Masukkan ID") && this.inputPasswordLogin.getText().equals("Masukkan Password")){
+            this.inputIDLogin.setText("");
+            this.inputPasswordLogin.setText("");
+            if(this.inputIDLogin.getText().isBlank() && this.inputPasswordLogin.getText().isBlank()){
+                JOptionPane.showMessageDialog(this, "Mohon tidak mengosongkan input!");
             }
-        }catch(SQLException e){
-            e.printStackTrace();
+        }else if(this.inputIDLogin.getText().equals("Masukkan ID") && !this.inputPasswordLogin.getText().equals("Masukkan Password")){
+            this.inputIDLogin.setText("");
+            if(this.inputIDLogin.getText().isBlank() && !this.inputPasswordLogin.getText().isBlank()){
+                JOptionPane.showMessageDialog(this, "Input ID kosong!");
+            }
+        }else if(!this.inputIDLogin.getText().equals("Masukkan ID") && this.inputPasswordLogin.getText().equals("Masukkan Password")){
+            this.inputPasswordLogin.setText("");
+            if(!this.inputIDLogin.getText().isBlank() && this.inputPasswordLogin.getText().isBlank()){
+                JOptionPane.showMessageDialog(this, "Input Password kosong!");
+            }
+        }else if(!this.inputIDLogin.getText().equals("Masukkan ID") && !this.inputPasswordLogin.getText().equals("Masukkan Password")){
+            if(!this.inputIDLogin.getText().isBlank() && !this.inputPasswordLogin.getText().isBlank()){
+                try{
+                    Statement st1 = dbConnection.getConnection().createStatement();
+                    String getAdmin = String.format("select * from data_admin where id_admin=\"%s\" and password_admin=\"%s\";", this.inputIDLogin.getText(), this.inputPasswordLogin.getText());
+                    ResultSet rs1 = st1.executeQuery(getAdmin);
+                    if(rs1.next()){
+                        dispose();
+                        Pembayaran mp = new Pembayaran();
+                        mp.getAdminBio(rs1.getString("nama_admin"), Integer.parseInt(rs1.getString("id_admin")));
+                        mp.setVisible(true);
+                        mp.setExtendedState(mp.getExtendedState() | JFrame.MAXIMIZED_BOTH);
+                    }else{
+                        JOptionPane.showMessageDialog(this, "Maaf, data tersebut tidak tersedia di data admin!");
+                    }
+                }catch(SQLException e){
+                    e.printStackTrace();
+                }
+            }
         }
         
     }//GEN-LAST:event_buttonLoginActionPerformed
