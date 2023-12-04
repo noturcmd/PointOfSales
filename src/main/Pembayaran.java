@@ -576,16 +576,18 @@ public class Pembayaran extends javax.swing.JFrame {
 
     private void tombolRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tombolRefreshActionPerformed
         // TODO add your handling code here:
-        ArrayList<String> harga1 = new ArrayList<String>();
-        String harga4 = "";
-        String[] jumlahHarga2 = this.totalHargaKeseluruhan.getText().split("Rp");   
-        String[] jumlahHarga3 = jumlahHarga2[1].split(",");
-        for(String tes: jumlahHarga3){
-            harga4 += tes;
+        if(this.tabelPembelianBarang.getRowCount() > 0){
+            ArrayList<String> harga1 = new ArrayList<String>();
+            String harga4 = "";
+            String[] jumlahHarga2 = this.totalHargaKeseluruhan.getText().split("Rp");   
+            String[] jumlahHarga3 = jumlahHarga2[1].split(",");
+            for(String tes: jumlahHarga3){
+                harga4 += tes;
+            }
+            int diskon = (int)(0.1 * Integer.parseInt(harga4));
+            this.potonganDiskon.setText("Rp" + df.format(diskon));
+            this.hargaAkhir.setText("Rp" + String.valueOf(df.format(Integer.parseInt(harga4) - diskon)));
         }
-        int diskon = (int)(0.1 * Integer.parseInt(harga4));
-        this.potonganDiskon.setText("Rp" + df.format(diskon));
-        this.hargaAkhir.setText("Rp" + String.valueOf(df.format(Integer.parseInt(harga4) - diskon)));
     }//GEN-LAST:event_tombolRefreshActionPerformed
 
 
