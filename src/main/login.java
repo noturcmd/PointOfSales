@@ -210,6 +210,7 @@ public class login extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Input Password kosong!");
             }
         }else if(!this.inputIDLogin.getText().equals("Masukkan ID") && !this.inputPasswordLogin.getText().equals("Masukkan Password")){
+            System.out.println("Huru hara");
             if(!this.inputIDLogin.getText().isBlank() && !this.inputPasswordLogin.getText().isBlank()){
                 try{
                     Statement st1 = dbConnection.getConnection().createStatement();
@@ -227,6 +228,12 @@ public class login extends javax.swing.JFrame {
                 }catch(SQLException e){
                     e.printStackTrace();
                 }
+            }else if(this.inputIDLogin.getText().isBlank() && this.inputPasswordLogin.getText().isBlank()){
+                JOptionPane.showMessageDialog(this, "Mohon tidak mengosongkan input!");
+            }else if(this.inputIDLogin.getText().isBlank() && !this.inputPasswordLogin.getText().isBlank()){
+                JOptionPane.showMessageDialog(this, "Input ID kosong!");
+            }else if(!this.inputIDLogin.getText().isBlank() && this.inputPasswordLogin.getText().isBlank()){
+                JOptionPane.showMessageDialog(this, "Input Password kosong!");
             }
         }
         
@@ -234,7 +241,6 @@ public class login extends javax.swing.JFrame {
 
     private void tampilkanPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tampilkanPassActionPerformed
         // TODO add your handling code here:
-        
         if(inputPasswordLogin.getText().equals("Masukkan Password") && tampilkanPass.isSelected()){
             this.inputPasswordLogin.setEchoChar((char)0);
         }else if(!inputPasswordLogin.getText().equals("Masukkan Password") && tampilkanPass.isSelected()){
