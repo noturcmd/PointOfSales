@@ -25,7 +25,6 @@ public class Pembayaran extends javax.swing.JFrame {
         this.dbConnection = KoneksiDatabase.getInstance();
         getDataBarang();
         System.out.println(getSize());
-//        getContentPane().setBackground(new Color(71,73,115));
     }
     
     void getAdminBio(String nama, int id){
@@ -320,18 +319,18 @@ public class Pembayaran extends javax.swing.JFrame {
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGap(42, 42, 42)
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(listNamaBarang, 0, 279, Short.MAX_VALUE)
+                                            .addComponent(listNamaBarang, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                             .addComponent(listKategoriBarang, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                             .addComponent(jumlahBarangYangDibeli)
                                             .addGroup(jPanel1Layout.createSequentialGroup()
                                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                                    .addComponent(searchByID, javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(statusMember, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE))
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                    .addComponent(searchByID, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
+                                                    .addComponent(statusMember, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
                                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                                     .addComponent(tombolSearch, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                     .addComponent(tombolRefresh, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE))))))
-                                .addGap(0, 0, Short.MAX_VALUE)))
+                                .addGap(0, 6, Short.MAX_VALUE)))
                         .addGap(30, 30, 30)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1036, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(123, 123, 123)))
@@ -413,7 +412,6 @@ public class Pembayaran extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
@@ -499,8 +497,33 @@ public class Pembayaran extends javax.swing.JFrame {
                 String query1 = String.format("Select id_barang, kategori_barang, harga_barang from tabel_barang where nama_barang = \"%s\";", this.listNamaBarang.getSelectedItem().toString());
                 ResultSet rs1 = st1.executeQuery(query1);
                 int hargaSeluruh = 0;
+                int jumlahBaris = modelTblPbl.getRowCount();
                 while(rs1.next()){
-                    modelTblPbl.addRow(new Object[]{rs1.getString("id_barang"), this.listNamaBarang.getSelectedItem().toString(),rs1.getString("kategori_barang"), this.jumlahBarangYangDibeli.getText(),df.format(Integer.parseInt(rs1.getString("harga_barang")) * Integer.parseInt(jumlahBarangYangDibeli.getText()))});
+                    if(jumlahBaris > 0){
+                        for(int i = 0; i < jumlahBaris; i++){
+                            System.out.println("Masuk lebih dalam");
+                            if(Integer.parseInt((String) this.modelTblPbl.getValueAt(i, 0)) == Integer.parseInt(rs1.getString("id_barang"))){
+                                System.out.println(Integer.parseInt((String) this.modelTblPbl.getValueAt(i, 0)) == Integer.parseInt(rs1.getString("id_barang")));
+                                System.out.println("Kondisi 11111");
+                                String jumlah = String.valueOf(Integer.parseInt((String) this.modelTblPbl.getValueAt(i, 3)) + Integer.parseInt(this.jumlahBarangYangDibeli.getText()));
+                                
+                                modelTblPbl.setValueAt(rs1.getString("id_barang"), i, 0);
+                                modelTblPbl.setValueAt(this.listNamaBarang.getSelectedItem().toString(), i, 1);
+                                modelTblPbl.setValueAt(rs1.getString("kategori_barang"), i, 2);
+                                modelTblPbl.setValueAt(jumlah, i, 3);
+                                int harga123 = Integer.parseInt(String.valueOf(modelTblPbl.getValueAt(i, 3))) * Integer.parseInt(rs1.getString("harga_barang"));
+                                modelTblPbl.setValueAt(df.format(harga123), i, 4);
+                                
+                            }else if(Integer.parseInt((String) this.modelTblPbl.getValueAt(i, 0)) != Integer.parseInt(rs1.getString("id_barang"))){
+                                System.out.println(Integer.parseInt((String) this.modelTblPbl.getValueAt(i, 0)) != Integer.parseInt(rs1.getString("id_barang")));
+                                System.out.println("Kondisi 22222");
+                                modelTblPbl.addRow(new Object[]{rs1.getString("id_barang"), this.listNamaBarang.getSelectedItem().toString(),rs1.getString("kategori_barang"), this.jumlahBarangYangDibeli.getText(),df.format(Integer.parseInt(rs1.getString("harga_barang")) * Integer.parseInt(jumlahBarangYangDibeli.getText()))});
+                            }
+                        }
+                    }else{
+                        System.out.println("Kondisi 3333");
+                        modelTblPbl.addRow(new Object[]{rs1.getString("id_barang"), this.listNamaBarang.getSelectedItem().toString(),rs1.getString("kategori_barang"), this.jumlahBarangYangDibeli.getText(),df.format(Integer.parseInt(rs1.getString("harga_barang")) * Integer.parseInt(jumlahBarangYangDibeli.getText()))});
+                    }
                 }
 
                 ArrayList<String> harga1 = new ArrayList<String>();
