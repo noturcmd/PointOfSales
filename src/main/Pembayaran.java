@@ -521,6 +521,8 @@ public class Pembayaran extends javax.swing.JFrame {
                     System.out.println("Diskon : " + diskon);
                     this.potonganDiskon.setText("Rp" + df.format(diskon));
                     this.hargaAkhir.setText("Rp" + String.valueOf(df.format(harga5 - diskon)));
+                }else{
+                    this.hargaAkhir.setText("Rp" + df.format(harga5));
                 }
             }catch(SQLException e){
                 e.printStackTrace();
