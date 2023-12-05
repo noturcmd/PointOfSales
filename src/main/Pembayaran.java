@@ -492,68 +492,94 @@ public class Pembayaran extends javax.swing.JFrame {
         }else if (this.jumlahBarangYangDibeli.getText().matches("\\d*") && Integer.parseInt(this.jumlahBarangYangDibeli.getText()) <= 0) {
             JOptionPane.showMessageDialog(this, "Mohon input jumlah yang valid!");
         }else if(this.jumlahBarangYangDibeli.getText().matches("\\d*") && Integer.parseInt(this.jumlahBarangYangDibeli.getText()) > 0){
-            try{
+            try {
                 Statement st1 = dbConnection.getConnection().createStatement();
-                String query1 = String.format("Select id_barang, kategori_barang, harga_barang from tabel_barang where nama_barang = \"%s\";", this.listNamaBarang.getSelectedItem().toString());
+                String query1 = String.format("SELECT id_barang, kategori_barang, harga_barang FROM tabel_barang WHERE nama_barang = \"%s\";", this.listNamaBarang.getSelectedItem().toString());
                 ResultSet rs1 = st1.executeQuery(query1);
-                int hargaSeluruh = 0;
-                int jumlahBaris = modelTblPbl.getRowCount();
-                int index = 0;
-                if(rs1.next()){
-                    if(jumlahBaris == 0){
-                        System.out.println("Kondisi 1");
-                        modelTblPbl.addRow(new Object[]{rs1.getString("id_barang"), this.listNamaBarang.getSelectedItem().toString(),rs1.getString("kategori_barang"), this.jumlahBarangYangDibeli.getText(),df.format(Integer.parseInt(rs1.getString("harga_barang")) * Integer.parseInt(jumlahBarangYangDibeli.getText()))});
-                    }else if(jumlahBaris > 0){
-                        while(index < jumlahBaris){
-                            if(Integer.parseInt(String.valueOf(modelTblPbl.getValueAt(index, 0))) == index){
-                                System.out.println(Integer.parseInt((String) this.modelTblPbl.getValueAt(index, 0)) == Integer.parseInt(rs1.getString("id_barang")));
-                                System.out.println("Kondisi 2");
-                                String jumlah = String.valueOf(Integer.parseInt((String) this.modelTblPbl.getValueAt(index, 3)) + Integer.parseInt(this.jumlahBarangYangDibeli.getText()));
-                                modelTblPbl.setValueAt(rs1.getString("id_barang"), index, 0);
-                                modelTblPbl.setValueAt(this.listNamaBarang.getSelectedItem().toString(), index, 1);
-                                modelTblPbl.setValueAt(rs1.getString("kategori_barang"), index, 2);
-                                modelTblPbl.setValueAt(jumlah, index, 3);
-                                int harga123 = Integer.parseInt(String.valueOf(modelTblPbl.getValueAt(index, 3))) * Integer.parseInt(rs1.getString("harga_barang"));
-                                modelTblPbl.setValueAt(df.format(harga123), index, 4);
-                                System.out.println("Index1 : " + index);
-                                break;
-                            }else if(Integer.parseInt(String.valueOf(modelTblPbl.getValueAt(index, 0))) != index){
-                                System.out.println("Kondisi 3");
-                                modelTblPbl.addRow(new Object[]{rs1.getString("id_barang"), this.listNamaBarang.getSelectedItem().toString(),rs1.getString("kategori_barang"), this.jumlahBarangYangDibeli.getText(),df.format(Integer.parseInt(rs1.getString("harga_barang")) * Integer.parseInt(jumlahBarangYangDibeli.getText()))});
-                                index++;
-                            }
+
+                if (rs1.next()) {
+                    int jumlahBaris = modelTblPbl.getRowCount();
+                    int index = 0;
+                    boolean idFound = false;
+
+                    while (index < jumlahBaris) {
+                        if (Integer.parseInt((String) this.modelTblPbl.getValueAt(index, 0)) == Integer.parseInt(rs1.getString("id_barang"))) {
+                            System.out.println("Kondisi 11111");
+                            String jumlah = String.valueOf(Integer.parseInt((String) this.modelTblPbl.getValueAt(index, 3)) + Integer.parseInt(this.jumlahBarangYangDibeli.getText()));
+                            modelTblPbl.setValueAt(rs1.getString("id_barang"), index, 0);
+                            modelTblPbl.setValueAt(this.listNamaBarang.getSelectedItem().toString(), index, 1);
+                            modelTblPbl.setValueAt(rs1.getString("kategori_barang"), index, 2);
+                            modelTblPbl.setValueAt(jumlah, index, 3);
+                            int harga123 = Integer.parseInt(String.valueOf(modelTblPbl.getValueAt(index, 3))) * Integer.parseInt(rs1.getString("harga_barang"));
+                            modelTblPbl.setValueAt(df.format(harga123), index, 4);
+                            idFound = true;
+                            
+                            break;
                         }
+                        index++;
+                    }
+
+                    if (!idFound) {
+                        System.out.println("Kondisi 22222");
+                        modelTblPbl.addRow(new Object[]{rs1.getString("id_barang"), this.listNamaBarang.getSelectedItem().toString(), rs1.getString("kategori_barang"), this.jumlahBarangYangDibeli.getText(), df.format(Integer.parseInt(rs1.getString("harga_barang")) * Integer.parseInt(this.jumlahBarangYangDibeli.getText()))});
+                        
                     }
                     
+                    int getHargaTable = 0;
                     
+                    ArrayList<String> harga1 = new ArrayList<String>();
+                    for(int i = 0; i < modelTblPbl.getRowCount(); i++){
+                        String getHarga = "";
+                        String[] harga = (String[]) String.valueOf(modelTblPbl.getValueAt(i, 4)).split(",");
+                        for(String harga10: harga){
+                            getHarga += harga10;
+                        }
+                        harga1.add(getHarga);
+                        
+                    }
+                    
+                    for(String hargaalll : harga1){
+                        getHargaTable += Integer.parseInt(hargaalll);
+                    }
+                    
+
+                    
+                    this.totalHargaKeseluruhan.setText("Rp" + df.format(getHargaTable));
+                    this.hargaAkhir.setText("Rp" + df.format(getHargaTable));
+//                    JOptionPane.showMessageDialog(rootPane, "Harga akhir : "+getHargaTable);
                 }
                 
-                JOptionPane.showMessageDialog(this, "Index : " + index);
-
-                ArrayList<String> harga1 = new ArrayList<String>();
-                int jumlahData = modelTblPbl.getRowCount();
-                int harga5 = 0;
-                for(int i = 0; i < jumlahData; i++){
+                if(this.tabelPembelianBarang.getRowCount() > 0){
+                    ArrayList<String> harga1 = new ArrayList<String>();
                     String harga4 = "";
-                    String harga2 = String.valueOf( modelTblPbl.getValueAt(i, 4));
-                    String[] jumlahHarga = harga2.split(",");
-                    for(String harga3: jumlahHarga){
-                        harga4 += harga3;
+                    String[] diskonAll = this.totalHargaKeseluruhan.getText().split("Rp");
+                    for(String hahaha: diskonAll){
+                        System.out.println("harga haha: " +  hahaha);
                     }
-                    harga5 += Integer.parseInt(harga4);
+                    
+                    String[] splittt = diskonAll[1].split(",");
+                    for(String trusss: splittt){
+                        harga4 += trusss;
+                    }
+                    
+//                    System.out.println("Harga trusss : " + harga4);
+                    
+                    if(this.statusMember.getText().equals("Member")){
+                        int diskonPotong = (int)(0.1 * Integer.parseInt(harga4));
+                        this.potonganDiskon.setText("Rp" + df.format(diskonPotong));
+                        int hargaAfterDiskon = Integer.parseInt(harga4) - diskonPotong;
+                        this.hargaAkhir.setText("Rp" + df.format(hargaAfterDiskon));
+//                        JOptionPane.showMessageDialog(rootPane, "Harga akhir2 : "+hargaAfterDiskon);
+                    }
+                     
+                          
                 }
-                this.totalHargaKeseluruhan.setText("Rp"+df.format(harga5));
-                if(this.statusMember.getText().equals("Member")){
-                    int diskon = (int) (0.1 * harga5);
-                    System.out.println("Diskon : " + diskon);
-                    this.potonganDiskon.setText("Rp" + df.format(diskon));
-                    this.hargaAkhir.setText("Rp" + String.valueOf(df.format(harga5 - diskon)));
-                }else{
-                    this.hargaAkhir.setText("Rp" + df.format(harga5));
-                }
-            }catch(SQLException e){
+                
+                
+            } catch (SQLException e) {
                 e.printStackTrace();
             }
+
         }
     }//GEN-LAST:event_buttonTambahActionPerformed
 
