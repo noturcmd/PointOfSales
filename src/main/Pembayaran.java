@@ -25,6 +25,7 @@ public class Pembayaran extends javax.swing.JFrame {
         this.dbConnection = KoneksiDatabase.getInstance();
         getDataBarang();
         System.out.println(getSize());
+        this.tombolSimpan.setVisible(false);
     }
     
     void getAdminBio(String nama, int id){
@@ -75,7 +76,8 @@ public class Pembayaran extends javax.swing.JFrame {
         searchByID = new javax.swing.JTextField();
         statusMember = new javax.swing.JLabel();
         tombolSearch = new javax.swing.JButton();
-        tombolRefresh = new javax.swing.JButton();
+        tombolReset = new javax.swing.JToggleButton();
+        tombolSimpan = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(71, 73, 115));
@@ -119,6 +121,11 @@ public class Pembayaran extends javax.swing.JFrame {
             }
         });
         tabelPembelianBarang.getTableHeader().setReorderingAllowed(false);
+        tabelPembelianBarang.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabelPembelianBarangMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tabelPembelianBarang);
         if (tabelPembelianBarang.getColumnModel().getColumnCount() > 0) {
             tabelPembelianBarang.getColumnModel().getColumn(0).setResizable(false);
@@ -264,11 +271,19 @@ public class Pembayaran extends javax.swing.JFrame {
             }
         });
 
-        tombolRefresh.setBackground(new java.awt.Color(241, 218, 196));
-        tombolRefresh.setText("Refresh");
-        tombolRefresh.addActionListener(new java.awt.event.ActionListener() {
+        tombolReset.setBackground(new java.awt.Color(241, 218, 196));
+        tombolReset.setText("Reset");
+        tombolReset.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tombolRefreshActionPerformed(evt);
+                tombolResetActionPerformed(evt);
+            }
+        });
+
+        tombolSimpan.setBackground(new java.awt.Color(241, 218, 196));
+        tombolSimpan.setText("Simpan");
+        tombolSimpan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tombolSimpanActionPerformed(evt);
             }
         });
 
@@ -279,11 +294,15 @@ public class Pembayaran extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addContainerGap(1411, Short.MAX_VALUE)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(44, 44, 44)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(totalHargaKeseluruhan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -327,13 +346,14 @@ public class Pembayaran extends javax.swing.JFrame {
                                                     .addComponent(searchByID, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
                                                     .addComponent(statusMember, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
-                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                    .addComponent(tombolSearch, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                    .addComponent(tombolRefresh, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE))))))
-                                .addGap(0, 6, Short.MAX_VALUE)))
-                        .addGap(30, 30, 30)
+                                                .addComponent(tombolSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(tombolReset, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(tombolSimpan))))))
+                        .addGap(9, 9, 9)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1036, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(123, 123, 123)))
+                        .addGap(120, 120, 120)))
                 .addGap(229, 229, 229))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(768, 768, 768)
@@ -360,7 +380,8 @@ public class Pembayaran extends javax.swing.JFrame {
                                 .addGap(49, 49, 49)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel4)
-                                    .addComponent(listKategoriBarang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(listKategoriBarang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(tombolSimpan, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel6)
@@ -373,17 +394,14 @@ public class Pembayaran extends javax.swing.JFrame {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(searchByID)))
-                            .addComponent(tombolSearch))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(tombolSearch)
+                                .addComponent(tombolReset)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(statusMember, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(4, 4, 4))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(tombolRefresh)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(statusMember, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(4, 4, 4)
                         .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -396,7 +414,7 @@ public class Pembayaran extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(totalHargaKeseluruhan, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel8)
                     .addComponent(potonganDiskon, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -404,7 +422,7 @@ public class Pembayaran extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel9)
                     .addComponent(hargaAkhir, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(488, Short.MAX_VALUE))
+                .addContainerGap(500, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -582,6 +600,8 @@ public class Pembayaran extends javax.swing.JFrame {
 
     private void tombolUbahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tombolUbahActionPerformed
         // TODO add your handling code here:
+        this.tombolSimpan.setVisible(true);
+        
     }//GEN-LAST:event_tombolUbahActionPerformed
 
     private void tombolHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tombolHapusActionPerformed
@@ -606,6 +626,18 @@ public class Pembayaran extends javax.swing.JFrame {
                 ResultSet rs1 = st1.executeQuery(query1);
                 if(rs1.next()){
                     this.statusMember.setText("Member");
+                if(this.tabelPembelianBarang.getRowCount() > 0){
+                    ArrayList<String> harga1 = new ArrayList<String>();
+                    String harga4 = "";
+                    String[] jumlahHarga2 = this.totalHargaKeseluruhan.getText().split("Rp");   
+                    String[] jumlahHarga3 = jumlahHarga2[1].split(",");
+                    for(String tes: jumlahHarga3){
+                        harga4 += tes;
+                    }
+                    int diskon = (int)(0.1 * Integer.parseInt(harga4));
+                    this.potonganDiskon.setText("Rp" + df.format(diskon));
+                    this.hargaAkhir.setText("Rp" + String.valueOf(df.format(Integer.parseInt(harga4) - diskon)));
+                }
                 }else{
                     this.statusMember.setText("Bukan Member");
                 }
@@ -624,21 +656,39 @@ public class Pembayaran extends javax.swing.JFrame {
         this.dfm.setVisible(true);
     }//GEN-LAST:event_daftarMemberActionPerformed
 
-    private void tombolRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tombolRefreshActionPerformed
+    private void tombolResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tombolResetActionPerformed
         // TODO add your handling code here:
-        if(this.tabelPembelianBarang.getRowCount() > 0){
-            ArrayList<String> harga1 = new ArrayList<String>();
-            String harga4 = "";
-            String[] jumlahHarga2 = this.totalHargaKeseluruhan.getText().split("Rp");   
-            String[] jumlahHarga3 = jumlahHarga2[1].split(",");
-            for(String tes: jumlahHarga3){
-                harga4 += tes;
-            }
-            int diskon = (int)(0.1 * Integer.parseInt(harga4));
-            this.potonganDiskon.setText("Rp" + df.format(diskon));
-            this.hargaAkhir.setText("Rp" + String.valueOf(df.format(Integer.parseInt(harga4) - diskon)));
+        DefaultTableModel tabelTabel = (DefaultTableModel) tabelPembelianBarang.getModel();
+        tabelTabel.setRowCount(0);
+        this.statusMember.setText("");
+        this.jumlahBarangYangDibeli.setText("");
+        this.searchByID.setText("");
+        this.totalHargaKeseluruhan.setText("Rp 0");
+        this.potonganDiskon.setText("Rp 0");
+        this.hargaAkhir.setText("Rp 0");
+    }//GEN-LAST:event_tombolResetActionPerformed
+
+    private void tabelPembelianBarangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelPembelianBarangMouseClicked
+        // TODO add your handling code here:
+        int row = tabelPembelianBarang.getSelectedRow();
+        DefaultTableModel getTableForEdit = (DefaultTableModel) tabelPembelianBarang.getModel();
+        
+    }//GEN-LAST:event_tabelPembelianBarangMouseClicked
+
+    private void tombolSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tombolSimpanActionPerformed
+        // TODO add your handling code here:
+        JOptionPane jop = new JOptionPane();
+        int jawab = jop.showConfirmDialog(this, "Ingin meminjam buku tersebut?");
+        switch(jawab){
+            case JOptionPane.YES_OPTION: 
+                                        this.tombolSimpan.setVisible(false);
+                                        break;
+            case JOptionPane.NO_OPTION: 
+                                        break;
+            case JOptionPane.CANCEL_OPTION: 
+                                        break;
         }
-    }//GEN-LAST:event_tombolRefreshActionPerformed
+    }//GEN-LAST:event_tombolSimpanActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -669,8 +719,9 @@ public class Pembayaran extends javax.swing.JFrame {
     private javax.swing.JLabel statusMember;
     private javax.swing.JTable tabelPembelianBarang;
     private javax.swing.JButton tombolHapus;
-    private javax.swing.JButton tombolRefresh;
+    private javax.swing.JToggleButton tombolReset;
     private javax.swing.JButton tombolSearch;
+    private javax.swing.JButton tombolSimpan;
     private javax.swing.JButton tombolUbah;
     private javax.swing.JLabel totalHargaKeseluruhan;
     // End of variables declaration//GEN-END:variables
