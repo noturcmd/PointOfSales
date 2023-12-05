@@ -546,7 +546,6 @@ public class Pembayaran extends javax.swing.JFrame {
                     
                     this.totalHargaKeseluruhan.setText("Rp" + df.format(getHargaTable));
                     this.hargaAkhir.setText("Rp" + df.format(getHargaTable));
-//                    JOptionPane.showMessageDialog(rootPane, "Harga akhir : "+getHargaTable);
                 }
                 
                 if(this.tabelPembelianBarang.getRowCount() > 0){
@@ -562,14 +561,12 @@ public class Pembayaran extends javax.swing.JFrame {
                         harga4 += trusss;
                     }
                     
-//                    System.out.println("Harga trusss : " + harga4);
                     
                     if(this.statusMember.getText().equals("Member")){
                         int diskonPotong = (int)(0.1 * Integer.parseInt(harga4));
                         this.potonganDiskon.setText("Rp" + df.format(diskonPotong));
                         int hargaAfterDiskon = Integer.parseInt(harga4) - diskonPotong;
                         this.hargaAkhir.setText("Rp" + df.format(hargaAfterDiskon));
-//                        JOptionPane.showMessageDialog(rootPane, "Harga akhir2 : "+hargaAfterDiskon);
                     }
                      
                           
