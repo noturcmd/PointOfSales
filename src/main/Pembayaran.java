@@ -748,22 +748,25 @@ public class Pembayaran extends javax.swing.JFrame {
         }else if(Integer.parseInt(this.inputPembayaran.getText()) > 0 && Integer.parseInt(this.inputPembayaran.getText()) < this.totalHargaSemua){
             JOptionPane.showMessageDialog(this, "Uang Anda kurang : "+ df.format(this.totalHargaSemua - Integer.parseInt(this.inputPembayaran.getText())));
         }else if(Integer.parseInt(this.inputPembayaran.getText()) == this.totalHargaSemua){
-            try{
-                Statement st1 = dbConnection.getConnection().createStatement();
-                String query1 = String.format("insert into tabel_riwayat_pembelian(id_transaksi, id_admin, id_member, waktu_transaksi, tanggal_transaksi, id_barang, jumlah_beli_barang, total_harga, pembayaran) values(\"%s\",\"%s\", curtime(), curdate(), \"%s\", \"%s\", \"%s\", \"%s\";", this.idAdminS, this.idMemberS, this.idBarangs, this.jumlahBeliBarang, this.totalHargaSemua, Integer.parseInt(this.inputPembayaran.getText()));
-                st1.executeUpdate(query1);
-            }catch(SQLException e){
-                e.printStackTrace();
+            if(this.statusMember.getText().equals("Member")){
+                try{
+                    Statement st1 = dbConnection.getConnection().createStatement();
+                    String query1 = String.format("insert into tabel_riwayat_pembelian(id_transaksi, id_admin, id_member, waktu_transaksi, tanggal_transaksi, id_barang, jumlah_beli_barang, total_harga, pembayaran) values(\"%s\",\"%s\", curtime(), curdate(), \"%s\", \"%s\", \"%s\", \"%s\";", this.idAdminS, this.idMemberS, this.idBarangs, this.jumlahBeliBarang, this.totalHargaSemua, Integer.parseInt(this.inputPembayaran.getText()));
+                    st1.executeUpdate(query1);
+                }catch(SQLException e){
+                    e.printStackTrace();
+                }
             }
         }else if(Integer.parseInt(this.inputPembayaran.getText()) > this.totalHargaSemua){
-            JOptionPane.showMessageDialog(this, "Total : " + this.totalHargaSemua);
-            JOptionPane.showMessageDialog(this, "Uang Anda kembalian : "+ df.format(Integer.parseInt(this.inputPembayaran.getText()) - this.totalHargaSemua));
-            try{
-                Statement st1 = dbConnection.getConnection().createStatement();
-                String query1 = String.format("insert into tabel_riwayat_pembelian(id_transaksi, id_admin, id_member, waktu_transaksi, tanggal_transaksi, id_barang, jumlah_beli_barang, total_harga, pembayaran) values(\"%s\",\"%s\", curtime(), curdate(), \"%s\", \"%s\", \"%s\", \"%s\";", this.idAdminS, this.idMemberS, this.idBarangs, this.jumlahBeliBarang, this.totalHargaSemua, Integer.parseInt(this.inputPembayaran.getText()));
-                st1.executeUpdate(query1);
-            }catch(SQLException e){
-                e.printStackTrace();
+            if(this.statusMember.getText().equals("Member")){
+                try{
+                    System.out.println(this.idAdminS + " : "+this.idMemberS + " : "+ this.idBarangs + " : "+ this.jumlahBeliBarang + " : "+this.totalHargaSemua + " : "+Integer.parseInt(this.inputPembayaran.getText()));
+                    Statement st1 = dbConnection.getConnection().createStatement();
+                    String query1 = String.format("insert into tabel_riwayat_pembelian(id_transaksi, id_admin, id_member, waktu_transaksi, tanggal_transaksi, id_barang, jumlah_beli_barang, total_harga, pembayaran) values(\"%s\",\"%s\", curtime(), curdate(), \"%s\", \"%s\", \"%s\", \"%s\";", this.idAdminS, this.idMemberS, this.idBarangs, this.jumlahBeliBarang, this.totalHargaSemua, Integer.parseInt(this.inputPembayaran.getText()));
+                    st1.executeUpdate(query1);
+                }catch(SQLException e){
+                    e.printStackTrace();
+            }
             }
         }
     }//GEN-LAST:event_tombolBayarActionPerformed
