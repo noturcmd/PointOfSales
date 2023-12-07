@@ -17,7 +17,7 @@ public class Pembayaran extends javax.swing.JFrame {
     
     DefaultTableModel modelTblPbl;
     private KoneksiDatabase dbConnection;
-    DecimalFormat df=new DecimalFormat("#,###");
+    DecimalFormat df=new DecimalFormat("#,###.##");
     DaftarMember dfm = null;
     int totalHargaSemua;
     int idAdminS;
@@ -38,6 +38,17 @@ public class Pembayaran extends javax.swing.JFrame {
         this.idAdminS = id;
         this.namaAdmin.setText(nama);
         this.idAdmin.setText(String.valueOf(id));
+    }
+    
+    void resetAll(){
+        DefaultTableModel tabelTabel = (DefaultTableModel) tabelPembelianBarang.getModel();
+        tabelTabel.setRowCount(0);
+        this.statusMember.setText("");
+        this.jumlahBarangYangDibeli.setText("");
+        this.searchByID.setText("");
+        this.totalHargaKeseluruhan.setText("Rp 0");
+        this.potonganDiskon.setText("Rp 0");
+        this.hargaAkhir.setText("Rp 0");
     }
     
     public static void main(String[] args) {
@@ -705,14 +716,7 @@ public class Pembayaran extends javax.swing.JFrame {
 
     private void tombolResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tombolResetActionPerformed
         // TODO add your handling code here:
-        DefaultTableModel tabelTabel = (DefaultTableModel) tabelPembelianBarang.getModel();
-        tabelTabel.setRowCount(0);
-        this.statusMember.setText("");
-        this.jumlahBarangYangDibeli.setText("");
-        this.searchByID.setText("");
-        this.totalHargaKeseluruhan.setText("Rp 0");
-        this.potonganDiskon.setText("Rp 0");
-        this.hargaAkhir.setText("Rp 0");
+        resetAll();
     }//GEN-LAST:event_tombolResetActionPerformed
 
     private void tabelPembelianBarangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelPembelianBarangMouseClicked
@@ -756,7 +760,7 @@ public class Pembayaran extends javax.swing.JFrame {
                     String queryUpdate = String.format("update from tabel_member set point_member = \"%s\" where id_member = \"%s\";", pointMember, this.idMemberS);
                     st2.executeUpdate(queryUpdate);
                     JOptionPane.showMessageDialog(this, "Pembayaran berhasil!");
-                    
+                    resetAll();
                 }catch(SQLException e){
                     e.printStackTrace();
                 }
@@ -766,6 +770,7 @@ public class Pembayaran extends javax.swing.JFrame {
                     String query1 = String.format("insert into tabel_riwayat_pembelian(id_admin, id_member, waktu_transaksi, tanggal_transaksi, id_barang, jumlah_beli_barang, total_harga, pembayaran) values(\"%s\",\"%s\", curtime(), curdate(), \"%s\", \"%s\", \"%s\", \"%s\");", this.idAdminS, "0", this.idBarangs, this.jumlahBeliBarang, this.totalHargaSemua, Integer.parseInt(this.inputPembayaran.getText()));
                     st1.executeUpdate(query1);
                     JOptionPane.showMessageDialog(this, "Pembayaran berhasil!");
+                    resetAll();
                 }catch(SQLException e){
                     e.printStackTrace();
                 }
@@ -782,6 +787,7 @@ public class Pembayaran extends javax.swing.JFrame {
                     String queryUpdate = String.format("update from tabel_member set point_member = \"%s\" where id_member = \"%s\";", pointMember, this.idMemberS);
                     st2.executeUpdate(queryUpdate);
                     JOptionPane.showMessageDialog(this, "Pembayaran berhasil!");
+                    resetAll();
                 }catch(SQLException e){
                     e.printStackTrace();
                 }
@@ -791,6 +797,7 @@ public class Pembayaran extends javax.swing.JFrame {
                     String query1 = String.format("insert into tabel_riwayat_pembelian(id_admin, id_member, waktu_transaksi, tanggal_transaksi, id_barang, jumlah_beli_barang, total_harga, pembayaran) values(\"%s\",\"%s\", curtime(), curdate(), \"%s\", \"%s\", \"%s\", \"%s\");", this.idAdminS, "0", this.idBarangs, this.jumlahBeliBarang, this.totalHargaSemua, Integer.parseInt(this.inputPembayaran.getText()));
                     st1.executeUpdate(query1);
                     JOptionPane.showMessageDialog(this, "Pembayaran berhasil!");
+                    resetAll();
                 }catch(SQLException e){
                     e.printStackTrace();
                 }
