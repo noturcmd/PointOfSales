@@ -765,7 +765,7 @@ public class Pembayaran extends javax.swing.JFrame {
                             String queryUpdate = String.format("update tabel_member set point_member = \"%s\" where id_member = \"%s\";", pointMember, this.idMemberS);
                             st3.executeUpdate(queryUpdate);
                         }else{
-                            int tambahPoint = Integer.parseInt(rs2.getString(query2)) + pointMember;
+                            int tambahPoint = Integer.parseInt(rs2.getString("point_member")) + pointMember;
                             Statement st3 = dbConnection.getConnection().createStatement();
                             String queryUpdate = String.format("update tabel_member set point_member = \"%s\" where id_member = \"%s\";", tambahPoint, this.idMemberS);
                             st3.executeUpdate(queryUpdate);
@@ -800,6 +800,7 @@ public class Pembayaran extends javax.swing.JFrame {
                     st1.executeUpdate(query1);
                     int pointMember = (int) (0.2 * this.totalHargaSemua);
                     Statement st2 = dbConnection.getConnection().createStatement();
+                    JOptionPane.showMessageDialog(rootPane, "ID member : " + this.idMemberS);
                     String query2 = String.format("Select point_member from tabel_member where id_member = \"%s\";", this.idMemberS);
                     ResultSet rs2 = st2.executeQuery(query2);
                     if(rs2.next()){
@@ -808,7 +809,7 @@ public class Pembayaran extends javax.swing.JFrame {
                             String queryUpdate = String.format("update tabel_member set point_member = \"%s\" where id_member = \"%s\";", pointMember, this.idMemberS);
                             st3.executeUpdate(queryUpdate);
                         }else{
-                            int tambahPoint = Integer.parseInt(rs2.getString(query2)) + pointMember;
+                            int tambahPoint = Integer.parseInt(rs2.getString("point_member")) + pointMember;
                             Statement st3 = dbConnection.getConnection().createStatement();
                             String queryUpdate = String.format("update tabel_member set point_member = \"%s\" where id_member = \"%s\";", tambahPoint, this.idMemberS);
                             st3.executeUpdate(queryUpdate);
