@@ -25,7 +25,7 @@ public class Pembayaran extends javax.swing.JFrame {
     int idBarangs;
     int jumlahBeliBarang;
     
-    public Pembayaran() {
+    public Pembayaran(){
         initComponents();
         this.dbConnection = KoneksiDatabase.getInstance();
         getDataBarang();
