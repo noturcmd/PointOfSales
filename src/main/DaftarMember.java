@@ -18,6 +18,7 @@ public class DaftarMember extends javax.swing.JFrame {
         getContentPane().setBackground(new Color(14,41,84));
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
+        getContentPane().setBackground(new Color(14,41,84));
     }
 
     
@@ -69,7 +70,7 @@ public class DaftarMember extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addGap(76, 76, 76)
-                                .addComponent(inputNoTelpDaftarMember, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE))
+                                .addComponent(inputNoTelpDaftarMember, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -95,7 +96,7 @@ public class DaftarMember extends javax.swing.JFrame {
                     .addComponent(inputNoTelpDaftarMember, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(tombolDaftarMember)
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
 
         pack();
