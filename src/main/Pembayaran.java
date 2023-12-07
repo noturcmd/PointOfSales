@@ -762,12 +762,12 @@ public class Pembayaran extends javax.swing.JFrame {
                     if(rs2.next()){
                         if(Integer.parseInt(rs2.getString("point_member")) > 0){
                             Statement st3 = dbConnection.getConnection().createStatement();
-                            String queryUpdate = String.format("update from tabel_member set point_member = \"%s\" where id_member = \"%s\";", pointMember, this.idMemberS);
+                            String queryUpdate = String.format("update tabel_member set point_member = \"%s\" where id_member = \"%s\";", pointMember, this.idMemberS);
                             st3.executeUpdate(queryUpdate);
                         }else{
                             int tambahPoint = Integer.parseInt(rs2.getString(query2)) + pointMember;
                             Statement st3 = dbConnection.getConnection().createStatement();
-                            String queryUpdate = String.format("update from tabel_member set point_member = \"%s\" where id_member = \"%s\";", pointMember, this.idMemberS);
+                            String queryUpdate = String.format("update tabel_member set point_member = \"%s\" where id_member = \"%s\";", pointMember, this.idMemberS);
                             st3.executeUpdate(queryUpdate);
                         }
                     }
@@ -805,12 +805,12 @@ public class Pembayaran extends javax.swing.JFrame {
                     if(rs2.next()){
                         if(Integer.parseInt(rs2.getString("point_member")) > 0){
                             Statement st3 = dbConnection.getConnection().createStatement();
-                            String queryUpdate = String.format("update from tabel_member set point_member = \"%s\" where id_member = \"%s\";", pointMember, this.idMemberS);
+                            String queryUpdate = String.format("update tabel_member set point_member = \"%s\" where id_member = \"%s\";", pointMember, this.idMemberS);
                             st3.executeUpdate(queryUpdate);
                         }else{
                             int tambahPoint = Integer.parseInt(rs2.getString(query2)) + pointMember;
                             Statement st3 = dbConnection.getConnection().createStatement();
-                            String queryUpdate = String.format("update from tabel_member set point_member = \"%s\" where id_member = \"%s\";", pointMember, this.idMemberS);
+                            String queryUpdate = String.format("update tabel_member set point_member = \"%s\" where id_member = \"%s\";", pointMember, this.idMemberS);
                             st3.executeUpdate(queryUpdate);
                         }
                     }
