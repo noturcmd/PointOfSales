@@ -753,7 +753,7 @@ public class Pembayaran extends javax.swing.JFrame {
             if(this.statusMember.getText().equals("Member")){
                 try{
                     Statement st1 = dbConnection.getConnection().createStatement();
-                    String query1 = String.format("insert into tabel_riwayat_pembelian(id_admin, id_member, waktu_transaksi, tanggal_transaksi, id_barang, jumlah_beli_barang, total_harga, pembayaran) values(\"%s\",\"%s\", curtime(), curdate(), \"%s\", \"%s\", \"%s\", \"%s\");", this.idAdminS, this.idMemberS, this.idBarangs, this.jumlahBeliBarang, this.totalHargaSemua, Integer.parseInt(this.inputPembayaran.getText()));
+                    String query1 = String.format("insert into tabel_riwayat_pembelian(id_admin, id_member, waktu_transaksi, tanggal_transaksi, id_barang, jumlah_beli_barang, total_harga, pembayaran, nama_barang) values(\"%s\",\"%s\", curtime(), curdate(), \"%s\", \"%s\", \"%s\", \"%s\", \"%s\");", this.idAdminS, this.idMemberS, this.idBarangs, this.jumlahBeliBarang, this.totalHargaSemua, Integer.parseInt(this.inputPembayaran.getText()), this.listNamaBarang.getSelectedItem().toString());
                     st1.executeUpdate(query1);
                     int pointMember = (int) (0.2 * this.jumlahBeliBarang);
                     Statement st2 = dbConnection.getConnection().createStatement();
@@ -769,7 +769,7 @@ public class Pembayaran extends javax.swing.JFrame {
             }else{
                 try{
                     Statement st1 = dbConnection.getConnection().createStatement();
-                    String query1 = String.format("insert into tabel_riwayat_pembelian(id_admin, id_member, waktu_transaksi, tanggal_transaksi, id_barang, jumlah_beli_barang, total_harga, pembayaran) values(\"%s\",\"%s\", curtime(), curdate(), \"%s\", \"%s\", \"%s\", \"%s\");", this.idAdminS, "0", this.idBarangs, this.jumlahBeliBarang, this.totalHargaSemua, Integer.parseInt(this.inputPembayaran.getText()));
+                    String query1 = String.format("insert into tabel_riwayat_pembelian(id_admin, id_member, waktu_transaksi, tanggal_transaksi, id_barang, jumlah_beli_barang, total_harga, pembayaran, nama_barang) values(\"%s\",\"%s\", curtime(), curdate(), \"%s\", \"%s\", \"%s\", \"%s\", \"%s\");", this.idAdminS, "0", this.idBarangs, this.jumlahBeliBarang, this.totalHargaSemua, Integer.parseInt(this.inputPembayaran.getText()),this.listNamaBarang.getSelectedItem().toString());
                     st1.executeUpdate(query1);
                     JOptionPane.showMessageDialog(this, "Pembayaran berhasil!");
                     resetAll();
@@ -784,7 +784,7 @@ public class Pembayaran extends javax.swing.JFrame {
                 try{
                     System.out.println(this.idAdminS + " : "+this.idMemberS + " : "+ this.idBarangs + " : "+ this.jumlahBeliBarang + " : "+this.totalHargaSemua + " : "+Integer.parseInt(this.inputPembayaran.getText()));
                     Statement st1 = dbConnection.getConnection().createStatement();
-                    String query1 = String.format("insert into tabel_riwayat_pembelian(id_admin, id_member, waktu_transaksi, tanggal_transaksi, id_barang, jumlah_beli_barang, total_harga, pembayaran) values(\"%s\",\"%s\", curtime(), curdate(), \"%s\", \"%s\", \"%s\", \"%s\");", this.idAdminS, this.idMemberS, this.idBarangs, this.jumlahBeliBarang, this.totalHargaSemua, Integer.parseInt(this.inputPembayaran.getText()));
+                    String query1 = String.format("insert into tabel_riwayat_pembelian(id_admin, id_member, waktu_transaksi, tanggal_transaksi, id_barang, jumlah_beli_barang, total_harga, pembayaran, nama_barang) values(\"%s\",\"%s\", curtime(), curdate(), \"%s\", \"%s\", \"%s\", \"%s\", \"%s\");", this.idAdminS, this.idMemberS, this.idBarangs, this.jumlahBeliBarang, this.totalHargaSemua, Integer.parseInt(this.inputPembayaran.getText()),this.listNamaBarang.getSelectedItem().toString());
                     st1.executeUpdate(query1);
                     int pointMember = (int) (0.2 * this.totalHargaSemua);
                     Statement st2 = dbConnection.getConnection().createStatement();
@@ -800,7 +800,7 @@ public class Pembayaran extends javax.swing.JFrame {
             }else{
                 try{
                     Statement st1 = dbConnection.getConnection().createStatement();
-                    String query1 = String.format("insert into tabel_riwayat_pembelian(id_admin, id_member, waktu_transaksi, tanggal_transaksi, id_barang, jumlah_beli_barang, total_harga, pembayaran) values(\"%s\",\"%s\", curtime(), curdate(), \"%s\", \"%s\", \"%s\", \"%s\");", this.idAdminS, "0", this.idBarangs, this.jumlahBeliBarang, this.totalHargaSemua, Integer.parseInt(this.inputPembayaran.getText()));
+                    String query1 = String.format("insert into tabel_riwayat_pembelian(id_admin, id_member, waktu_transaksi, tanggal_transaksi, id_barang, jumlah_beli_barang, total_harga, pembayaran, nama_barang) values(\"%s\",\"%s\", curtime(), curdate(), \"%s\", \"%s\", \"%s\", \"%s\", \"%s\");", this.idAdminS, "0", this.idBarangs, this.jumlahBeliBarang, this.totalHargaSemua, Integer.parseInt(this.inputPembayaran.getText()),this.listNamaBarang.getSelectedItem().toString());
                     st1.executeUpdate(query1);
                     JOptionPane.showMessageDialog(this, "Pembayaran berhasil!");
                     resetAll();
