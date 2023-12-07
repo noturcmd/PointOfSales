@@ -767,7 +767,7 @@ public class Pembayaran extends javax.swing.JFrame {
                         }else{
                             int tambahPoint = Integer.parseInt(rs2.getString(query2)) + pointMember;
                             Statement st3 = dbConnection.getConnection().createStatement();
-                            String queryUpdate = String.format("update tabel_member set point_member = \"%s\" where id_member = \"%s\";", pointMember, this.idMemberS);
+                            String queryUpdate = String.format("update tabel_member set point_member = \"%s\" where id_member = \"%s\";", tambahPoint, this.idMemberS);
                             st3.executeUpdate(queryUpdate);
                         }
                     }
@@ -810,7 +810,7 @@ public class Pembayaran extends javax.swing.JFrame {
                         }else{
                             int tambahPoint = Integer.parseInt(rs2.getString(query2)) + pointMember;
                             Statement st3 = dbConnection.getConnection().createStatement();
-                            String queryUpdate = String.format("update tabel_member set point_member = \"%s\" where id_member = \"%s\";", pointMember, this.idMemberS);
+                            String queryUpdate = String.format("update tabel_member set point_member = \"%s\" where id_member = \"%s\";", tambahPoint, this.idMemberS);
                             st3.executeUpdate(queryUpdate);
                         }
                     }
