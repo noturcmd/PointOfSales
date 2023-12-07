@@ -761,6 +761,8 @@ public class Pembayaran extends javax.swing.JFrame {
                     st2.executeUpdate(queryUpdate);
                     JOptionPane.showMessageDialog(this, "Pembayaran berhasil!");
                     resetAll();
+                    this.inputPembayaran.setText("");
+                    this.idMemberS = 0;
                 }catch(SQLException e){
                     e.printStackTrace();
                 }
@@ -771,6 +773,8 @@ public class Pembayaran extends javax.swing.JFrame {
                     st1.executeUpdate(query1);
                     JOptionPane.showMessageDialog(this, "Pembayaran berhasil!");
                     resetAll();
+                    this.inputPembayaran.setText("");
+                    this.idMemberS = 0;
                 }catch(SQLException e){
                     e.printStackTrace();
                 }
@@ -782,12 +786,14 @@ public class Pembayaran extends javax.swing.JFrame {
                     Statement st1 = dbConnection.getConnection().createStatement();
                     String query1 = String.format("insert into tabel_riwayat_pembelian(id_admin, id_member, waktu_transaksi, tanggal_transaksi, id_barang, jumlah_beli_barang, total_harga, pembayaran) values(\"%s\",\"%s\", curtime(), curdate(), \"%s\", \"%s\", \"%s\", \"%s\");", this.idAdminS, this.idMemberS, this.idBarangs, this.jumlahBeliBarang, this.totalHargaSemua, Integer.parseInt(this.inputPembayaran.getText()));
                     st1.executeUpdate(query1);
-                    int pointMember = (int) (0.2 * this.jumlahBeliBarang);
+                    int pointMember = (int) (0.2 * this.totalHargaSemua);
                     Statement st2 = dbConnection.getConnection().createStatement();
-                    String queryUpdate = String.format("update from tabel_member set point_member = \"%s\" where id_member = \"%s\";", pointMember, this.idMemberS);
+                    String queryUpdate = String.format("update tabel_member set point_member = \"%s\" where id_member = \"%s\";", pointMember, this.idMemberS);
                     st2.executeUpdate(queryUpdate);
                     JOptionPane.showMessageDialog(this, "Pembayaran berhasil!");
                     resetAll();
+                    this.inputPembayaran.setText("");
+                    this.idMemberS = 0;
                 }catch(SQLException e){
                     e.printStackTrace();
                 }
@@ -798,6 +804,8 @@ public class Pembayaran extends javax.swing.JFrame {
                     st1.executeUpdate(query1);
                     JOptionPane.showMessageDialog(this, "Pembayaran berhasil!");
                     resetAll();
+                    this.inputPembayaran.setText("");
+                    this.idMemberS = 0;
                 }catch(SQLException e){
                     e.printStackTrace();
                 }
