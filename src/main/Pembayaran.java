@@ -757,8 +757,20 @@ public class Pembayaran extends javax.swing.JFrame {
                     st1.executeUpdate(query1);
                     int pointMember = (int) (0.2 * this.jumlahBeliBarang);
                     Statement st2 = dbConnection.getConnection().createStatement();
-                    String queryUpdate = String.format("update from tabel_member set point_member = \"%s\" where id_member = \"%s\";", pointMember, this.idMemberS);
-                    st2.executeUpdate(queryUpdate);
+                    String query2 = String.format("Select point_member from tabel_member where id_member = \"%s\";", this.idMemberS);
+                    ResultSet rs2 = st2.executeQuery(query2);
+                    if(rs2.next()){
+                        if(Integer.parseInt(rs2.getString("point_member")) > 0){
+                            Statement st3 = dbConnection.getConnection().createStatement();
+                            String queryUpdate = String.format("update from tabel_member set point_member = \"%s\" where id_member = \"%s\";", pointMember, this.idMemberS);
+                            st3.executeUpdate(queryUpdate);
+                        }else{
+                            int tambahPoint = Integer.parseInt(rs2.getString(query2)) + pointMember;
+                            Statement st3 = dbConnection.getConnection().createStatement();
+                            String queryUpdate = String.format("update from tabel_member set point_member = \"%s\" where id_member = \"%s\";", pointMember, this.idMemberS);
+                            st3.executeUpdate(queryUpdate);
+                        }
+                    }
                     JOptionPane.showMessageDialog(this, "Pembayaran berhasil!");
                     resetAll();
                     this.inputPembayaran.setText("");
@@ -788,8 +800,20 @@ public class Pembayaran extends javax.swing.JFrame {
                     st1.executeUpdate(query1);
                     int pointMember = (int) (0.2 * this.totalHargaSemua);
                     Statement st2 = dbConnection.getConnection().createStatement();
-                    String queryUpdate = String.format("update tabel_member set point_member = \"%s\" where id_member = \"%s\";", pointMember, this.idMemberS);
-                    st2.executeUpdate(queryUpdate);
+                    String query2 = String.format("Select point_member from tabel_member where id_member = \"%s\";", this.idMemberS);
+                    ResultSet rs2 = st2.executeQuery(query2);
+                    if(rs2.next()){
+                        if(Integer.parseInt(rs2.getString("point_member")) > 0){
+                            Statement st3 = dbConnection.getConnection().createStatement();
+                            String queryUpdate = String.format("update from tabel_member set point_member = \"%s\" where id_member = \"%s\";", pointMember, this.idMemberS);
+                            st3.executeUpdate(queryUpdate);
+                        }else{
+                            int tambahPoint = Integer.parseInt(rs2.getString(query2)) + pointMember;
+                            Statement st3 = dbConnection.getConnection().createStatement();
+                            String queryUpdate = String.format("update from tabel_member set point_member = \"%s\" where id_member = \"%s\";", pointMember, this.idMemberS);
+                            st3.executeUpdate(queryUpdate);
+                        }
+                    }
                     JOptionPane.showMessageDialog(this, "Pembayaran berhasil!");
                     resetAll();
                     this.inputPembayaran.setText("");
