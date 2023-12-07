@@ -87,6 +87,7 @@ public class Pembayaran extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         inputPembayaran = new javax.swing.JTextField();
         tombolBayar = new javax.swing.JButton();
+        teksTotal = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(71, 73, 115));
@@ -316,6 +317,10 @@ public class Pembayaran extends javax.swing.JFrame {
             }
         });
 
+        teksTotal.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        teksTotal.setForeground(new java.awt.Color(241, 218, 196));
+        teksTotal.setText("Total");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -344,6 +349,8 @@ public class Pembayaran extends javax.swing.JFrame {
                                 .addGap(768, 768, 768)
                                 .addComponent(jLabel1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(teksTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(hargaAkhir, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(37, 37, 37)
@@ -404,7 +411,9 @@ public class Pembayaran extends javax.swing.JFrame {
                                 .addComponent(jLabel1)
                                 .addGap(84, 84, 84))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(hargaAkhir)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(hargaAkhir)
+                                    .addComponent(teksTotal))
                                 .addGap(38, 38, 38)))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -792,6 +801,7 @@ public class Pembayaran extends javax.swing.JFrame {
     private javax.swing.JTextField searchByID;
     private javax.swing.JLabel statusMember;
     private javax.swing.JTable tabelPembelianBarang;
+    private javax.swing.JLabel teksTotal;
     private javax.swing.JButton tombolBayar;
     private javax.swing.JButton tombolHapus;
     private javax.swing.JToggleButton tombolReset;
