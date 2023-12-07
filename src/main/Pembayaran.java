@@ -751,6 +751,16 @@ public class Pembayaran extends javax.swing.JFrame {
                     Statement st1 = dbConnection.getConnection().createStatement();
                     String query1 = String.format("insert into tabel_riwayat_pembelian(id_transaksi, id_admin, id_member, waktu_transaksi, tanggal_transaksi, id_barang, jumlah_beli_barang, total_harga, pembayaran) values(\"%s\",\"%s\", curtime(), curdate(), \"%s\", \"%s\", \"%s\", \"%s\");", this.idAdminS, this.idMemberS, this.idBarangs, this.jumlahBeliBarang, this.totalHargaSemua, Integer.parseInt(this.inputPembayaran.getText()));
                     st1.executeUpdate(query1);
+                    JOptionPane.showMessageDialog(this, "Pembayaran berhasil!");
+                }catch(SQLException e){
+                    e.printStackTrace();
+                }
+            }else{
+                try{
+                    Statement st1 = dbConnection.getConnection().createStatement();
+                    String query1 = String.format("insert into tabel_riwayat_pembelian(id_transaksi, id_admin, id_member, waktu_transaksi, tanggal_transaksi, id_barang, jumlah_beli_barang, total_harga, pembayaran) values(\"%s\",\"%s\", curtime(), curdate(), \"%s\", \"%s\", \"%s\", \"%s\");", this.idAdminS, 0, this.idBarangs, this.jumlahBeliBarang, this.totalHargaSemua, Integer.parseInt(this.inputPembayaran.getText()));
+                    st1.executeUpdate(query1);
+                    JOptionPane.showMessageDialog(this, "Pembayaran berhasil!");
                 }catch(SQLException e){
                     e.printStackTrace();
                 }
@@ -762,9 +772,19 @@ public class Pembayaran extends javax.swing.JFrame {
                     Statement st1 = dbConnection.getConnection().createStatement();
                     String query1 = String.format("insert into tabel_riwayat_pembelian(id_transaksi, id_admin, id_member, waktu_transaksi, tanggal_transaksi, id_barang, jumlah_beli_barang, total_harga, pembayaran) values(\"%s\",\"%s\", curtime(), curdate(), \"%s\", \"%s\", \"%s\", \"%s\");", this.idAdminS, this.idMemberS, this.idBarangs, this.jumlahBeliBarang, this.totalHargaSemua, Integer.parseInt(this.inputPembayaran.getText()));
                     st1.executeUpdate(query1);
+                    JOptionPane.showMessageDialog(this, "Pembayaran berhasil!");
                 }catch(SQLException e){
                     e.printStackTrace();
-            }
+                }
+            }else{
+                try{
+                    Statement st1 = dbConnection.getConnection().createStatement();
+                    String query1 = String.format("insert into tabel_riwayat_pembelian(id_transaksi, id_admin, id_member, waktu_transaksi, tanggal_transaksi, id_barang, jumlah_beli_barang, total_harga, pembayaran) values(\"%s\",\"%s\", curtime(), curdate(), \"%s\", \"%s\", \"%s\", \"%s\");", this.idAdminS, 0, this.idBarangs, this.jumlahBeliBarang, this.totalHargaSemua, Integer.parseInt(this.inputPembayaran.getText()));
+                    st1.executeUpdate(query1);
+                    JOptionPane.showMessageDialog(this, "Pembayaran berhasil!");
+                }catch(SQLException e){
+                    e.printStackTrace();
+                }
             }
         }
     }//GEN-LAST:event_tombolBayarActionPerformed
