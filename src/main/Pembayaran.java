@@ -836,8 +836,10 @@ public class Pembayaran extends javax.swing.JFrame {
                             String queryUpdate = String.format("update tabel_member set point_member = \"%s\" where id_member = \"%s\";", tambahPoint, this.idMemberS);
                             st3.executeUpdate(queryUpdate);
                             Statement st5 = dbConnection.getConnection().createStatement();
-                            String queryUpdate2 = String.format("update tabel_barang set jumlah_barang = \"%s\" where id_barang = \"%s\";", (Integer.parseInt(rs4.getString("jumlah_barang")) -this.jumlahBeliBarang), this.idBarangs);
-                            st5.executeUpdate(queryUpdate2);
+                            if(rs4.next()){
+                                String queryUpdate2 = String.format("update tabel_barang set jumlah_barang = \"%s\" where id_barang = \"%s\";", (Integer.parseInt(rs4.getString("jumlah_barang")) -this.jumlahBeliBarang), this.idBarangs);
+                                st5.executeUpdate(queryUpdate2);
+                            }
                         }
                     }
                     JOptionPane.showMessageDialog(this, "Pembayaran berhasil!");
@@ -855,8 +857,10 @@ public class Pembayaran extends javax.swing.JFrame {
                     Statement st4 = dbConnection.getConnection().createStatement();
                     String query4 = String.format("Select jumlah_barang from tabel_barang where id_barang = \"%s\";", this.idBarangs);
                     ResultSet rs4 = st4.executeQuery(query4);
-                    String queryUpdate2 = String.format("update tabel_barang set jumlah_barang = \"%s\" where id_barang = \"%s\";", (Integer.parseInt(rs4.getString("jumlah_barang")) -this.jumlahBeliBarang), this.idBarangs);
-                    st1.executeUpdate(queryUpdate2);
+                    if(rs4.next()){
+                        String queryUpdate2 = String.format("update tabel_barang set jumlah_barang = \"%s\" where id_barang = \"%s\";", (Integer.parseInt(rs4.getString("jumlah_barang")) -this.jumlahBeliBarang), this.idBarangs);
+                        st1.executeUpdate(queryUpdate2);
+                    }
                     JOptionPane.showMessageDialog(this, "Pembayaran berhasil!");
                     resetAll();
                     this.inputPembayaran.setText("");
