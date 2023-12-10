@@ -748,9 +748,7 @@ public class Pembayaran extends javax.swing.JFrame {
         }else if (!this.inputPembayaran.getText().matches("\\d*")) {
             JOptionPane.showMessageDialog(this, "Mohon input nominal yang valid!");
         }else if(this.inputPembayaran.getText().matches("\\d*")){
-              if(Integer.parseInt(this.inputPembayaran.getText()) <= 0){
-              JOptionPane.showMessageDialog(this, "input tidak valid!");
-                }else if(Integer.parseInt(this.inputPembayaran.getText()) > 0 && Integer.parseInt(this.inputPembayaran.getText()) < this.totalHargaSemua){
+              if(Integer.parseInt(this.inputPembayaran.getText()) > 0 && Integer.parseInt(this.inputPembayaran.getText()) < this.totalHargaSemua){
                     JOptionPane.showMessageDialog(this, "Uang Anda kurang : "+ df.format(this.totalHargaSemua - Integer.parseInt(this.inputPembayaran.getText())));
                 }else if(Integer.parseInt(this.inputPembayaran.getText()) == this.totalHargaSemua){
                     if(this.statusMember.getText().equals("Member")){
