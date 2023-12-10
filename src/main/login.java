@@ -218,10 +218,10 @@ public class login extends javax.swing.JFrame {
                     ResultSet rs1 = st1.executeQuery(getAdmin);
                     if(rs1.next()){
                         dispose();
-                        Pembayaran mp = new Pembayaran();
-                        mp.getAdminBio(rs1.getString("nama_admin"), Integer.parseInt(rs1.getString("id_admin")));
+                        MainMenu mp = new MainMenu();
+//                        mp.getAdminBio(rs1.getString("nama_admin"), Integer.parseInt(rs1.getString("id_admin")));
                         mp.setVisible(true);
-                        mp.setExtendedState(mp.getExtendedState() | JFrame.MAXIMIZED_BOTH);
+//                        mp.setExtendedState(mp.getExtendedState() | JFrame.MAXIMIZED_BOTH);
                     }else{
                         JOptionPane.showMessageDialog(this, "Maaf, data tersebut tidak tersedia di data admin!");
                     }

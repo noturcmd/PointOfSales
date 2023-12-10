@@ -723,7 +723,6 @@ public class Pembayaran extends javax.swing.JFrame {
         // TODO add your handling code here:
         int row = tabelPembelianBarang.getSelectedRow();
         DefaultTableModel getTableForEdit = (DefaultTableModel) tabelPembelianBarang.getModel();
-        
     }//GEN-LAST:event_tabelPembelianBarangMouseClicked
 
     private void tombolSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tombolSimpanActionPerformed
@@ -735,8 +734,6 @@ public class Pembayaran extends javax.swing.JFrame {
                                         this.tombolSimpan.setVisible(false);
                                         break;
             case JOptionPane.NO_OPTION: 
-                                        break;
-            case JOptionPane.CANCEL_OPTION: 
                                         break;
         }
     }//GEN-LAST:event_tombolSimpanActionPerformed
