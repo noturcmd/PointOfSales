@@ -4,6 +4,8 @@
  */
 package main;
 
+import javax.swing.JFrame;
+
 /**
  *
  * @author acer_
@@ -129,6 +131,11 @@ public class MainMenu extends javax.swing.JFrame {
 
     private void buttonPembayaranActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPembayaranActionPerformed
         // TODO add your handling code here:
+        dispose();
+        Pembayaran mp = new Pembayaran();
+        mp.getAdminBio(this.namaAdmins, this.idAdminS);
+        mp.setVisible(true);
+        mp.setExtendedState(mp.getExtendedState() | JFrame.MAXIMIZED_BOTH);
     }//GEN-LAST:event_buttonPembayaranActionPerformed
 
     private void buttonRiwayatTransaksiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRiwayatTransaksiActionPerformed
