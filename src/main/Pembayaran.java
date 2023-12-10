@@ -767,17 +767,21 @@ public class Pembayaran extends javax.swing.JFrame {
                             Statement st3 = dbConnection.getConnection().createStatement();
                             String queryUpdate = String.format("update tabel_member set point_member = \"%s\" where id_member = \"%s\";", pointMember, this.idMemberS);
                             st3.executeUpdate(queryUpdate);
-                            Statement st5 = dbConnection.getConnection().createStatement();
-                            String queryUpdate2 = String.format("update tabel_barang set jumlah_barang = \"%s\" where id_barang = \"%s\";", (Integer.parseInt(rs4.getString("jumlah_barang")) -this.jumlahBeliBarang), this.idBarangs);
-                            st5.executeUpdate(queryUpdate2);
+                            if(rs4.next()){
+                                Statement st5 = dbConnection.getConnection().createStatement();
+                                String queryUpdate2 = String.format("update tabel_barang set jumlah_barang = \"%s\" where id_barang = \"%s\";", (Integer.parseInt(rs4.getString("jumlah_barang")) -this.jumlahBeliBarang), this.idBarangs);
+                                st5.executeUpdate(queryUpdate2);
+                        }
                         }else{
                             int tambahPoint = Integer.parseInt(rs2.getString("point_member")) + pointMember;
                             Statement st3 = dbConnection.getConnection().createStatement();
                             String queryUpdate = String.format("update tabel_member set point_member = \"%s\" where id_member = \"%s\";", tambahPoint, this.idMemberS);
                             st3.executeUpdate(queryUpdate);
-                            Statement st5 = dbConnection.getConnection().createStatement();
-                            String queryUpdate2 = String.format("update tabel_barang set jumlah_barang = \"%s\" where id_barang = \"%s\";", (Integer.parseInt(rs4.getString("jumlah_barang")) -this.jumlahBeliBarang), this.idBarangs);
-                            st5.executeUpdate(queryUpdate2);
+                            if(rs4.next()){
+                                Statement st5 = dbConnection.getConnection().createStatement();
+                                String queryUpdate2 = String.format("update tabel_barang set jumlah_barang = \"%s\" where id_barang = \"%s\";", (Integer.parseInt(rs4.getString("jumlah_barang")) -this.jumlahBeliBarang), this.idBarangs);
+                                st5.executeUpdate(queryUpdate2);
+                            }
                         }
                     }
                     JOptionPane.showMessageDialog(this, "Pembayaran berhasil!");
