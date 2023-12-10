@@ -745,9 +745,9 @@ public class Pembayaran extends javax.swing.JFrame {
         // TODO add your handling code here:
         if(this.inputPembayaran.getText().isBlank()){
             JOptionPane.showMessageDialog(this, "Mohon tidak mengosongkan input pembayaran!");
-        }else if (!this.jumlahBarangYangDibeli.getText().matches("\\d*")) {
+        }else if (!this.inputPembayaran.getText().matches("\\d*")) {
             JOptionPane.showMessageDialog(this, "Mohon input nominal yang valid!");
-        }else if(this.jumlahBarangYangDibeli.getText().matches("\\d*")){
+        }else if(this.inputPembayaran.getText().matches("\\d*")){
               if(Integer.parseInt(this.inputPembayaran.getText()) <= 0){
               JOptionPane.showMessageDialog(this, "input tidak valid!");
                 }else if(Integer.parseInt(this.inputPembayaran.getText()) > 0 && Integer.parseInt(this.inputPembayaran.getText()) < this.totalHargaSemua){
