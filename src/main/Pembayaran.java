@@ -81,7 +81,7 @@ public class Pembayaran extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Mohon input jumlah yang valid!");
         }else if(this.jumlahBarangYangDibeli.getText().matches("\\d*") && Integer.parseInt(this.jumlahBarangYangDibeli.getText()) > 0){
             try {
-                this.jumlahBeliBarang += Integer.parseInt(this.jumlahBarangYangDibeli.getText()); // Perbaiki logic jumlahnya!
+                this.jumlahBeliBarang += Integer.parseInt(this.jumlahBarangYangDibeli.getText());
                 Statement st1 = dbConnection.getConnection().createStatement();
                 String query1 = String.format("SELECT id_barang, kategori_barang, harga_barang FROM tabel_barang WHERE nama_barang = \"%s\";", this.listNamaBarang.getSelectedItem().toString());
                 ResultSet rs1 = st1.executeQuery(query1);
