@@ -81,12 +81,12 @@ public class Pembayaran extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Mohon input jumlah yang valid!");
         }else if(this.jumlahBarangYangDibeli.getText().matches("\\d*") && Integer.parseInt(this.jumlahBarangYangDibeli.getText()) > 0){
             try {
+                this.jumlahBeliBarang += Integer.parseInt(this.jumlahBarangYangDibeli.getText()); // Perbaiki logic jumlahnya!
                 Statement st1 = dbConnection.getConnection().createStatement();
                 String query1 = String.format("SELECT id_barang, kategori_barang, harga_barang FROM tabel_barang WHERE nama_barang = \"%s\";", this.listNamaBarang.getSelectedItem().toString());
                 ResultSet rs1 = st1.executeQuery(query1);
-
                 if (rs1.next()) {
-                    this.jumlahBeliBarang = Integer.parseInt(this.jumlahBarangYangDibeli.getText());
+                    
                     this.idBarangs = Integer.parseInt(rs1.getString("id_barang"));
                     int jumlahBaris = modelTblPbl.getRowCount();
                     int index = 0;
@@ -887,7 +887,6 @@ public class Pembayaran extends javax.swing.JFrame {
                                 st1.executeUpdate(query1);
                                 int pointMember = (int) (0.2 * this.totalHargaSemua);
                                 Statement st2 = dbConnection.getConnection().createStatement();
-            //                    JOptionPane.showMessageDialog(rootPane, "ID member : " + this.idMemberS);
                                 String query2 = String.format("Select point_member from tabel_member where id_member = \"%s\";", this.idMemberS);
                                 ResultSet rs2 = st2.executeQuery(query2);
                                 Statement st4 = dbConnection.getConnection().createStatement();
@@ -934,6 +933,7 @@ public class Pembayaran extends javax.swing.JFrame {
                                     String queryUpdate2 = String.format("update tabel_barang set jumlah_barang = \"%s\" where id_barang = \"%s\";", (Integer.parseInt(rs4.getString("jumlah_barang")) -this.jumlahBeliBarang), this.idBarangs);
                                     st1.executeUpdate(queryUpdate2);
                                 }
+                                JOptionPane.showMessageDialog(this, "Jumlah barang yang dibeli : " + this.jumlahBeliBarang);
                                 JOptionPane.showMessageDialog(this, "Pembayaran berhasil!");
                                 resetAll();
                                 this.inputPembayaran.setText("");
