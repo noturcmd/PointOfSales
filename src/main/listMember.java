@@ -47,7 +47,7 @@ public class listMember extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        tombolkeluar.setText("Keluar");
+        tombolkeluar.setText("Kembali");
         tombolkeluar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tombolkeluarActionPerformed(evt);
@@ -78,9 +78,9 @@ public class listMember extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(56, 56, 56)
                 .addComponent(tombolkeluar)
-                .addGap(137, 137, 137)
+                .addGap(118, 118, 118)
                 .addComponent(tomboldaftar)
-                .addGap(110, 110, 110)
+                .addGap(129, 129, 129)
                 .addComponent(tombolhapus, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -100,8 +100,8 @@ public class listMember extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tombolkeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tombolkeluarActionPerformed
-        MainMenu exitPembayaran = new MainMenu();
-        exitPembayaran.setVisible(true);
+        MainMenu exitMember = new MainMenu();
+        exitMember.setVisible(true);
         this.dispose();       
     }//GEN-LAST:event_tombolkeluarActionPerformed
 
