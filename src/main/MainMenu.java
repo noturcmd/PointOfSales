@@ -155,8 +155,7 @@ public class MainMenu extends javax.swing.JFrame {
         // TODO add your handling code here:
         dispose();
         listMember lm = new listMember();
-        lm.setVisible(true);
-        lm.setExtendedState(lm.getExtendedState() | JFrame.MAXIMIZED_BOTH);   
+        lm.setVisible(true); 
     }//GEN-LAST:event_buttonMemberActionPerformed
 
     

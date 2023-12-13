@@ -125,6 +125,8 @@ public class DaftarMember extends javax.swing.JFrame {
                         String query11 = String.format("insert into tabel_member(nama_member, nohp_member) values (\"%s\", \"%s\");", this.inputNamaDaftarMember.getText(), this.inputNoTelpDaftarMember.getText());
                         st2.executeUpdate(query11);
                         JOptionPane.showMessageDialog(this, "Berhasil Mendaftar!");
+                        this.dispose();
+
                     }
                 }catch(SQLException e){
                     e.printStackTrace();

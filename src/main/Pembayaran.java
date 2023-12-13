@@ -207,6 +207,7 @@ public class Pembayaran extends javax.swing.JFrame {
         setBackground(new java.awt.Color(71, 73, 115));
 
         jPanel1.setBackground(new java.awt.Color(14, 41, 84));
+        jPanel1.setToolTipText("");
 
         jLabel1.setFont(new java.awt.Font("Tw Cen MT", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(166, 156, 172));
@@ -342,6 +343,7 @@ public class Pembayaran extends javax.swing.JFrame {
 
         listNamaBarang.setBackground(new java.awt.Color(31, 110, 140));
         listNamaBarang.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        listNamaBarang.setMaximumRowCount(99999);
         listNamaBarang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 listNamaBarangActionPerformed(evt);
@@ -607,7 +609,7 @@ public class Pembayaran extends javax.swing.JFrame {
                             .addComponent(inputPembayaran, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(tombolBayar)))
-                .addContainerGap(529, Short.MAX_VALUE))
+                .addContainerGap(51, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

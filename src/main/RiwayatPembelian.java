@@ -26,7 +26,6 @@ public class RiwayatPembelian extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        Ubah = new javax.swing.JButton();
         Hapus = new javax.swing.JButton();
         labelTotal = new javax.swing.JLabel();
         showTotal = new javax.swing.JLabel();
@@ -67,8 +66,6 @@ public class RiwayatPembelian extends javax.swing.JFrame {
 
         jLabel1.setText("Riwayat Transaksi");
 
-        Ubah.setText("Ubah");
-
         Hapus.setText("Hapus");
         Hapus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -99,8 +96,6 @@ public class RiwayatPembelian extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(butKembali, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(Ubah, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(35, 35, 35)
                         .addComponent(Hapus, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(40, 40, 40)
                         .addComponent(labelTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -120,8 +115,7 @@ public class RiwayatPembelian extends javax.swing.JFrame {
                     .addComponent(Hapus)
                     .addComponent(labelTotal)
                     .addComponent(showTotal)
-                    .addComponent(butKembali)
-                    .addComponent(Ubah))
+                    .addComponent(butKembali))
                 .addContainerGap(46, Short.MAX_VALUE))
         );
 
@@ -135,7 +129,6 @@ public class RiwayatPembelian extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Hapus;
-    private javax.swing.JButton Ubah;
     private javax.swing.JButton butKembali;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
