@@ -26,21 +26,92 @@ public class listMember extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        tombolkeluar = new javax.swing.JButton();
+        tombolhapus = new javax.swing.JButton();
+        tomboldaftar = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "ID", "NAMA", "NO HP", "POINT"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
+        tombolkeluar.setText("Keluar");
+        tombolkeluar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tombolkeluarActionPerformed(evt);
+            }
+        });
+
+        tombolhapus.setText("Hapus");
+        tombolhapus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tombolhapusActionPerformed(evt);
+            }
+        });
+
+        tomboldaftar.setText("Daftar");
+        tomboldaftar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tomboldaftarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 595, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(56, 56, 56)
+                .addComponent(tombolkeluar)
+                .addGap(137, 137, 137)
+                .addComponent(tomboldaftar)
+                .addGap(110, 110, 110)
+                .addComponent(tombolhapus, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tombolhapus)
+                    .addComponent(tombolkeluar)
+                    .addComponent(tomboldaftar))
+                .addGap(0, 15, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void tombolkeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tombolkeluarActionPerformed
+        MainMenu exitPembayaran = new MainMenu();
+        exitPembayaran.setVisible(true);
+        this.dispose();       
+    }//GEN-LAST:event_tombolkeluarActionPerformed
+
+    private void tombolhapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tombolhapusActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tombolhapusActionPerformed
+
+    private void tomboldaftarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tomboldaftarActionPerformed
+            // TODO add your handling code here:
+    }//GEN-LAST:event_tomboldaftarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -78,5 +149,10 @@ public class listMember extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JButton tomboldaftar;
+    private javax.swing.JButton tombolhapus;
+    private javax.swing.JButton tombolkeluar;
     // End of variables declaration//GEN-END:variables
 }
