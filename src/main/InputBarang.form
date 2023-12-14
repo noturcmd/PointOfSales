@@ -45,52 +45,58 @@
                           <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                           <Component id="butKembali" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <Group type="102" attributes="0">
-                          <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+                      <Group type="102" alignment="1" attributes="0">
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          <Component id="butHapus" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="butUbah" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="1" attributes="0">
+                          <EmptySpace min="-2" pref="73" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
-                              <Group type="102" alignment="1" attributes="0">
-                                  <Component id="butHapus" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="jButton2" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" alignment="1" groupAlignment="0" attributes="0">
+                                  <Component id="BrBarang1" min="-2" pref="56" max="-2" attributes="0"/>
+                                  <Component id="JuBarang" min="-2" max="-2" attributes="0"/>
+                                  <Component id="BrBarang" min="-2" max="-2" attributes="0"/>
+                                  <Component id="HaBarang" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
+                              <Group type="103" alignment="1" groupAlignment="0" attributes="0">
+                                  <Component id="Barang" min="-2" max="-2" attributes="0"/>
+                                  <Component id="ID" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="1" attributes="0">
+                                  <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="1" attributes="0">
-                                      <Component id="ID" min="-2" max="-2" attributes="0"/>
-                                      <Component id="Barang" min="-2" max="-2" attributes="0"/>
-                                      <Group type="103" alignment="1" groupAlignment="0" attributes="0">
-                                          <Component id="BrBarang1" min="-2" pref="56" max="-2" attributes="0"/>
-                                          <Component id="JuBarang" min="-2" max="-2" attributes="0"/>
-                                          <Component id="BrBarang" min="-2" max="-2" attributes="0"/>
-                                          <Component id="HaBarang" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" attributes="0">
-                                          <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
-                                          <Component id="butSimpan" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace min="-2" pref="113" max="-2" attributes="0"/>
-                                      </Group>
+                                      <Component id="inpBarang" alignment="1" min="-2" pref="129" max="-2" attributes="0"/>
+                                      <Component id="inpID" alignment="1" min="-2" pref="129" max="-2" attributes="0"/>
+                                      <Component id="inpBrand" alignment="1" min="-2" pref="129" max="-2" attributes="0"/>
+                                      <Component id="inpKategori" alignment="1" min="-2" pref="129" max="-2" attributes="0"/>
+                                      <Component id="inpJumlah" alignment="1" min="-2" pref="129" max="-2" attributes="0"/>
+                                      <Component id="inpHarga" alignment="1" min="-2" pref="129" max="-2" attributes="0"/>
                                       <Group type="102" alignment="1" attributes="0">
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="inpBarang" alignment="1" min="-2" pref="129" max="-2" attributes="0"/>
-                                              <Component id="inpID" alignment="1" min="-2" pref="129" max="-2" attributes="0"/>
-                                              <Component id="inpBrand" alignment="1" min="-2" pref="129" max="-2" attributes="0"/>
-                                              <Component id="inpKategori" alignment="1" min="-2" pref="129" max="-2" attributes="0"/>
-                                              <Component id="inpJumlah" alignment="1" min="-2" pref="129" max="-2" attributes="0"/>
-                                              <Component id="inpHarga" alignment="1" min="-2" pref="129" max="-2" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace min="56" pref="56" max="-2" attributes="0"/>
+                                          <Component id="viaID" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Component id="exceptID" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Component id="viaAll" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" attributes="0">
-                                          <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace min="364" pref="592" max="32767" attributes="0"/>
-                                      </Group>
-                                      <Component id="jScrollPane1" max="32767" attributes="0"/>
-                                  </Group>
+                                  <EmptySpace min="56" pref="56" max="-2" attributes="0"/>
                               </Group>
+                              <Group type="102" attributes="0">
+                                  <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
+                                  <Component id="butSimpan" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="113" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="364" pref="544" max="32767" attributes="0"/>
+                              </Group>
+                              <Component id="jScrollPane1" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -109,18 +115,24 @@
                           <Component id="jScrollPane1" min="-2" pref="323" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jButton2" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="butUbah" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="butHapus" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="butKembali" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="74" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="viaAll" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="viaID" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="exceptID" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="ID" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="inpID" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="Barang" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="inpBarang" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -275,10 +287,13 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="butSimpanActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton2">
+        <Component class="javax.swing.JButton" name="butUbah">
           <Properties>
             <Property name="text" type="java.lang.String" value="Ubah"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="butUbahActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="butHapus">
           <Properties>
@@ -299,6 +314,24 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="inpKategoriActionPerformed"/>
           </Events>
+        </Component>
+        <Component class="javax.swing.JRadioButton" name="viaAll">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="All"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JRadioButton" name="viaID">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="ID"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="viaIDActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JRadioButton" name="exceptID">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Except ID"/>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>
