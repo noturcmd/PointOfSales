@@ -550,6 +550,7 @@ public class InputBarang extends javax.swing.JFrame {
             this.kategori.setVisible(false);
             this.HaBarang.setVisible(false);
             this.BrBarang.setVisible(false);
+            this.butSimpan.setVisible(false);
         }
     }//GEN-LAST:event_viaIDActionPerformed
 
@@ -596,6 +597,7 @@ public class InputBarang extends javax.swing.JFrame {
             this.HaBarang.setVisible(true);
             this.BrBarang.setVisible(true);
             this.ID.setVisible(false);
+            this.butSimpan.setVisible(false);
         }
     }//GEN-LAST:event_exceptIDActionPerformed
 
@@ -614,6 +616,7 @@ public class InputBarang extends javax.swing.JFrame {
             this.HaBarang.setVisible(true);
             this.BrBarang.setVisible(true);
             this.ID.setVisible(true);
+            this.butSimpan.setVisible(true);
         }
     }//GEN-LAST:event_viaAllActionPerformed
 

@@ -41,7 +41,7 @@ public class RiwayatPembelian extends javax.swing.JFrame {
             ResultSet rs1 = st1.executeQuery(query1);
             while(rs1.next()){
                 System.out.println("HARIDWA");
-                this.modelTabelRiwayat.addRow(new Object[]{rs1.getString(1),rs1.getString(2),rs1.getString(3),rs1.getString(7),rs1.getString(6),rs1.getString(4),rs1.getString(5),rs1.getString(1),rs1.getString(9),rs1.getString(10)});
+                this.modelTabelRiwayat.addRow(new Object[]{rs1.getString(1),rs1.getString(2),rs1.getString(3),rs1.getString(7),rs1.getString(6),rs1.getString(4),rs1.getString(5),rs1.getString(8),rs1.getString(9),rs1.getString(10)});
             }
             
             int totalPenghasilan = 0;

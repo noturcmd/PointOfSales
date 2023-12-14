@@ -16,6 +16,7 @@ public class listMember extends javax.swing.JFrame {
     private KoneksiDatabase dbConnection;
     
     DefaultTableModel forMember;
+    DaftarMember daftarMember = null;
     
     Integer baris;
     int idAdminS;
@@ -55,9 +56,9 @@ public class listMember extends javax.swing.JFrame {
         tombolkeluar = new javax.swing.JButton();
         tombolhapus = new javax.swing.JButton();
         tomboldaftar = new javax.swing.JButton();
-        butRefresh = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         ubahNoHP = new javax.swing.JTextField();
+        butRefresh = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(204, 204, 204));
@@ -129,15 +130,6 @@ public class listMember extends javax.swing.JFrame {
             }
         });
 
-        butRefresh.setBackground(new java.awt.Color(241, 218, 196));
-        butRefresh.setForeground(new java.awt.Color(13, 12, 29));
-        butRefresh.setText("Refresh");
-        butRefresh.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                butRefreshActionPerformed(evt);
-            }
-        });
-
         jLabel1.setFont(new java.awt.Font("Segoe UI Black", 0, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(241, 218, 196));
         jLabel1.setText("No HP :");
@@ -163,6 +155,15 @@ public class listMember extends javax.swing.JFrame {
             }
         });
 
+        butRefresh.setBackground(new java.awt.Color(241, 218, 196));
+        butRefresh.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        butRefresh.setText("Refresh");
+        butRefresh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                butRefreshActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -183,9 +184,9 @@ public class listMember extends javax.swing.JFrame {
                                         .addComponent(jLabel1)
                                         .addGap(18, 18, 18)
                                         .addComponent(ubahNoHP)
-                                        .addGap(59, 59, 59)))
-                                .addComponent(butRefresh)
-                                .addGap(18, 18, 18)
+                                        .addGap(62, 62, 62)))
+                                .addComponent(butRefresh, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(tombolhapus, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(tomboldaftar))))
@@ -206,9 +207,9 @@ public class listMember extends javax.swing.JFrame {
                     .addComponent(ubahNoHP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1)
                     .addComponent(tombolkeluar)
-                    .addComponent(butRefresh)
                     .addComponent(tombolhapus)
-                    .addComponent(tomboldaftar))
+                    .addComponent(tomboldaftar)
+                    .addComponent(butRefresh))
                 .addGap(30, 30, 30))
         );
 
@@ -255,8 +256,13 @@ public class listMember extends javax.swing.JFrame {
 
     private void tomboldaftarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tomboldaftarActionPerformed
             // TODO add your handling code here:
-            DaftarMember daftarMember = new DaftarMember();
+            if(this.daftarMember == null){
+                this.daftarMember = new DaftarMember();
+            }
             daftarMember.setVisible(true);
+            
+            
+            
     }//GEN-LAST:event_tomboldaftarActionPerformed
 
     private void tabelMemberMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelMemberMouseClicked
@@ -264,12 +270,6 @@ public class listMember extends javax.swing.JFrame {
         this.baris = tabelMember.getSelectedRow();
         this.ubahNoHP.setText((String) this.tabelMember.getValueAt(this.baris, 2));
     }//GEN-LAST:event_tabelMemberMouseClicked
-
-    private void butRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butRefreshActionPerformed
-        // TODO add your handling code here:
-        this.forMember.setRowCount(0);
-        this.tampilkanMember();
-    }//GEN-LAST:event_butRefreshActionPerformed
 
     private void ubahNoHPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ubahNoHPActionPerformed
         // TODO add your handling code here:
@@ -303,6 +303,12 @@ public class listMember extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.tabelMember.setValueAt(this.ubahNoHP.getText(), this.baris, 2);
     }//GEN-LAST:event_ubahNoHPKeyTyped
+
+    private void butRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butRefreshActionPerformed
+        // TODO add your handling code here:
+        this.forMember.setRowCount(0);
+        this.tampilkanMember();
+    }//GEN-LAST:event_butRefreshActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
