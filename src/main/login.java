@@ -218,8 +218,7 @@ public class login extends javax.swing.JFrame {
                     ResultSet rs1 = st1.executeQuery(getAdmin);
                     if(rs1.next()){
                         dispose();
-                        MainMenu mp = new MainMenu();
-                        mp.getAdminBio(rs1.getString("nama_admin"), Integer.parseInt(rs1.getString("id_admin")));
+                        MainMenu mp = new MainMenu(rs1.getString("nama_admin"), Integer.parseInt(rs1.getString("id_admin")));
                         mp.setVisible(true);
                     }else{
                         JOptionPane.showMessageDialog(this, "Maaf, data tersebut tidak tersedia di data admin!");

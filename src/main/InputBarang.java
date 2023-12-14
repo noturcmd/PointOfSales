@@ -21,6 +21,9 @@ public class InputBarang extends javax.swing.JFrame {
     private DefaultTableModel modelTabelBarang;
     ButtonGroup buttonStatus = new ButtonGroup();
     
+    int idAdminS;
+    String namaAdmins;
+    
     Integer baris;
     public InputBarang() {
         this.dbConnection = KoneksiDatabase.getInstance();
@@ -32,6 +35,11 @@ public class InputBarang extends javax.swing.JFrame {
         this.buttonStatus.add(viaAll);
         this.viaAll.setSelected(true);
         
+    }
+    
+    void getAdminBio(String nama, int id){
+        this.idAdminS = id;
+        this.namaAdmins = nama;
     }
     
     void tampilkanDataBarang(){
@@ -540,7 +548,7 @@ public class InputBarang extends javax.swing.JFrame {
 
     private void butKembaliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butKembaliActionPerformed
         // TODO add your handling code here:
-        MainMenu exitMember = new MainMenu();
+        MainMenu exitMember = new MainMenu(this.namaAdmins, this.idAdminS);
         exitMember.setVisible(true);
         this.dispose();  
     }//GEN-LAST:event_butKembaliActionPerformed

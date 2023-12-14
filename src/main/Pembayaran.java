@@ -33,6 +33,7 @@ public class Pembayaran extends javax.swing.JFrame {
         System.out.println(getSize());
         this.tombolSimpan.setVisible(false);
         setLocationRelativeTo(null);
+        
     }
     
     private void ubahDataBaris() {
@@ -201,7 +202,7 @@ public class Pembayaran extends javax.swing.JFrame {
         inputPembayaran = new javax.swing.JTextField();
         tombolBayar = new javax.swing.JButton();
         teksTotal = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        tombolKembali = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(71, 73, 115));
@@ -450,11 +451,11 @@ public class Pembayaran extends javax.swing.JFrame {
         teksTotal.setForeground(new java.awt.Color(241, 218, 196));
         teksTotal.setText("Total");
 
-        jButton1.setBackground(new java.awt.Color(241, 218, 196));
-        jButton1.setText("Keluar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        tombolKembali.setBackground(new java.awt.Color(241, 218, 196));
+        tombolKembali.setText("Kembali");
+        tombolKembali.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                tombolKembaliActionPerformed(evt);
             }
         });
 
@@ -500,7 +501,7 @@ public class Pembayaran extends javax.swing.JFrame {
                                         .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(tombolKembali, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(idAdmin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -598,7 +599,7 @@ public class Pembayaran extends javax.swing.JFrame {
                                     .addComponent(tombolUbah)
                                     .addComponent(tombolHapus)
                                     .addComponent(daftarMember)
-                                    .addComponent(jButton1)))
+                                    .addComponent(tombolKembali)))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(34, 34, 34)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -985,12 +986,12 @@ public class Pembayaran extends javax.swing.JFrame {
         
     }//GEN-LAST:event_tabelPembelianBarangFocusLost
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void tombolKembaliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tombolKembaliActionPerformed
         // TODO add your handling code here:
-        MainMenu exitPembayaran = new MainMenu();
+        MainMenu exitPembayaran = new MainMenu(this.namaAdmin.getText(), this.idAdminS);
         exitPembayaran.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_tombolKembaliActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -999,7 +1000,6 @@ public class Pembayaran extends javax.swing.JFrame {
     private javax.swing.JLabel hargaAkhir;
     private javax.swing.JLabel idAdmin;
     private javax.swing.JTextField inputPembayaran;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1025,6 +1025,7 @@ public class Pembayaran extends javax.swing.JFrame {
     private javax.swing.JLabel teksTotal;
     private javax.swing.JButton tombolBayar;
     private javax.swing.JButton tombolHapus;
+    private javax.swing.JButton tombolKembali;
     private javax.swing.JToggleButton tombolReset;
     private javax.swing.JButton tombolSearch;
     private javax.swing.JButton tombolSimpan;

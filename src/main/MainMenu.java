@@ -5,6 +5,7 @@
 package main;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -16,14 +17,12 @@ public class MainMenu extends javax.swing.JFrame {
     private int idAdminS;
     private String namaAdmins;
     
-    public MainMenu() {
-        initComponents();
-        setLocationRelativeTo(null);
-    }
-    
-    void getAdminBio(String nama, int id){
+    public MainMenu(String nama, int id) {
         this.idAdminS = id;
         this.namaAdmins = nama;
+        initComponents();
+        setLocationRelativeTo(null);
+//        JOptionPane.showMessageDialog(this, "ID admin : " + this.idAdminS + ", Nama Admin : " + this.namaAdmins);
     }
 
     
@@ -134,6 +133,7 @@ public class MainMenu extends javax.swing.JFrame {
         // TODO add your handling code here:
         dispose();
         InputBarang ib = new InputBarang();
+        ib.getAdminBio(this.namaAdmins, this.idAdminS);
         ib.setVisible(true);
     }//GEN-LAST:event_buttonInputBarangActionPerformed
 
@@ -149,7 +149,8 @@ public class MainMenu extends javax.swing.JFrame {
     private void buttonRiwayatTransaksiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRiwayatTransaksiActionPerformed
         // TODO add your handling code here:
         dispose();
-        RiwayatPembelian rp = new RiwayatPembelian();
+        RiwayatPembelian rp = new RiwayatPembelian(this.namaAdmins, this.idAdminS);
+        rp.getAdminBio(this.namaAdmins, this.idAdminS);
         rp.setVisible(true);
         rp.setExtendedState(rp.getExtendedState() | JFrame.MAXIMIZED_BOTH);
     }//GEN-LAST:event_buttonRiwayatTransaksiActionPerformed
@@ -157,7 +158,7 @@ public class MainMenu extends javax.swing.JFrame {
     private void buttonMemberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonMemberActionPerformed
         // TODO add your handling code here:
         dispose();
-        listMember lm = new listMember();
+        listMember lm = new listMember(this.namaAdmins, this.idAdminS);
         lm.setVisible(true); 
     }//GEN-LAST:event_buttonMemberActionPerformed
 

@@ -11,13 +11,19 @@ package main;
 public class RiwayatPembelian extends javax.swing.JFrame {
     private KoneksiDatabase dbConnection;
 
-    /**
-     * Creates new form RiwayatPembelian
-     */
-    public RiwayatPembelian() {
+    int idAdminS;
+    String namaAdmins;
+    public RiwayatPembelian(String nama, int id) {
         this.dbConnection = KoneksiDatabase.getInstance();
         initComponents();
+        setLocationRelativeTo(null);
     }
+    
+    void getAdminBio(String nama, int id){
+        this.idAdminS = id;
+        this.namaAdmins = nama;
+    }
+    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -33,6 +39,7 @@ public class RiwayatPembelian extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(71, 73, 115));
 
