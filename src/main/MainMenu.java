@@ -152,7 +152,6 @@ public class MainMenu extends javax.swing.JFrame {
         RiwayatPembelian rp = new RiwayatPembelian(this.namaAdmins, this.idAdminS);
         rp.getAdminBio(this.namaAdmins, this.idAdminS);
         rp.setVisible(true);
-        rp.setExtendedState(rp.getExtendedState() | JFrame.MAXIMIZED_BOTH);
     }//GEN-LAST:event_buttonRiwayatTransaksiActionPerformed
 
     private void buttonMemberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonMemberActionPerformed

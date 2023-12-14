@@ -165,6 +165,9 @@ public class RiwayatPembelian extends javax.swing.JFrame {
 
     private void butKembaliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butKembaliActionPerformed
         // TODO add your handling code here:
+        MainMenu exitMember = new MainMenu(this.namaAdmins, this.idAdminS);
+        exitMember.setVisible(true);
+        this.dispose(); 
     }//GEN-LAST:event_butKembaliActionPerformed
     
 
