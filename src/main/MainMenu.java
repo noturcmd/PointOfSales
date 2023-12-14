@@ -131,7 +131,6 @@ public class MainMenu extends javax.swing.JFrame {
         dispose();
         InputBarang ib = new InputBarang();
         ib.setVisible(true);
-        ib.setExtendedState(ib.getExtendedState() | JFrame.MAXIMIZED_BOTH);
     }//GEN-LAST:event_buttonInputBarangActionPerformed
 
     private void buttonPembayaranActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPembayaranActionPerformed

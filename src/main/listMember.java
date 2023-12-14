@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package main;
+import java.awt.event.KeyEvent;
 import java.sql.*;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -20,6 +21,7 @@ public class listMember extends javax.swing.JFrame {
     public listMember() {
         this.dbConnection = KoneksiDatabase.getInstance();
         initComponents();
+        setLocationRelativeTo(null);
         this.tampilkanMember();
     }
     
@@ -47,8 +49,9 @@ public class listMember extends javax.swing.JFrame {
         tombolkeluar = new javax.swing.JButton();
         tombolhapus = new javax.swing.JButton();
         tomboldaftar = new javax.swing.JButton();
-        butUbah = new javax.swing.JButton();
         butRefresh = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        ubahNoHP = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -103,13 +106,6 @@ public class listMember extends javax.swing.JFrame {
             }
         });
 
-        butUbah.setText("Ubah");
-        butUbah.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                butUbahActionPerformed(evt);
-            }
-        });
-
         butRefresh.setText("Refresh");
         butRefresh.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -117,38 +113,63 @@ public class listMember extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Segoe UI Black", 0, 24)); // NOI18N
+        jLabel1.setText("No HP ");
+
+        ubahNoHP.setFont(new java.awt.Font("Segoe UI Black", 0, 24)); // NOI18N
+        ubahNoHP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ubahNoHPActionPerformed(evt);
+            }
+        });
+        ubahNoHP.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                ubahNoHPKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                ubahNoHPKeyReleased(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 595, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(56, 56, 56)
                 .addComponent(tombolkeluar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(43, 43, 43)
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
+                .addComponent(ubahNoHP, javax.swing.GroupLayout.DEFAULT_SIZE, 241, Short.MAX_VALUE)
+                .addGap(91, 91, 91)
                 .addComponent(butRefresh)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(tombolhapus, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(butUbah)
-                .addGap(18, 18, 18)
                 .addComponent(tomboldaftar)
-                .addGap(24, 24, 24))
+                .addGap(114, 114, 114))
+            .addComponent(jScrollPane1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tombolhapus)
-                    .addComponent(tombolkeluar)
-                    .addComponent(tomboldaftar)
-                    .addComponent(butUbah)
-                    .addComponent(butRefresh))
-                .addGap(0, 15, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(tombolhapus)
+                            .addComponent(tombolkeluar)
+                            .addComponent(tomboldaftar)
+                            .addComponent(butRefresh))
+                        .addGap(0, 5, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(ubahNoHP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1))
+                        .addContainerGap())))
         );
 
         pack();
@@ -166,7 +187,6 @@ public class listMember extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Tidak ada baris yang dipilih!");
         }else{
             try{
-//                System.out.println("Baris : "  +tabelMember.getValueAt(this.baris, 0));
                 String getID = (String) tabelMember.getValueAt(this.baris, 0);
                 Statement st1 = dbConnection.getConnection().createStatement();
                 String query1 = String.format("delete from tabel_member where id_member = \"%s\";", getID);
@@ -175,7 +195,9 @@ public class listMember extends javax.swing.JFrame {
                 e.printStackTrace();
             }
             this.forMember.removeRow(this.baris);
+            this.baris = null;
             JOptionPane.showMessageDialog(this, "Data berhasil dihapus!");
+            
         }
     }//GEN-LAST:event_tombolhapusActionPerformed
 
@@ -185,13 +207,10 @@ public class listMember extends javax.swing.JFrame {
             daftarMember.setVisible(true);
     }//GEN-LAST:event_tomboldaftarActionPerformed
 
-    private void butUbahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butUbahActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_butUbahActionPerformed
-
     private void tabelMemberMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelMemberMouseClicked
         // TODO add your handling code here:
         this.baris = tabelMember.getSelectedRow();
+        this.ubahNoHP.setText((String) this.tabelMember.getValueAt(this.baris, 2));
     }//GEN-LAST:event_tabelMemberMouseClicked
 
     private void butRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butRefreshActionPerformed
@@ -199,6 +218,35 @@ public class listMember extends javax.swing.JFrame {
         this.forMember.setRowCount(0);
         this.tampilkanMember();
     }//GEN-LAST:event_butRefreshActionPerformed
+
+    private void ubahNoHPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ubahNoHPActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ubahNoHPActionPerformed
+
+    private void ubahNoHPKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ubahNoHPKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            try{
+                Statement st1 = this.dbConnection.getConnection().createStatement();
+                String query1 = String.format("update tabel_member set nohp_member = \"%s\" where id_member = \"%s\";",this.ubahNoHP.getText(), this.tabelMember.getValueAt(this.baris, 0));
+                st1.executeUpdate(query1);
+                JOptionPane.showMessageDialog(this, "Berhasil diubah!");
+                this.ubahNoHP.setText("");
+                this.ubahNoHP.setFocusable(false);
+                this.baris = null;
+                
+            }catch(SQLException e){
+                e.printStackTrace();
+            }
+        }
+        
+    }//GEN-LAST:event_ubahNoHPKeyPressed
+
+    private void ubahNoHPKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ubahNoHPKeyReleased
+        // TODO add your handling code here:
+        this.tabelMember.setValueAt(this.ubahNoHP.getText(), this.baris, 2);
+        
+    }//GEN-LAST:event_ubahNoHPKeyReleased
 
     /**
      * @param args the command line arguments
@@ -237,11 +285,12 @@ public class listMember extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton butRefresh;
-    private javax.swing.JButton butUbah;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tabelMember;
     private javax.swing.JButton tomboldaftar;
     private javax.swing.JButton tombolhapus;
     private javax.swing.JButton tombolkeluar;
+    private javax.swing.JTextField ubahNoHP;
     // End of variables declaration//GEN-END:variables
 }
