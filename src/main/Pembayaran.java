@@ -32,7 +32,7 @@ public class Pembayaran extends javax.swing.JFrame {
         getDataBarang();
         System.out.println(getSize());
         this.tombolSimpan.setVisible(false);
-//        this.inputPembayaran.setBackground(new Color(14,41,84));
+        setLocationRelativeTo(null);
     }
     
     private void ubahDataBaris() {
@@ -205,6 +205,7 @@ public class Pembayaran extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(71, 73, 115));
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(71, 73, 115));
         jPanel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(241, 218, 196), 4, true));
