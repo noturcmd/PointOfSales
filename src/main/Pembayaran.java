@@ -29,6 +29,8 @@ public class Pembayaran extends javax.swing.JFrame {
     Integer baris;
     Integer baris2;
     
+    Integer pointMember;
+    
     public Pembayaran(){
         initComponents();
         this.dbConnection = KoneksiDatabase.getInstance();
@@ -204,8 +206,30 @@ public class Pembayaran extends javax.swing.JFrame {
                                 int diskonPotong = (int)(0.1 * Integer.parseInt(harga4));
                                 this.potonganDiskon.setText("Rp" + df.format(diskonPotong));
                                 int hargaAfterDiskon = Integer.parseInt(harga4) - diskonPotong;
-                                this.hargaAkhir.setText("Rp" + df.format(hargaAfterDiskon));
                                 this.totalHargaSemua = hargaAfterDiskon;
+                                JOptionPane.showMessageDialog(rootPane, "Harga all satu : " + totalHargaSemua);
+                                try{
+                                Statement rahasia = dbConnection.getConnection().createStatement();
+                                String rahasia2 = String.format("select point_member from tabel_member where id_member = \"%s\";", this.searchByID.getText());
+                                ResultSet rs3 = rahasia.executeQuery(rahasia2);
+                                if(rs3.next()){
+                                    if(Integer.parseInt(rs3.getString("point_member")) >= 4000){
+                                        int diskon2 = (int)(0.2 * this.totalHargaSemua);
+                                        JOptionPane.showMessageDialog(rootPane, "Besar diskon pertama : " + diskonPotong);
+                                        JOptionPane.showMessageDialog(rootPane, "Besar diskon kedua : " + diskon2);
+                                        this.totalHargaSemua = this.totalHargaSemua - diskon2;
+                                        JOptionPane.showMessageDialog(rootPane, "Harga All dua : " + this.totalHargaSemua);
+                                        this.potonganDiskon.setText("Rp" + df.format(diskonPotong + diskon2));
+                                        JOptionPane.showMessageDialog(rootPane, "Harga All terakhir : " + this.totalHargaSemua);
+                                        this.hargaAkhir.setText("Rp" + String.valueOf(df.format(this.totalHargaSemua)));
+                                    }else{
+                                        this.potonganDiskon.setText("Rp" + df.format(diskonPotong));
+                                        this.hargaAkhir.setText("Rp" + String.valueOf(df.format(this.totalHargaSemua - diskonPotong)));
+                                    }
+                                }
+                    }catch(SQLException e){
+                        e.printStackTrace();
+                    }
                             }       
                         }
                       }
@@ -740,6 +764,9 @@ public class Pembayaran extends javax.swing.JFrame {
                         int hargaAfterDiskon = Integer.parseInt(harga4) - diskonPotong;
                         this.hargaAkhir.setText("Rp" + df.format(hargaAfterDiskon));
                         this.totalHargaSemua = hargaAfterDiskon;
+                        this.totalHargaSemua = Integer.parseInt(harga4) - diskonPotong;
+                    
+                        
                     }else{
                         
                     }    
@@ -775,9 +802,27 @@ public class Pembayaran extends javax.swing.JFrame {
                         harga4 += tes;
                     }
                     int diskon = (int)(0.1 * Integer.parseInt(harga4));
-                    this.potonganDiskon.setText("Rp" + df.format(diskon));
-                    this.hargaAkhir.setText("Rp" + String.valueOf(df.format(Integer.parseInt(harga4) - diskon)));
                     this.totalHargaSemua = Integer.parseInt(harga4) - diskon;
+                    JOptionPane.showMessageDialog(rootPane, "Harga all satu : " + totalHargaSemua);
+                    Statement rahasia = dbConnection.getConnection().createStatement();
+                    String rahasia2 = String.format("select point_member from tabel_member where id_member = \"%s\";", this.searchByID.getText());
+                    ResultSet rs3 = rahasia.executeQuery(rahasia2);
+                                if(rs3.next()){
+//                                    JOptionPane.showMessageDialog(rootPane, "Bisa masuk");
+                                    if(Integer.parseInt(rs3.getString("point_member")) >= 4000){
+                                        int diskon2 = (int)(0.2 * this.totalHargaSemua);
+                                        JOptionPane.showMessageDialog(rootPane, "Besar diskon pertama : " + diskon);
+                                        JOptionPane.showMessageDialog(rootPane, "Besar diskon kedua : " + diskon2);
+                                        this.totalHargaSemua = this.totalHargaSemua - diskon2;
+                                        JOptionPane.showMessageDialog(rootPane, "Harga All dua : " + this.totalHargaSemua);
+                                        this.potonganDiskon.setText("Rp" + df.format(diskon + diskon2));
+                                        JOptionPane.showMessageDialog(rootPane, "Harga All terakhir : " + this.totalHargaSemua);
+                                        this.hargaAkhir.setText("Rp" + String.valueOf(df.format(this.totalHargaSemua)));
+                                    }else{
+                                        this.potonganDiskon.setText("Rp" + df.format(diskon));
+                                        this.hargaAkhir.setText("Rp" + String.valueOf(df.format(this.totalHargaSemua - diskon)));
+                                    }
+                                }
                 }
                 }else{
                     this.statusMember.setText("Bukan Member");
@@ -824,21 +869,40 @@ public class Pembayaran extends javax.swing.JFrame {
 
     private void tombolBayarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tombolBayarActionPerformed
         // TODO add your handling code here:
-        Integer jumlahPCS = 0;
-        for(int i = 0; i < tabelPembelianBarang.getRowCount(); i++){
-            jumlahPCS += Integer.parseInt((String) tabelPembelianBarang.getValueAt(i, 4));
-        }
+        Integer jumlahPCS = this.totalHargaSemua;
+//        String huhu = "";
+//        for(int i = 0; i < tabelPembelianBarang.getRowCount(); i++){
+//            String[] getHargaHu = String.valueOf(tabelPembelianBarang.getValueAt(i, 5)).split(",");
+//            for(String tes: getHargaHu){
+//                System.out.println("Tes tes :" + tes);
+//                huhu += tes;
+//            }
+//            System.out.println("Tes tes :" + huhu);
+//            jumlahPCS +=Integer.parseInt(getHargaHu[i]);
+//        }
         
         String namaBarang2 = "";
         for(int i = 0; i < tabelPembelianBarang.getRowCount(); i++){
             namaBarang2 += String.join(",", String.valueOf(tabelPembelianBarang.getValueAt(i, 1)));
         }
         
+//        JOptionPane.showMessageDialog(this, "namaBarang2 : " + namaBarang2);
+        
         String idBarangs = "";
         for(int i = 0; i < tabelPembelianBarang.getRowCount(); i++){
-            idBarangs += String.join(",", String.valueOf(tabelPembelianBarang.getValueAt(i, 0)));
+            idBarangs += String.valueOf(tabelPembelianBarang.getValueAt(i, 0)+",");
         }
-        JOptionPane.showMessageDialog(this, namaBarang2);
+        
+        String[] idBarang2 = idBarangs.split(",");
+        ArrayList<String> idBaru = new ArrayList<>();
+        for(String tes: idBarang2){
+            if(tes.isBlank() | tes.isEmpty()){
+                
+            }else{
+                idBaru.add(tes);
+            }
+        }
+//        JOptionPane.showMessageDialog(this, namaBarang2);
         if(this.totalHargaSemua <= 0){
             JOptionPane.showMessageDialog(this, "Barang belum diinput!");
         }else{
@@ -856,7 +920,9 @@ public class Pembayaran extends javax.swing.JFrame {
                                 
                                 String query1 = String.format("insert into tabel_riwayat_pembelian(id_admin, id_member, waktu_transaksi, tanggal_transaksi, id_barang, jumlah_beli_barang, total_harga, pembayaran, nama_barang) values(\"%s\",\"%s\", curtime(), curdate(), \"%s\", \"%s\", \"%s\", \"%s\", \"%s\");", this.idAdminS, this.idMemberS, this.idBarangs, jumlahPCS, this.totalHargaSemua, Integer.parseInt(this.inputPembayaran.getText()), namaBarang2);
                                 st1.executeUpdate(query1);
-                                int pointMember = (int) (0.2 * jumlahPCS);
+//                                JOptionPane.showMessageDialog(rootPane, "Jumlah PCS : " + jumlahPCS);
+//                                int pointMember = (int) (0.2 * this.totalHargaSemua);
+//                                JOptionPane.showMessageDialog(rootPane, "PointMember : " + pointMember);
                                 Statement st2 = dbConnection.getConnection().createStatement();
                                 String query2 = String.format("Select point_member from tabel_member where id_member = \"%s\";", this.idMemberS);
                                 ResultSet rs2 = st2.executeQuery(query2);
@@ -866,59 +932,85 @@ public class Pembayaran extends javax.swing.JFrame {
                                 if(rs2.next()){
                                     if(Integer.parseInt(rs2.getString("point_member")) > 0){
                                         Statement st3 = dbConnection.getConnection().createStatement();
-                                        String queryUpdate = String.format("update tabel_member set point_member = \"%s\" where id_member = \"%s\";", pointMember, this.idMemberS);
+                                        String queryUpdate = String.format("update tabel_member set point_member = \"%s\" where id_member = \"%s\";", Integer.parseInt(rs2.getString("point_member")) - 4000  + pointMember, this.idMemberS);
                                         st3.executeUpdate(queryUpdate);
                                         ResultSet rs1 = st3.executeQuery(query4);
-                                        int jumlahBaris = tabelPembelianBarang.getRowCount();
+                                        
+                                        
                                         if(rs4.next()){
-                                            int jumlahBarangDatabase = rs4.getInt("jumlah_barang");
+                                        for(int i = 0; i < idBaru.size(); i++){ 
+                                            try (
+                                                    Statement st5 = dbConnection.getConnection().createStatement()) {
+//                                            JOptionPane.showMessageDialog(rootPane, "ID barang : " + idBaru.get(i));
+                                            String query5 = String.format("Select jumlah_barang from tabel_barang where id_barang = \"%s\";", idBaru.get(i));
+                                            ResultSet rs5 = st5.executeQuery(query5);
+                                            int jumlahBaris = tabelPembelianBarang.getRowCount();
 
-                                        for (int i = 0; i < jumlahBaris; i++) {
-                                            
-                                            int jumlahBarangDibeli = Integer.parseInt(tabelPembelianBarang.getValueAt(i,4).toString());
-                                            JOptionPane.showMessageDialog(this, "Jumlah Barang : " +jumlahBarangDibeli );
-                                            int jumlahBarangBaru = jumlahBarangDatabase - jumlahBarangDibeli;
+                                            while (rs5.next()) {
 
-                                            String updateQuery = "UPDATE tabel_barang SET jumlah_barang = ? WHERE id_barang = ?";
-                                            try (PreparedStatement preparedStatement = dbConnection.getConnection().prepareStatement(updateQuery)) {
-                                                preparedStatement.setInt(1, jumlahBarangBaru);
-                                                preparedStatement.setString(2, (String) tabelPembelianBarang.getValueAt(i, 0));
-                                                JOptionPane.showMessageDialog(this, "ID : " + tabelPembelianBarang.getValueAt(i, 0));
-                                                int rowCount = preparedStatement.executeUpdate();
-                                                System.out.println("Baris yang diupdate: " + rowCount);
-                                            } catch (SQLException e) {
-                                                e.printStackTrace();
+        //                                        for (int d = 0; d < jumlahBaris; d++) {
+                                                    int jumlahBarangDatabase = rs5.getInt("jumlah_barang");
+                                                    int jumlahBarangDibeli = Integer.parseInt(tabelPembelianBarang.getValueAt(i,4).toString());
+        //                                            JOptionPane.showMessageDialog(this, "nama Barang : " + );
+//                                                    JOptionPane.showMessageDialog(rootPane, "Jumlah database : " + jumlahBarangDatabase);
+//                                                    JOptionPane.showMessageDialog(rootPane, "Jumlah beli : " + jumlahBarangDibeli);
+                                                    int jumlahBarangBaru = jumlahBarangDatabase - jumlahBarangDibeli;
+//                                                    JOptionPane.showMessageDialog(rootPane, "Jumlah baru : " + jumlahBarangBaru);
+                                                    String updateQuery = "UPDATE tabel_barang SET jumlah_barang = ? WHERE id_barang = ?";
+                                                    try (PreparedStatement preparedStatement = dbConnection.getConnection().prepareStatement(updateQuery)) {
+                                                        preparedStatement.setInt(1, jumlahBarangBaru);
+                                                        preparedStatement.setString(2, (String) tabelPembelianBarang.getValueAt(i, 0));
+//                                                        JOptionPane.showMessageDialog(this, "ID : " + tabelPembelianBarang.getValueAt(i, 0));
+                                                        int rowCount = preparedStatement.executeUpdate();
+                                                        System.out.println("Baris yang diupdate: " + rowCount);
+                                                    } catch (SQLException e) {
+                                                        e.printStackTrace();
+                                                    }
+        //                                        }
                                             }
                                         }
+                                    }
                                         }
                                 }else{
                                         int tambahPoint = Integer.parseInt(rs2.getString("point_member")) + pointMember;
                                         Statement st3 = dbConnection.getConnection().createStatement();
                                         String queryUpdate = String.format("update tabel_member set point_member = \"%s\" where id_member = \"%s\";", tambahPoint, this.idMemberS);
                                         st3.executeUpdate(queryUpdate);
-                                        int jumlahBaris = tabelPembelianBarang.getRowCount();
                                         if(rs4.next()){
-                                            int jumlahBarangDatabase = rs4.getInt("jumlah_barang");
+                                            if(rs4.next()){
+                                        for(int i = 0; i < idBaru.size(); i++){
+                                            try (
+                                                    Statement st5 = dbConnection.getConnection().createStatement()) {
+//                                            JOptionPane.showMessageDialog(rootPane, "ID barang : " + idBaru.get(i));
+                                            String query5 = String.format("Select jumlah_barang from tabel_barang where id_barang = \"%s\";", idBaru.get(i));
+                                            ResultSet rs5 = st5.executeQuery(query4);
+                                            int jumlahBaris = tabelPembelianBarang.getRowCount();
 
-                                        for (int i = 0; i < jumlahBaris; i++) {
-                                            
-                                            int jumlahBarangDibeli = Integer.parseInt(tabelPembelianBarang.getValueAt(i,4).toString());
-                                            JOptionPane.showMessageDialog(this, "Jumlah Barang : " +jumlahBarangDibeli );
-                                            int jumlahBarangBaru = jumlahBarangDatabase - jumlahBarangDibeli;
+                                            while (rs4.next()) {
 
-                                            String updateQuery = "UPDATE tabel_barang SET jumlah_barang = ? WHERE id_barang = ?";
-                                            try (PreparedStatement preparedStatement = dbConnection.getConnection().prepareStatement(updateQuery)) {
-                                                preparedStatement.setInt(1, jumlahBarangBaru);
-                                                preparedStatement.setString(2, (String) tabelPembelianBarang.getValueAt(i, 0));
-                                                JOptionPane.showMessageDialog(this, "ID : " + tabelPembelianBarang.getValueAt(i, 0));
-                                                int rowCount = preparedStatement.executeUpdate();
-                                                System.out.println("Baris yang diupdate: " + rowCount);
-                                            } catch (SQLException e) {
-                                                e.printStackTrace();
+        //                                        for (int d = 0; d < jumlahBaris; d++) {
+                                                    int jumlahBarangDatabase = rs4.getInt("jumlah_barang");
+                                                    int jumlahBarangDibeli = Integer.parseInt(tabelPembelianBarang.getValueAt(i,4).toString());
+        //                                            JOptionPane.showMessageDialog(this, "nama Barang : " + );
+//                                                    JOptionPane.showMessageDialog(rootPane, "Jumlah database : " + jumlahBarangDatabase);
+//                                                    JOptionPane.showMessageDialog(rootPane, "Jumlah beli : " + jumlahBarangDibeli);
+                                                    int jumlahBarangBaru = jumlahBarangDatabase - jumlahBarangDibeli;
+//                                                    JOptionPane.showMessageDialog(rootPane, "Jumlah baru : " + jumlahBarangBaru);
+                                                    String updateQuery = "UPDATE tabel_barang SET jumlah_barang = ? WHERE id_barang = ?";
+                                                    try (PreparedStatement preparedStatement = dbConnection.getConnection().prepareStatement(updateQuery)) {
+                                                        preparedStatement.setInt(1, jumlahBarangBaru);
+                                                        preparedStatement.setString(2, (String) tabelPembelianBarang.getValueAt(i, 0));
+//                                                        JOptionPane.showMessageDialog(this, "ID : " + tabelPembelianBarang.getValueAt(i, 0));
+                                                        int rowCount = preparedStatement.executeUpdate();
+                                                        System.out.println("Baris yang diupdate: " + rowCount);
+                                                    } catch (SQLException e) {
+                                                        e.printStackTrace();
+                                                    }
+        //                                        }
                                             }
                                         }
-                                            
-                                            
+                                    }
+                                            }
                                         }
                                     }
                                 }
@@ -937,32 +1029,36 @@ public class Pembayaran extends javax.swing.JFrame {
                                 st1.executeUpdate(query1);
                                 System.out.println("Jumlah Beli Barang bukan member dan sama dengan : " + jumlahPCS);
 
-                                try (Statement st4 = dbConnection.getConnection().createStatement()) {
-                                    String query4 = String.format("Select jumlah_barang from tabel_barang where id_barang = \"%s\";", this.idBarangs);
+                                for(int i = 0; i < idBaru.size(); i++){
+                                    try (Statement st4 = dbConnection.getConnection().createStatement()) {
+//                                    JOptionPane.showMessageDialog(rootPane, "ID barang : " + idBaru.get(i));
+                                    String query4 = String.format("Select jumlah_barang from tabel_barang where id_barang = \"%s\";", idBaru.get(i));
                                     ResultSet rs4 = st4.executeQuery(query4);
                                     int jumlahBaris = tabelPembelianBarang.getRowCount();
 
                                     while (rs4.next()) {
-                                        int jumlahBarangDatabase = rs4.getInt("jumlah_barang");
-
-                                        for (int i = 0; i < jumlahBaris; i++) {
-                                            
+                                        
+//                                        for (int d = 0; d < jumlahBaris; d++) {
+                                            int jumlahBarangDatabase = rs4.getInt("jumlah_barang");
                                             int jumlahBarangDibeli = Integer.parseInt(tabelPembelianBarang.getValueAt(i,4).toString());
-                                            JOptionPane.showMessageDialog(this, "Jumlah Barang : " +jumlahBarangDibeli );
+//                                            JOptionPane.showMessageDialog(this, "nama Barang : " + );
+//                                            JOptionPane.showMessageDialog(rootPane, "Jumlah database : " + jumlahBarangDatabase);
+//                                            JOptionPane.showMessageDialog(rootPane, "Jumlah beli : " + jumlahBarangDibeli);
                                             int jumlahBarangBaru = jumlahBarangDatabase - jumlahBarangDibeli;
-
+//                                            JOptionPane.showMessageDialog(rootPane, "Jumlah baru : " + jumlahBarangBaru);
                                             String updateQuery = "UPDATE tabel_barang SET jumlah_barang = ? WHERE id_barang = ?";
                                             try (PreparedStatement preparedStatement = dbConnection.getConnection().prepareStatement(updateQuery)) {
                                                 preparedStatement.setInt(1, jumlahBarangBaru);
                                                 preparedStatement.setString(2, (String) tabelPembelianBarang.getValueAt(i, 0));
-                                                JOptionPane.showMessageDialog(this, "ID : " + tabelPembelianBarang.getValueAt(i, 0));
+//                                                JOptionPane.showMessageDialog(this, "ID : " + tabelPembelianBarang.getValueAt(i, 0));
                                                 int rowCount = preparedStatement.executeUpdate();
                                                 System.out.println("Baris yang diupdate: " + rowCount);
                                             } catch (SQLException e) {
                                                 e.printStackTrace();
                                             }
-                                        }
+//                                        }
                                     }
+                                }
                                 }
 
                                 JOptionPane.showMessageDialog(this, "Pembayaran berhasil!");
@@ -993,27 +1089,40 @@ public class Pembayaran extends javax.swing.JFrame {
                                 if(rs2.next()){
                                     if(Integer.parseInt(rs2.getString("point_member")) > 0){
                                         Statement st3 = dbConnection.getConnection().createStatement();
-                                        String queryUpdate = String.format("update tabel_member set point_member = \"%s\" where id_member = \"%s\";", pointMember, this.idMemberS);
+                                        String queryUpdate = String.format("update tabel_member set point_member = \"%s\" where id_member = \"%s\";", Integer.parseInt(rs2.getString("point_member")) - 4000  + pointMember, this.idMemberS);
                                         st3.executeUpdate(queryUpdate);
                                         if(rs4.next()){
-                                            int jumlahBarangDatabase = rs4.getInt("jumlah_barang");
+                                        for(int i = 0; i < idBaru.size(); i++){
+                                            try (
+                                            Statement st5 = dbConnection.getConnection().createStatement()) {
+//                                            JOptionPane.showMessageDialog(rootPane, "ID barang : " + idBaru.get(i));
+                                            String query5 = String.format("Select jumlah_barang from tabel_barang where id_barang = \"%s\";", idBaru.get(i));
+                                            ResultSet rs5 = st5.executeQuery(query5);
 
-                                        for (int i = 0; i < jumlahBaris; i++) {
-                                            
-                                            int jumlahBarangDibeli = Integer.parseInt(tabelPembelianBarang.getValueAt(i,4).toString());
-                                            JOptionPane.showMessageDialog(this, "Jumlah Barang : " +jumlahBarangDibeli );
-                                            int jumlahBarangBaru = jumlahBarangDatabase - jumlahBarangDibeli;
+                                            while (rs5.next()) {
 
-                                            String updateQuery = "UPDATE tabel_barang SET jumlah_barang = ? WHERE id_barang = ?";
-                                            try (PreparedStatement preparedStatement = dbConnection.getConnection().prepareStatement(updateQuery)) {
-                                                preparedStatement.setInt(1, jumlahBarangBaru);
-                                                preparedStatement.setString(2, (String) tabelPembelianBarang.getValueAt(i, 0));
-                                                JOptionPane.showMessageDialog(this, "ID : " + tabelPembelianBarang.getValueAt(i, 0));
-                                                int rowCount = preparedStatement.executeUpdate();
-                                                System.out.println("Baris yang diupdate: " + rowCount);
-                                            } catch (SQLException e) {
-                                                e.printStackTrace();
+        //                                        for (int d = 0; d < jumlahBaris; d++) {
+                                                    int jumlahBarangDatabase = rs5.getInt("jumlah_barang");
+                                                    int jumlahBarangDibeli = Integer.parseInt(tabelPembelianBarang.getValueAt(i,4).toString());
+        //                                            JOptionPane.showMessageDialog(this, "nama Barang : " + );
+//                                                    JOptionPane.showMessageDialog(rootPane, "Jumlah database : " + jumlahBarangDatabase);
+//                                                    JOptionPane.showMessageDialog(rootPane, "Jumlah beli : " + jumlahBarangDibeli);
+                                                    int jumlahBarangBaru = jumlahBarangDatabase - jumlahBarangDibeli;
+//                                                    JOptionPane.showMessageDialog(rootPane, "Jumlah baru : " + jumlahBarangBaru);
+                                                    String updateQuery = "UPDATE tabel_barang SET jumlah_barang = ? WHERE id_barang = ?";
+                                                    try (PreparedStatement preparedStatement = dbConnection.getConnection().prepareStatement(updateQuery)) {
+                                                        preparedStatement.setInt(1, jumlahBarangBaru);
+                                                        preparedStatement.setString(2, (String) tabelPembelianBarang.getValueAt(i, 0));
+//                                                        JOptionPane.showMessageDialog(this, "ID : " + tabelPembelianBarang.getValueAt(i, 0));
+                                                        int rowCount = preparedStatement.executeUpdate();
+                                                        System.out.println("Baris yang diupdate: " + rowCount);
+                                                    } catch (SQLException e) {
+                                                        e.printStackTrace();
+                                                    }
+        //                                        }
                                             }
+                                        }
+                                    
                                         }
                                             
                                         }
@@ -1024,25 +1133,39 @@ public class Pembayaran extends javax.swing.JFrame {
                                         st3.executeUpdate(queryUpdate);
                                         Statement st5 = dbConnection.getConnection().createStatement();
                                         if(rs4.next()){
-                                            int jumlahBarangDatabase = rs4.getInt("jumlah_barang");
+                                        for(int i = 0; i < idBaru.size(); i++){
+                                            try (
+                                              Statement st6 = dbConnection.getConnection().createStatement()) {
+//                                            JOptionPane.showMessageDialog(rootPane, "ID barang : " + idBaru.get(i));
+                                            String query5 = String.format("Select jumlah_barang from tabel_barang where id_barang = \"%s\";", idBaru.get(i));
+                                            ResultSet rs5 = st6.executeQuery(query4);
 
-                                        for (int i = 0; i < jumlahBaris; i++) {
-                                            
-                                            int jumlahBarangDibeli = Integer.parseInt(tabelPembelianBarang.getValueAt(i,4).toString());
-                                            JOptionPane.showMessageDialog(this, "Jumlah Barang : " +jumlahBarangDibeli );
-                                            int jumlahBarangBaru = jumlahBarangDatabase - jumlahBarangDibeli;
+                                            while (rs4.next()) {
 
-                                            String updateQuery = "UPDATE tabel_barang SET jumlah_barang = ? WHERE id_barang = ?";
-                                            try (PreparedStatement preparedStatement = dbConnection.getConnection().prepareStatement(updateQuery)) {
-                                                preparedStatement.setInt(1, jumlahBarangBaru);
-                                                preparedStatement.setString(2, (String) tabelPembelianBarang.getValueAt(i, 0));
-                                                JOptionPane.showMessageDialog(this, "ID : " + tabelPembelianBarang.getValueAt(i, 0));
-                                                int rowCount = preparedStatement.executeUpdate();
-                                                System.out.println("Baris yang diupdate: " + rowCount);
-                                            } catch (SQLException e) {
-                                                e.printStackTrace();
+        //                                        for (int d = 0; d < jumlahBaris; d++) {
+                                                    int jumlahBarangDatabase = rs4.getInt("jumlah_barang");
+                                                    int jumlahBarangDibeli = Integer.parseInt(tabelPembelianBarang.getValueAt(i,4).toString());
+        //                                            JOptionPane.showMessageDialog(this, "nama Barang : " + );
+//                                                    JOptionPane.showMessageDialog(rootPane, "Jumlah database : " + jumlahBarangDatabase);
+//                                                    JOptionPane.showMessageDialog(rootPane, "Jumlah beli : " + jumlahBarangDibeli);
+                                                    int jumlahBarangBaru = jumlahBarangDatabase - jumlahBarangDibeli;
+//                                                    JOptionPane.showMessageDialog(rootPane, "Jumlah baru : " + jumlahBarangBaru);
+                                                    String updateQuery = "UPDATE tabel_barang SET jumlah_barang = ? WHERE id_barang = ?";
+                                                    try (PreparedStatement preparedStatement = dbConnection.getConnection().prepareStatement(updateQuery)) {
+                                                        preparedStatement.setInt(1, jumlahBarangBaru);
+                                                        preparedStatement.setString(2, (String) tabelPembelianBarang.getValueAt(i, 0));
+//                                                        JOptionPane.showMessageDialog(this, "ID : " + tabelPembelianBarang.getValueAt(i, 0));
+                                                        int rowCount = preparedStatement.executeUpdate();
+                                                        System.out.println("Baris yang diupdate: " + rowCount);
+                                                    } catch (SQLException e) {
+                                                        e.printStackTrace();
+                                                    }
+        //                                        }
                                             }
                                         }
+                                            
+                                        }
+                                        
                                             
                                         }
                                     }
@@ -1056,33 +1179,38 @@ public class Pembayaran extends javax.swing.JFrame {
                             }
                         }else{
                             try{
-                                Statement st1 = dbConnection.getConnection().createStatement();
-                                String query1 = String.format("insert into tabel_riwayat_pembelian(id_admin, id_member, waktu_transaksi, tanggal_transaksi, id_barang, jumlah_beli_barang, total_harga, pembayaran, nama_barang) values(\"%s\",\"%s\", curtime(), curdate(), \"%s\", \"%s\", \"%s\", \"%s\", \"%s\");", this.idAdminS, "0", this.idBarangs, jumlahPCS, this.totalHargaSemua, Integer.parseInt(this.inputPembayaran.getText()),namaBarang2);
-                                st1.executeUpdate(query1);
-                                Statement st4 = dbConnection.getConnection().createStatement();
-                                String query4 = String.format("Select jumlah_barang from tabel_barang where id_barang = \"%s\";", this.idBarangs);
-                                ResultSet rs4 = st4.executeQuery(query4);
-                                int jumlahBaris = tabelPembelianBarang.getRowCount();
-                                if(rs4.next()){
-                                    int jumlahBarangDatabase = rs4.getInt("jumlah_barang");
+                                        for(int i = 0; i < idBaru.size(); i++){
+                                            try (
+                                            Statement st5 = dbConnection.getConnection().createStatement()) {
+//                                            JOptionPane.showMessageDialog(rootPane, "ID barang : " + idBaru.get(i));
+                                            String query5 = String.format("Select jumlah_barang from tabel_barang where id_barang = \"%s\";", idBaru.get(i));
+                                            ResultSet rs5 = st5.executeQuery(query5);
+                                            int jumlahBaris = tabelPembelianBarang.getRowCount();
 
-                                        for (int i = 0; i < jumlahBaris; i++) {
-                                            
-                                            int jumlahBarangDibeli = Integer.parseInt(tabelPembelianBarang.getValueAt(i,4).toString());
-                                            JOptionPane.showMessageDialog(this, "Jumlah Barang : " +jumlahBarangDibeli );
-                                            int jumlahBarangBaru = jumlahBarangDatabase - jumlahBarangDibeli;
+                                            while (rs5.next()) {
 
-                                            String updateQuery = "UPDATE tabel_barang SET jumlah_barang = ? WHERE id_barang = ?";
-                                            try (PreparedStatement preparedStatement = dbConnection.getConnection().prepareStatement(updateQuery)) {
-                                                preparedStatement.setInt(1, jumlahBarangBaru);
-                                                preparedStatement.setString(2, (String) tabelPembelianBarang.getValueAt(i, 0));
-                                                JOptionPane.showMessageDialog(this, "ID : " + tabelPembelianBarang.getValueAt(i, 0));
-                                                int rowCount = preparedStatement.executeUpdate();
-                                                System.out.println("Baris yang diupdate: " + rowCount);
-                                            } catch (SQLException e) {
-                                                e.printStackTrace();
+        //                                        for (int d = 0; d < jumlahBaris; d++) {
+                                                    int jumlahBarangDatabase = rs5.getInt("jumlah_barang");
+                                                    int jumlahBarangDibeli = Integer.parseInt(tabelPembelianBarang.getValueAt(i,4).toString());
+        //                                            JOptionPane.showMessageDialog(this, "nama Barang : " + );
+//                                                    JOptionPane.showMessageDialog(rootPane, "Jumlah database : " + jumlahBarangDatabase);
+//                                                    JOptionPane.showMessageDialog(rootPane, "Jumlah beli : " + jumlahBarangDibeli);
+                                                    int jumlahBarangBaru = jumlahBarangDatabase - jumlahBarangDibeli;
+//                                                    JOptionPane.showMessageDialog(rootPane, "Jumlah baru : " + jumlahBarangBaru);
+                                                    String updateQuery = "UPDATE tabel_barang SET jumlah_barang = ? WHERE id_barang = ?";
+                                                    try (PreparedStatement preparedStatement = dbConnection.getConnection().prepareStatement(updateQuery)) {
+                                                        preparedStatement.setInt(1, jumlahBarangBaru);
+                                                        preparedStatement.setString(2, (String) tabelPembelianBarang.getValueAt(i, 0));
+//                                                        JOptionPane.showMessageDialog(this, "ID : " + tabelPembelianBarang.getValueAt(i, 0));
+                                                        int rowCount = preparedStatement.executeUpdate();
+                                                        System.out.println("Baris yang diupdate: " + rowCount);
+                                                    } catch (SQLException e) {
+                                                        e.printStackTrace();
+                                                    }
+        //                                        }
                                             }
-                                        }
+                                        
+                                    }
                                     
                                 }
                                 JOptionPane.showMessageDialog(this, "Pembayaran berhasil!");
