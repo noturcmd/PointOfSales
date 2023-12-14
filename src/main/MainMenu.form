@@ -101,7 +101,13 @@
         <Component class="javax.swing.JButton" name="buttonInputBarang">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ac" green="9c" red="a6" type="rgb"/>
+              <Color blue="50" green="41" red="4a" type="rgb"/>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI Black" size="14" style="0"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="c4" green="da" red="f1" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Input Barang"/>
           </Properties>
@@ -119,7 +125,13 @@
         <Component class="javax.swing.JButton" name="buttonMember">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ac" green="9c" red="a6" type="rgb"/>
+              <Color blue="50" green="41" red="4a" type="rgb"/>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI Black" size="14" style="0"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="c4" green="da" red="f1" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Member"/>
           </Properties>
@@ -130,7 +142,13 @@
         <Component class="javax.swing.JButton" name="buttonPembayaran">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ac" green="9c" red="a6" type="rgb"/>
+              <Color blue="50" green="41" red="4a" type="rgb"/>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI Black" size="14" style="0"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="c4" green="da" red="f1" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Pembayaran"/>
           </Properties>
@@ -141,7 +159,13 @@
         <Component class="javax.swing.JButton" name="buttonRiwayatTransaksi">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ac" green="9c" red="a6" type="rgb"/>
+              <Color blue="50" green="41" red="4a" type="rgb"/>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI Black" size="14" style="0"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="c4" green="da" red="f1" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Riwayat Transaksi"/>
           </Properties>

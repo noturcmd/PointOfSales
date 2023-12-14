@@ -3,7 +3,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package main;
-
+import java.sql.*;
+import java.text.DecimalFormat;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author acer_
@@ -13,15 +16,47 @@ public class RiwayatPembelian extends javax.swing.JFrame {
 
     int idAdminS;
     String namaAdmins;
+    DecimalFormat df=new DecimalFormat("#,###.##");
+    
+    Integer baris;
+    
+    DefaultTableModel modelTabelRiwayat;
     public RiwayatPembelian(String nama, int id) {
         this.dbConnection = KoneksiDatabase.getInstance();
         initComponents();
         setLocationRelativeTo(null);
+        tampilkanRiwayat();
     }
     
     void getAdminBio(String nama, int id){
         this.idAdminS = id;
         this.namaAdmins = nama;
+    }
+    
+    void tampilkanRiwayat(){
+        this.modelTabelRiwayat = (DefaultTableModel) tabelRiwayat.getModel();
+        try{
+            Statement st1 = this.dbConnection.getConnection().createStatement();
+            String query1 = String.format("select * from tabel_riwayat_pembelian;");
+            ResultSet rs1 = st1.executeQuery(query1);
+            while(rs1.next()){
+                System.out.println("HARIDWA");
+                this.modelTabelRiwayat.addRow(new Object[]{rs1.getString(1),rs1.getString(2),rs1.getString(3),rs1.getString(7),rs1.getString(6),rs1.getString(4),rs1.getString(5),rs1.getString(1),rs1.getString(9),rs1.getString(10)});
+            }
+            
+            int totalPenghasilan = 0;
+            for(int i = 0; i < tabelRiwayat.getRowCount(); i++){
+                totalPenghasilan += Integer.parseInt((String) tabelRiwayat.getValueAt(i, 8));
+            }
+            
+            if(totalPenghasilan == 0){
+                this.showTotal.setText("Rp0");
+            }else{
+                this.showTotal.setText("Rp"+df.format(totalPenghasilan));
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
     }
     
 
@@ -31,7 +66,7 @@ public class RiwayatPembelian extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabelRiwayat = new javax.swing.JTable();
         Hapus = new javax.swing.JButton();
         labelTotal = new javax.swing.JLabel();
         showTotal = new javax.swing.JLabel();
@@ -43,14 +78,14 @@ public class RiwayatPembelian extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(71, 73, 115));
 
-        jTable1.setBackground(new java.awt.Color(166, 156, 172));
-        jTable1.setForeground(new java.awt.Color(22, 27, 51));
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabelRiwayat.setBackground(new java.awt.Color(166, 156, 172));
+        tabelRiwayat.setForeground(new java.awt.Color(22, 27, 51));
+        tabelRiwayat.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "ID Transaksi", "ID Admin", "ID Member", "Waktu Transaksi", "Tanggal Transaksi", "Nama Barang", "ID Barang", "Jumlah Barang", "Total Harga", "Nominal"
+                "ID Transaksi", "ID Admin", "ID Member", "ID Barang", "Nama Barang", "Waktu Transaksi", "Tanggal Transaksi", "Jumlah Barang", "Total Harga", "Nominal"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -61,19 +96,24 @@ public class RiwayatPembelian extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jTable1.getTableHeader().setReorderingAllowed(false);
-        jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setResizable(false);
-            jTable1.getColumnModel().getColumn(1).setResizable(false);
-            jTable1.getColumnModel().getColumn(2).setResizable(false);
-            jTable1.getColumnModel().getColumn(3).setResizable(false);
-            jTable1.getColumnModel().getColumn(4).setResizable(false);
-            jTable1.getColumnModel().getColumn(5).setResizable(false);
-            jTable1.getColumnModel().getColumn(6).setResizable(false);
-            jTable1.getColumnModel().getColumn(7).setResizable(false);
-            jTable1.getColumnModel().getColumn(8).setResizable(false);
-            jTable1.getColumnModel().getColumn(9).setResizable(false);
+        tabelRiwayat.getTableHeader().setReorderingAllowed(false);
+        tabelRiwayat.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabelRiwayatMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tabelRiwayat);
+        if (tabelRiwayat.getColumnModel().getColumnCount() > 0) {
+            tabelRiwayat.getColumnModel().getColumn(0).setResizable(false);
+            tabelRiwayat.getColumnModel().getColumn(1).setResizable(false);
+            tabelRiwayat.getColumnModel().getColumn(2).setResizable(false);
+            tabelRiwayat.getColumnModel().getColumn(3).setResizable(false);
+            tabelRiwayat.getColumnModel().getColumn(4).setResizable(false);
+            tabelRiwayat.getColumnModel().getColumn(5).setResizable(false);
+            tabelRiwayat.getColumnModel().getColumn(6).setResizable(false);
+            tabelRiwayat.getColumnModel().getColumn(7).setResizable(false);
+            tabelRiwayat.getColumnModel().getColumn(8).setResizable(false);
+            tabelRiwayat.getColumnModel().getColumn(9).setResizable(false);
         }
 
         Hapus.setBackground(new java.awt.Color(241, 218, 196));
@@ -84,13 +124,12 @@ public class RiwayatPembelian extends javax.swing.JFrame {
             }
         });
 
-        labelTotal.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        labelTotal.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
         labelTotal.setForeground(new java.awt.Color(241, 218, 196));
         labelTotal.setText("Total Penjualan");
 
-        showTotal.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        showTotal.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
         showTotal.setForeground(new java.awt.Color(241, 218, 196));
-        showTotal.setText("jLabel3");
 
         butKembali.setBackground(new java.awt.Color(241, 218, 196));
         butKembali.setText("Kembali");
@@ -120,10 +159,10 @@ public class RiwayatPembelian extends javax.swing.JFrame {
                                 .addComponent(butKembali, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(Hapus, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(32, 32, 32)
-                                .addComponent(labelTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(48, 48, 48)
-                                .addComponent(showTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(35, 35, 35)
+                                .addComponent(labelTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(showTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1358, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(65, Short.MAX_VALUE))
         );
@@ -161,6 +200,21 @@ public class RiwayatPembelian extends javax.swing.JFrame {
 
     private void HapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HapusActionPerformed
         // TODO add your handling code here:
+        if(this.baris == null){
+            JOptionPane.showMessageDialog(this, "Tidak ada baris yang dipilih!");
+        }else{
+            try{
+                String getID = (String) tabelRiwayat.getValueAt(this.baris, 0);
+                Statement st1 = dbConnection.getConnection().createStatement();
+                String query1 = String.format("delete from tabel_riwayat_pembelian where id_transaksi= \"%s\";", getID);
+                st1.executeUpdate(query1);
+            }catch(SQLException e){
+                e.printStackTrace();
+            }
+            this.modelTabelRiwayat.removeRow(this.baris);
+            this.baris = null;
+            JOptionPane.showMessageDialog(this, "Data berhasil dihapus!"); 
+        }
     }//GEN-LAST:event_HapusActionPerformed
 
     private void butKembaliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butKembaliActionPerformed
@@ -169,6 +223,11 @@ public class RiwayatPembelian extends javax.swing.JFrame {
         exitMember.setVisible(true);
         this.dispose(); 
     }//GEN-LAST:event_butKembaliActionPerformed
+
+    private void tabelRiwayatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelRiwayatMouseClicked
+        // TODO add your handling code here:
+        this.baris = tabelRiwayat.getSelectedRow();
+    }//GEN-LAST:event_tabelRiwayatMouseClicked
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -177,8 +236,8 @@ public class RiwayatPembelian extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel labelTotal;
     private javax.swing.JLabel showTotal;
+    private javax.swing.JTable tabelRiwayat;
     // End of variables declaration//GEN-END:variables
 }

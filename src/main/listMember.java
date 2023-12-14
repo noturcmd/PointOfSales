@@ -142,7 +142,6 @@ public class listMember extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(241, 218, 196));
         jLabel1.setText("No HP :");
 
-        ubahNoHP.setEditable(false);
         ubahNoHP.setBackground(new java.awt.Color(166, 156, 172));
         ubahNoHP.setFont(new java.awt.Font("Segoe UI Black", 0, 24)); // NOI18N
         ubahNoHP.setForeground(new java.awt.Color(22, 27, 51));
@@ -158,6 +157,9 @@ public class listMember extends javax.swing.JFrame {
             }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 ubahNoHPKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                ubahNoHPKeyTyped(evt);
             }
         });
 
@@ -247,8 +249,7 @@ public class listMember extends javax.swing.JFrame {
             }
             this.forMember.removeRow(this.baris);
             this.baris = null;
-            JOptionPane.showMessageDialog(this, "Data berhasil dihapus!");
-            
+            JOptionPane.showMessageDialog(this, "Data berhasil dihapus!"); 
         }
     }//GEN-LAST:event_tombolhapusActionPerformed
 
@@ -295,9 +296,13 @@ public class listMember extends javax.swing.JFrame {
 
     private void ubahNoHPKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ubahNoHPKeyReleased
         // TODO add your handling code here:
-        this.tabelMember.setValueAt(this.ubahNoHP.getText(), this.baris, 2);
         
     }//GEN-LAST:event_ubahNoHPKeyReleased
+
+    private void ubahNoHPKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ubahNoHPKeyTyped
+        // TODO add your handling code here:
+        this.tabelMember.setValueAt(this.ubahNoHP.getText(), this.baris, 2);
+    }//GEN-LAST:event_ubahNoHPKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

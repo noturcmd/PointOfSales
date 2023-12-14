@@ -22,7 +22,7 @@ public class Pembayaran extends javax.swing.JFrame {
     int totalHargaSemua;
     int idAdminS;
     int idMemberS;
-    int idBarangs;
+    String idBarangs;
     int jumlahBeliBarang;
     Integer baris;
     
@@ -88,13 +88,13 @@ public class Pembayaran extends javax.swing.JFrame {
                 ResultSet rs1 = st1.executeQuery(query1);
                 if (rs1.next()) {
                     
-                    this.idBarangs = Integer.parseInt(rs1.getString("id_barang"));
+                    this.idBarangs = rs1.getString("id_barang");
                     int jumlahBaris = modelTblPbl.getRowCount();
                     int index = 0;
                     boolean idFound = false;
 
                     while (index < jumlahBaris) {
-                        if (Integer.parseInt((String) this.modelTblPbl.getValueAt(index, 0)) == Integer.parseInt(rs1.getString("id_barang"))) {
+                        if (this.modelTblPbl.getValueAt(index, 0).equals(rs1.getString("id_barang"))) {
                             System.out.println("Kondisi 11111");
                             String jumlah = String.valueOf(Integer.parseInt((String) this.modelTblPbl.getValueAt(index, 3)) + Integer.parseInt(this.jumlahBarangYangDibeli.getText()));
                             modelTblPbl.setValueAt(rs1.getString("id_barang"), index, 0);

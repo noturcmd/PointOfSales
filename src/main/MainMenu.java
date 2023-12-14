@@ -4,6 +4,7 @@
  */
 package main;
 
+import java.awt.Color;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -22,7 +23,7 @@ public class MainMenu extends javax.swing.JFrame {
         this.namaAdmins = nama;
         initComponents();
         setLocationRelativeTo(null);
-//        JOptionPane.showMessageDialog(this, "ID admin : " + this.idAdminS + ", Nama Admin : " + this.namaAdmins);
+//        buttonRiwayatTransaksi.setText("Riwayat \nTransaksi");
     }
 
     
@@ -43,7 +44,9 @@ public class MainMenu extends javax.swing.JFrame {
         panelMainMenu.setBackground(new java.awt.Color(241, 218, 196));
         panelMainMenu.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(71, 73, 115), 10, true));
 
-        buttonInputBarang.setBackground(new java.awt.Color(166, 156, 172));
+        buttonInputBarang.setBackground(new java.awt.Color(74, 65, 80));
+        buttonInputBarang.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
+        buttonInputBarang.setForeground(new java.awt.Color(241, 218, 196));
         buttonInputBarang.setText("Input Barang");
         buttonInputBarang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -53,7 +56,9 @@ public class MainMenu extends javax.swing.JFrame {
 
         logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Logo/Screenshot__241_-removebg-preview (2).png"))); // NOI18N
 
-        buttonMember.setBackground(new java.awt.Color(166, 156, 172));
+        buttonMember.setBackground(new java.awt.Color(74, 65, 80));
+        buttonMember.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
+        buttonMember.setForeground(new java.awt.Color(241, 218, 196));
         buttonMember.setText("Member");
         buttonMember.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -61,7 +66,9 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
 
-        buttonPembayaran.setBackground(new java.awt.Color(166, 156, 172));
+        buttonPembayaran.setBackground(new java.awt.Color(74, 65, 80));
+        buttonPembayaran.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
+        buttonPembayaran.setForeground(new java.awt.Color(241, 218, 196));
         buttonPembayaran.setText("Pembayaran");
         buttonPembayaran.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -69,7 +76,9 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
 
-        buttonRiwayatTransaksi.setBackground(new java.awt.Color(166, 156, 172));
+        buttonRiwayatTransaksi.setBackground(new java.awt.Color(74, 65, 80));
+        buttonRiwayatTransaksi.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
+        buttonRiwayatTransaksi.setForeground(new java.awt.Color(241, 218, 196));
         buttonRiwayatTransaksi.setText("Riwayat Transaksi");
         buttonRiwayatTransaksi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

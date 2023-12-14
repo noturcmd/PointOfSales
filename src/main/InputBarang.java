@@ -94,6 +94,7 @@ public class InputBarang extends javax.swing.JFrame {
         BrBarang = new javax.swing.JLabel();
         inpJumlah = new javax.swing.JTextField();
         JuBarang = new javax.swing.JLabel();
+        butReset = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -163,6 +164,7 @@ public class InputBarang extends javax.swing.JFrame {
         }
 
         butSimpan.setBackground(new java.awt.Color(241, 218, 196));
+        butSimpan.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         butSimpan.setText("Simpan");
         butSimpan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -171,6 +173,7 @@ public class InputBarang extends javax.swing.JFrame {
         });
 
         butUbah.setBackground(new java.awt.Color(241, 218, 196));
+        butUbah.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         butUbah.setText("Ubah");
         butUbah.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -179,6 +182,7 @@ public class InputBarang extends javax.swing.JFrame {
         });
 
         butHapus.setBackground(new java.awt.Color(241, 218, 196));
+        butHapus.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         butHapus.setText("Hapus");
         butHapus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -187,6 +191,7 @@ public class InputBarang extends javax.swing.JFrame {
         });
 
         butKembali.setBackground(new java.awt.Color(241, 218, 196));
+        butKembali.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         butKembali.setText("Kembali");
         butKembali.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -313,6 +318,15 @@ public class InputBarang extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        butReset.setBackground(new java.awt.Color(241, 218, 196));
+        butReset.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        butReset.setText("Reset");
+        butReset.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                butResetActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -323,10 +337,12 @@ public class InputBarang extends javax.swing.JFrame {
                 .addGap(27, 27, 27)
                 .addComponent(butSimpan)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(butReset, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(butHapus)
-                .addGap(66, 66, 66)
+                .addGap(18, 18, 18)
                 .addComponent(butUbah)
-                .addGap(68, 68, 68))
+                .addGap(116, 116, 116))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(447, 447, 447)
                 .addComponent(jLabel1)
@@ -364,17 +380,13 @@ public class InputBarang extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(butHapus)
-                            .addComponent(butUbah)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(butKembali)
-                            .addComponent(butSimpan))))
+                .addGap(24, 24, 24)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(butKembali)
+                    .addComponent(butSimpan)
+                    .addComponent(butReset)
+                    .addComponent(butHapus)
+                    .addComponent(butUbah))
                 .addContainerGap(22, Short.MAX_VALUE))
         );
 
@@ -532,6 +544,7 @@ public class InputBarang extends javax.swing.JFrame {
     private void viaIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viaIDActionPerformed
         // TODO add your handling code here:
         if(this.viaID.isSelected()){
+            this.ID.setVisible(true);
             this.inpBarang.setVisible(false);
             this.inpBrand.setVisible(false);
             this.inpID.setVisible(true);
@@ -610,6 +623,22 @@ public class InputBarang extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_viaAllActionPerformed
 
+    private void butResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butResetActionPerformed
+        // TODO add your handling code here:
+        this.inpBarang.setText("");
+        this.inpBrand.setText("");
+        this.inpID.setText("");
+        this.inpHarga.setText("");
+        this.inpJumlah.setText("");
+        this.inpKategori.setText("");
+        this.Barang.setVisible(true);
+        this.JuBarang.setVisible(true);
+        this.kategori.setVisible(true);
+        this.HaBarang.setVisible(true);
+        this.BrBarang.setVisible(true);
+        this.ID.setVisible(true);
+    }//GEN-LAST:event_butResetActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Barang;
@@ -619,6 +648,7 @@ public class InputBarang extends javax.swing.JFrame {
     private javax.swing.JLabel JuBarang;
     private javax.swing.JButton butHapus;
     private javax.swing.JButton butKembali;
+    private javax.swing.JButton butReset;
     private javax.swing.JButton butSimpan;
     private javax.swing.JButton butUbah;
     private javax.swing.JRadioButton exceptID;
