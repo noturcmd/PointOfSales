@@ -223,6 +223,11 @@ public class InputBarang extends javax.swing.JFrame {
         inpID.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
         inpID.setForeground(new java.awt.Color(166, 156, 172));
         inpID.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(170, 165, 159)));
+        inpID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inpIDActionPerformed(evt);
+            }
+        });
 
         ID.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
         ID.setForeground(new java.awt.Color(166, 156, 172));
@@ -491,13 +496,6 @@ public class InputBarang extends javax.swing.JFrame {
             }else if(this.exceptID.isSelected()){
                 this.inpID.setVisible(false);
                 try{
-                Statement st1 = this.dbConnection.getConnection().createStatement();
-                String query1 = String.format("select id_barang from tabel_barang where id_barang = \"%s\";", this.inpID.getText());
-                ResultSet rs1 = st1.executeQuery(query1);
-                if(rs1.next()){
-                    JOptionPane.showMessageDialog(this, "Barang tersebut sudah ada!");
-                }else{
-                    try{
                         Statement st2 = this.dbConnection.getConnection().createStatement();
                         String query2 = String.format("update tabel_barang set nama_barang= \"%s\", brand_barang= \"%s\", kategori_barang= \"%s\", jumlah_barang= \"%s\", harga_barang= \"%s\" where id_barang= \"%s\";",this.inpBarang.getText(), this.inpBrand.getText(), this.inpKategori.getText(), this.inpJumlah.getText(), this.inpHarga.getText(), this.tabelBarang.getValueAt(this.baris, 0));
                         st2.executeUpdate(query2);
@@ -506,13 +504,9 @@ public class InputBarang extends javax.swing.JFrame {
                         tampilkanDataBarang();
                         this.resetInput();
                         this.baris = null;
-                        }catch(SQLException e){
-                            e.printStackTrace();
-                        }
-                    }
                 }catch(SQLException e){
                     e.printStackTrace();
-                }
+                }  
             }else if(this.viaAll.isSelected()){
                 try{
                 Statement st1 = this.dbConnection.getConnection().createStatement();
@@ -638,6 +632,10 @@ public class InputBarang extends javax.swing.JFrame {
         this.BrBarang.setVisible(true);
         this.ID.setVisible(true);
     }//GEN-LAST:event_butResetActionPerformed
+
+    private void inpIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inpIDActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_inpIDActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
