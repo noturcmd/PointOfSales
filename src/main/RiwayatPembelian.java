@@ -35,12 +35,13 @@ public class RiwayatPembelian extends javax.swing.JFrame {
     
     void tampilkanRiwayat(){
         this.modelTabelRiwayat = (DefaultTableModel) tabelRiwayat.getModel();
+        this.modelTabelRiwayat.setRowCount(0);
         try{
             Statement st1 = this.dbConnection.getConnection().createStatement();
             String query1 = String.format("select * from tabel_riwayat_pembelian;");
             ResultSet rs1 = st1.executeQuery(query1);
             while(rs1.next()){
-                System.out.println("HARIDWA");
+//                System.out.println("HARIDWA");
                 this.modelTabelRiwayat.addRow(new Object[]{rs1.getString(1),rs1.getString(2),rs1.getString(3),rs1.getString(7),rs1.getString(6),rs1.getString(4),rs1.getString(5),rs1.getString(8),rs1.getString(9),rs1.getString(10)});
             }
             
@@ -208,10 +209,10 @@ public class RiwayatPembelian extends javax.swing.JFrame {
                 Statement st1 = dbConnection.getConnection().createStatement();
                 String query1 = String.format("delete from tabel_riwayat_pembelian where id_transaksi= \"%s\";", getID);
                 st1.executeUpdate(query1);
+                tampilkanRiwayat();
             }catch(SQLException e){
                 e.printStackTrace();
             }
-            this.modelTabelRiwayat.removeRow(this.baris);
             this.baris = null;
             JOptionPane.showMessageDialog(this, "Data berhasil dihapus!"); 
         }

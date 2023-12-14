@@ -84,6 +84,8 @@ public class Pembayaran extends javax.swing.JFrame {
         this.totalHargaKeseluruhan.setText("Rp 0");
         this.potonganDiskon.setText("Rp 0");
         this.hargaAkhir.setText("Rp 0");
+        this.baris2 = null;
+        this.baris = null;
     }
     
     void tambahBarang(){
@@ -95,89 +97,101 @@ public class Pembayaran extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Mohon input jumlah yang valid!");
         }else if(this.jumlahBarangYangDibeli.getText().matches("\\d*") && Integer.parseInt(this.jumlahBarangYangDibeli.getText()) > 0){
 //            JOptionPane.showMessageDialog(rootPane, "Masuk ke Anuuuuu");
-            try {
-                this.namaBarangs = (String) this.tabelDataBarang.getValueAt(this.baris2, 1);
-                this.jumlahBeliBarang += Integer.parseInt(this.jumlahBarangYangDibeli.getText());
-                Statement st1 = dbConnection.getConnection().createStatement();
-                String query1 = String.format("SELECT * FROM tabel_barang WHERE nama_barang = \"%s\";", this.namaBarangs);
-//                JOptionPane.showMessageDialog(rootPane, this.namaBarangs);
-                ResultSet rs1 = st1.executeQuery(query1);
-                if (rs1.next()) {
-                    
-                    this.idBarangs = rs1.getString("id_barang");
-                    int jumlahBaris = modelTblPbl.getRowCount();
-                    int index = 0;
-                    boolean idFound = false;
+            if(this.baris2 == null){
+                JOptionPane.showMessageDialog(rootPane, "Mohon memilih barang!");
+            }else{
+                    try {
+                        Statement st2 = dbConnection.getConnection().createStatement();
+                        String query2 = String.format("select jumlah_barang from tabel_barang where id_barang = \"%s\";", this.tabelDataBarang.getValueAt(this.baris2, 0));
+                        ResultSet rs2 = st2.executeQuery(query2);
+                        if(rs2.next()){
+                        int sisaBarang = Integer.parseInt(rs2.getString("jumlah_barang"));
+                        if(sisaBarang - Integer.parseInt(this.jumlahBarangYangDibeli.getText()) <= 0){
+                            JOptionPane.showMessageDialog(this, "Jumlah barang yang akan dibeli tidak pas dengan stok yang tersedia!");
+                        }else{
+                            this.namaBarangs = (String) this.tabelDataBarang.getValueAt(this.baris2, 1);
+                        this.jumlahBeliBarang += Integer.parseInt(this.jumlahBarangYangDibeli.getText());
+                        Statement st1 = dbConnection.getConnection().createStatement();
+                        String query1 = String.format("SELECT * FROM tabel_barang WHERE nama_barang = \"%s\";", this.namaBarangs);
+        
+                        ResultSet rs1 = st1.executeQuery(query1);
+                        if (rs1.next()) {
 
-                    while (index < jumlahBaris) {
-                        if (this.modelTblPbl.getValueAt(index, 0).equals(rs1.getString("id_barang"))) {
-                            System.out.println("Kondisi 11111");
-//                            JOptionPane.showMessageDialog(rootPane, this.namaBarangs);
-                            String jumlah = String.valueOf(Integer.parseInt((String) this.modelTblPbl.getValueAt(index, 4)) + Integer.parseInt(this.jumlahBarangYangDibeli.getText()));
-                            modelTblPbl.setValueAt(rs1.getString("id_barang"), index, 0);
-                            modelTblPbl.setValueAt(this.namaBarangs, index, 1);
-                            modelTblPbl.setValueAt(rs1.getString("kategori_barang"), index, 2);
-                            modelTblPbl.setValueAt(rs1.getString("brand_barang"), index, 3);
-                            modelTblPbl.setValueAt(jumlah, index, 4);
-                            int harga123 = Integer.parseInt(String.valueOf(modelTblPbl.getValueAt(index, 4))) * Integer.parseInt(rs1.getString("harga_barang"));
-                            modelTblPbl.setValueAt(df.format(harga123), index, 5);
-                            idFound = true;
-                            break;
+                            this.idBarangs = rs1.getString("id_barang");
+                            int jumlahBaris = modelTblPbl.getRowCount();
+                            int index = 0;
+                            boolean idFound = false;
+
+                            while (index < jumlahBaris) {
+                                if (this.modelTblPbl.getValueAt(index, 0).equals(rs1.getString("id_barang"))) {
+                                    System.out.println("Kondisi 11111");
+        
+                                    String jumlah = String.valueOf(Integer.parseInt((String) this.modelTblPbl.getValueAt(index, 4)) + Integer.parseInt(this.jumlahBarangYangDibeli.getText()));
+                                    modelTblPbl.setValueAt(rs1.getString("id_barang"), index, 0);
+                                    modelTblPbl.setValueAt(this.namaBarangs, index, 1);
+                                    modelTblPbl.setValueAt(rs1.getString("kategori_barang"), index, 2);
+                                    modelTblPbl.setValueAt(rs1.getString("brand_barang"), index, 3);
+                                    modelTblPbl.setValueAt(jumlah, index, 4);
+                                    int harga123 = Integer.parseInt(String.valueOf(modelTblPbl.getValueAt(index, 4))) * Integer.parseInt(rs1.getString("harga_barang"));
+                                    modelTblPbl.setValueAt(df.format(harga123), index, 5);
+                                    idFound = true;
+                                    break;
+                                }
+                                index++;
+                            }
+
+                            if (!idFound) {
+        //                        JOptionPane.showMessageDialog(rootPane, this.namaBarangs);
+                                this.namaBarangs = (String) this.tabelDataBarang.getValueAt(this.baris2, 1);
+                                modelTblPbl.addRow(new Object[]{rs1.getString("id_barang"), this.namaBarangs, rs1.getString("kategori_barang"), rs1.getString("brand_barang"),this.jumlahBarangYangDibeli.getText(), df.format(Integer.parseInt(rs1.getString("harga_barang")) * Integer.parseInt(this.jumlahBarangYangDibeli.getText()))});
+                            }
+                            int getHargaTable = 0;
+                            ArrayList<String> harga1 = new ArrayList<String>();
+                            for(int i = 0; i < modelTblPbl.getRowCount(); i++){
+                                String getHarga = "";
+                                String[] harga = (String[]) String.valueOf(modelTblPbl.getValueAt(i, 5)).split(",");
+                                for(String harga10: harga){
+                                    getHarga += harga10;
+                                }
+                                harga1.add(getHarga);
+                            }
+                            for(String hargaalll : harga1){
+                                getHargaTable += Integer.parseInt(hargaalll);
+                            }
+                            this.totalHargaKeseluruhan.setText("Rp" + df.format(getHargaTable));
+                            this.hargaAkhir.setText("Rp" + df.format(getHargaTable));
                         }
-                        index++;
-                    }
-                    
-                    if (!idFound) {
-//                        JOptionPane.showMessageDialog(rootPane, this.namaBarangs);
-                        this.namaBarangs = (String) this.tabelDataBarang.getValueAt(this.baris2, 1);
-                        modelTblPbl.addRow(new Object[]{rs1.getString("id_barang"), this.namaBarangs, rs1.getString("kategori_barang"), rs1.getString("brand_barang"),this.jumlahBarangYangDibeli.getText(), df.format(Integer.parseInt(rs1.getString("harga_barang")) * Integer.parseInt(this.jumlahBarangYangDibeli.getText()))});
-                    }
-                    int getHargaTable = 0;
-                    ArrayList<String> harga1 = new ArrayList<String>();
-                    for(int i = 0; i < modelTblPbl.getRowCount(); i++){
-                        String getHarga = "";
-                        String[] harga = (String[]) String.valueOf(modelTblPbl.getValueAt(i, 5)).split(",");
-                        for(String harga10: harga){
-                            getHarga += harga10;
+
+                        if(this.tabelPembelianBarang.getRowCount() > 0){
+                            ArrayList<String> harga1 = new ArrayList<String>();
+                            String harga4 = "";
+                            String[] diskonAll = this.totalHargaKeseluruhan.getText().split("Rp");
+                            for(String hahaha: diskonAll){
+                                System.out.println("harga haha: " +  hahaha);
+                            }
+
+                            String[] splittt = diskonAll[1].split(",");
+                            for(String trusss: splittt){
+                                harga4 += trusss;
+                            }
+
+                            this.totalHargaSemua = Integer.parseInt(harga4);
+
+
+                            if(this.statusMember.getText().equals("Member")){
+                                int diskonPotong = (int)(0.1 * Integer.parseInt(harga4));
+                                this.potonganDiskon.setText("Rp" + df.format(diskonPotong));
+                                int hargaAfterDiskon = Integer.parseInt(harga4) - diskonPotong;
+                                this.hargaAkhir.setText("Rp" + df.format(hargaAfterDiskon));
+                                this.totalHargaSemua = hargaAfterDiskon;
+                            }       
                         }
-                        harga1.add(getHarga);
+                      }
                     }
-                    for(String hargaalll : harga1){
-                        getHargaTable += Integer.parseInt(hargaalll);
-                    }
-                    this.totalHargaKeseluruhan.setText("Rp" + df.format(getHargaTable));
-                    this.hargaAkhir.setText("Rp" + df.format(getHargaTable));
+                    
+                } catch (SQLException e) {
+                    e.printStackTrace();
                 }
-                
-                if(this.tabelPembelianBarang.getRowCount() > 0){
-                    ArrayList<String> harga1 = new ArrayList<String>();
-                    String harga4 = "";
-                    String[] diskonAll = this.totalHargaKeseluruhan.getText().split("Rp");
-                    for(String hahaha: diskonAll){
-                        System.out.println("harga haha: " +  hahaha);
-                    }
-                    
-                    String[] splittt = diskonAll[1].split(",");
-                    for(String trusss: splittt){
-                        harga4 += trusss;
-                    }
-                    
-                    this.totalHargaSemua = Integer.parseInt(harga4);
-                    
-                    
-                    if(this.statusMember.getText().equals("Member")){
-                        int diskonPotong = (int)(0.1 * Integer.parseInt(harga4));
-                        this.potonganDiskon.setText("Rp" + df.format(diskonPotong));
-                        int hargaAfterDiskon = Integer.parseInt(harga4) - diskonPotong;
-                        this.hargaAkhir.setText("Rp" + df.format(hargaAfterDiskon));
-                        this.totalHargaSemua = hargaAfterDiskon;
-                    }       
-                }
-                
-                
-                
-            } catch (SQLException e) {
-                e.printStackTrace();
             }
 
         }
@@ -789,7 +803,7 @@ public class Pembayaran extends javax.swing.JFrame {
     private void tombolBayarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tombolBayarActionPerformed
         // TODO add your handling code here:
         if(this.totalHargaSemua <= 0){
-            JOptionPane.showConfirmDialog(this, "Barang belum diinput!");
+            JOptionPane.showMessageDialog(this, "Barang belum diinput!");
         }else{
             if(this.inputPembayaran.getText().isBlank()){
                 JOptionPane.showMessageDialog(this, "Mohon tidak mengosongkan input pembayaran!");
@@ -929,7 +943,7 @@ public class Pembayaran extends javax.swing.JFrame {
                                     st1.executeUpdate(queryUpdate2);
 //                                    this.stokBarang.setText(rs4.getString("jumlah_barang"));
                                 }
-                                JOptionPane.showMessageDialog(this, "Jumlah barang yang dibeli : " + this.jumlahBeliBarang);
+//                                JOptionPane.showMessageDialog(this, "Jumlah barang yang dibeli : " + this.jumlahBeliBarang);
                                 JOptionPane.showMessageDialog(this, "Pembayaran berhasil!");
                                 resetAll();
                                 this.inputPembayaran.setText("");
