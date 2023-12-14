@@ -29,7 +29,7 @@ public class Pembayaran extends javax.swing.JFrame {
     Integer baris;
     Integer baris2;
     
-    Integer pointMember;
+//    Integer pointMember;
     
     public Pembayaran(){
         initComponents();
@@ -820,7 +820,8 @@ public class Pembayaran extends javax.swing.JFrame {
                                         this.hargaAkhir.setText("Rp" + String.valueOf(df.format(this.totalHargaSemua)));
                                     }else{
                                         this.potonganDiskon.setText("Rp" + df.format(diskon));
-                                        this.hargaAkhir.setText("Rp" + String.valueOf(df.format(this.totalHargaSemua - diskon)));
+                                        JOptionPane.showMessageDialog(rootPane, "Harga All terakhir : " + this.totalHargaSemua);
+                                        this.hargaAkhir.setText("Rp" + String.valueOf(df.format(this.totalHargaSemua)));
                                     }
                                 }
                 }
@@ -921,7 +922,7 @@ public class Pembayaran extends javax.swing.JFrame {
                                 String query1 = String.format("insert into tabel_riwayat_pembelian(id_admin, id_member, waktu_transaksi, tanggal_transaksi, id_barang, jumlah_beli_barang, total_harga, pembayaran, nama_barang) values(\"%s\",\"%s\", curtime(), curdate(), \"%s\", \"%s\", \"%s\", \"%s\", \"%s\");", this.idAdminS, this.idMemberS, this.idBarangs, jumlahPCS, this.totalHargaSemua, Integer.parseInt(this.inputPembayaran.getText()), namaBarang2);
                                 st1.executeUpdate(query1);
 //                                JOptionPane.showMessageDialog(rootPane, "Jumlah PCS : " + jumlahPCS);
-//                                int pointMember = (int) (0.2 * this.totalHargaSemua);
+                                int pointMember = (int) (0.2 * this.totalHargaSemua);
 //                                JOptionPane.showMessageDialog(rootPane, "PointMember : " + pointMember);
                                 Statement st2 = dbConnection.getConnection().createStatement();
                                 String query2 = String.format("Select point_member from tabel_member where id_member = \"%s\";", this.idMemberS);
@@ -931,10 +932,17 @@ public class Pembayaran extends javax.swing.JFrame {
                                 ResultSet rs4 = st4.executeQuery(query4);
                                 if(rs2.next()){
                                     if(Integer.parseInt(rs2.getString("point_member")) > 0){
-                                        Statement st3 = dbConnection.getConnection().createStatement();
-                                        String queryUpdate = String.format("update tabel_member set point_member = \"%s\" where id_member = \"%s\";", Integer.parseInt(rs2.getString("point_member")) - 4000  + pointMember, this.idMemberS);
-                                        st3.executeUpdate(queryUpdate);
-                                        ResultSet rs1 = st3.executeQuery(query4);
+                                        if(Integer.parseInt(rs2.getString("point_member")) >= 4000){
+                                            Statement st3 = dbConnection.getConnection().createStatement();
+                                            String queryUpdate = String.format("update tabel_member set point_member = \"%s\" where id_member = \"%s\";", Integer.parseInt(rs2.getString("point_member")) - 4000  + pointMember, this.idMemberS);
+                                            st3.executeUpdate(queryUpdate);
+                                            ResultSet rs1 = st3.executeQuery(query4);
+                                        }else{
+                                            Statement st3 = dbConnection.getConnection().createStatement();
+                                            String queryUpdate = String.format("update tabel_member set point_member = \"%s\" where id_member = \"%s\";", Integer.parseInt(rs2.getString("point_member")) + pointMember, this.idMemberS);
+                                            st3.executeUpdate(queryUpdate);
+                                            ResultSet rs1 = st3.executeQuery(query4);
+                                        }
                                         
                                         
                                         if(rs4.next()){
@@ -1088,9 +1096,17 @@ public class Pembayaran extends javax.swing.JFrame {
                                 int jumlahBaris = tabelPembelianBarang.getRowCount();
                                 if(rs2.next()){
                                     if(Integer.parseInt(rs2.getString("point_member")) > 0){
-                                        Statement st3 = dbConnection.getConnection().createStatement();
-                                        String queryUpdate = String.format("update tabel_member set point_member = \"%s\" where id_member = \"%s\";", Integer.parseInt(rs2.getString("point_member")) - 4000  + pointMember, this.idMemberS);
-                                        st3.executeUpdate(queryUpdate);
+                                        if(Integer.parseInt(rs2.getString("point_member")) >= 4000){
+                                            Statement st3 = dbConnection.getConnection().createStatement();
+                                            String queryUpdate = String.format("update tabel_member set point_member = \"%s\" where id_member = \"%s\";", Integer.parseInt(rs2.getString("point_member")) - 4000  + pointMember, this.idMemberS);
+                                            st3.executeUpdate(queryUpdate);
+                                            ResultSet rs1 = st3.executeQuery(query4);
+                                        }else{
+                                            Statement st3 = dbConnection.getConnection().createStatement();
+                                            String queryUpdate = String.format("update tabel_member set point_member = \"%s\" where id_member = \"%s\";", Integer.parseInt(rs2.getString("point_member")) + pointMember, this.idMemberS);
+                                            st3.executeUpdate(queryUpdate);
+                                            ResultSet rs1 = st3.executeQuery(query4);
+                                        }
                                         if(rs4.next()){
                                         for(int i = 0; i < idBaru.size(); i++){
                                             try (
