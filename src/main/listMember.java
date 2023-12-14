@@ -44,6 +44,8 @@ public class listMember extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelMember = new javax.swing.JTable();
         tombolkeluar = new javax.swing.JButton();
@@ -54,8 +56,18 @@ public class listMember extends javax.swing.JFrame {
         ubahNoHP = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(204, 204, 204));
         setResizable(false);
 
+        jPanel1.setBackground(new java.awt.Color(166, 156, 172));
+        jPanel1.setPreferredSize(new java.awt.Dimension(964, 412));
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI Black", 0, 24)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(241, 218, 196));
+        jLabel2.setText("Member ATK ");
+
+        tabelMember.setBackground(new java.awt.Color(71, 73, 115));
+        tabelMember.setForeground(new java.awt.Color(241, 218, 196));
         tabelMember.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -72,6 +84,7 @@ public class listMember extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tabelMember.setGridColor(new java.awt.Color(241, 218, 196));
         tabelMember.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tabelMemberMouseClicked(evt);
@@ -85,6 +98,8 @@ public class listMember extends javax.swing.JFrame {
             tabelMember.getColumnModel().getColumn(3).setResizable(false);
         }
 
+        tombolkeluar.setBackground(new java.awt.Color(241, 218, 196));
+        tombolkeluar.setForeground(new java.awt.Color(13, 12, 29));
         tombolkeluar.setText("Kembali");
         tombolkeluar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -92,6 +107,8 @@ public class listMember extends javax.swing.JFrame {
             }
         });
 
+        tombolhapus.setBackground(new java.awt.Color(241, 218, 196));
+        tombolhapus.setForeground(new java.awt.Color(13, 12, 29));
         tombolhapus.setText("Hapus");
         tombolhapus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -99,6 +116,8 @@ public class listMember extends javax.swing.JFrame {
             }
         });
 
+        tomboldaftar.setBackground(new java.awt.Color(241, 218, 196));
+        tomboldaftar.setForeground(new java.awt.Color(13, 12, 29));
         tomboldaftar.setText("Daftar");
         tomboldaftar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -106,6 +125,8 @@ public class listMember extends javax.swing.JFrame {
             }
         });
 
+        butRefresh.setBackground(new java.awt.Color(241, 218, 196));
+        butRefresh.setForeground(new java.awt.Color(13, 12, 29));
         butRefresh.setText("Refresh");
         butRefresh.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -114,9 +135,14 @@ public class listMember extends javax.swing.JFrame {
         });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI Black", 0, 24)); // NOI18N
-        jLabel1.setText("No HP ");
+        jLabel1.setForeground(new java.awt.Color(241, 218, 196));
+        jLabel1.setText("No HP :");
 
+        ubahNoHP.setEditable(false);
+        ubahNoHP.setBackground(new java.awt.Color(166, 156, 172));
         ubahNoHP.setFont(new java.awt.Font("Segoe UI Black", 0, 24)); // NOI18N
+        ubahNoHP.setForeground(new java.awt.Color(22, 27, 51));
+        ubahNoHP.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 3, 0, new java.awt.Color(71, 73, 115)));
         ubahNoHP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ubahNoHPActionPerformed(evt);
@@ -131,45 +157,66 @@ public class listMember extends javax.swing.JFrame {
             }
         });
 
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 905, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(tombolkeluar)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(127, 127, 127)
+                                        .addComponent(jLabel1)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(ubahNoHP)
+                                        .addGap(59, 59, 59)))
+                                .addComponent(butRefresh)
+                                .addGap(18, 18, 18)
+                                .addComponent(tombolhapus, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(tomboldaftar))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(399, 399, 399)
+                        .addComponent(jLabel2)))
+                .addContainerGap(30, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ubahNoHP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1)
+                    .addComponent(tombolkeluar)
+                    .addComponent(butRefresh)
+                    .addComponent(tombolhapus)
+                    .addComponent(tomboldaftar))
+                .addGap(30, 30, 30))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(56, 56, 56)
-                .addComponent(tombolkeluar)
-                .addGap(43, 43, 43)
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(ubahNoHP, javax.swing.GroupLayout.DEFAULT_SIZE, 241, Short.MAX_VALUE)
-                .addGap(91, 91, 91)
-                .addComponent(butRefresh)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(tombolhapus, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(tomboldaftar)
-                .addGap(114, 114, 114))
-            .addComponent(jScrollPane1)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(tombolhapus)
-                            .addComponent(tombolkeluar)
-                            .addComponent(tomboldaftar)
-                            .addComponent(butRefresh))
-                        .addGap(0, 5, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(ubahNoHP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1))
-                        .addContainerGap())))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 418, Short.MAX_VALUE)
         );
 
         pack();
@@ -286,6 +333,8 @@ public class listMember extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton butRefresh;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tabelMember;
     private javax.swing.JButton tomboldaftar;

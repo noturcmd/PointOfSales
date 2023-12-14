@@ -44,6 +44,7 @@ public class MainMenu extends javax.swing.JFrame {
         panelMainMenu.setBackground(new java.awt.Color(241, 218, 196));
         panelMainMenu.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(71, 73, 115), 10, true));
 
+        buttonInputBarang.setBackground(new java.awt.Color(166, 156, 172));
         buttonInputBarang.setText("Input Barang");
         buttonInputBarang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -53,6 +54,7 @@ public class MainMenu extends javax.swing.JFrame {
 
         logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Logo/Screenshot__241_-removebg-preview (2).png"))); // NOI18N
 
+        buttonMember.setBackground(new java.awt.Color(166, 156, 172));
         buttonMember.setText("Member");
         buttonMember.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -60,6 +62,7 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
 
+        buttonPembayaran.setBackground(new java.awt.Color(166, 156, 172));
         buttonPembayaran.setText("Pembayaran");
         buttonPembayaran.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -67,6 +70,7 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
 
+        buttonRiwayatTransaksi.setBackground(new java.awt.Color(166, 156, 172));
         buttonRiwayatTransaksi.setText("Riwayat Transaksi");
         buttonRiwayatTransaksi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -139,7 +143,7 @@ public class MainMenu extends javax.swing.JFrame {
         Pembayaran mp = new Pembayaran();
         mp.getAdminBio(this.namaAdmins, this.idAdminS);
         mp.setVisible(true);
-        mp.setExtendedState(mp.getExtendedState() | JFrame.MAXIMIZED_BOTH);
+//        mp.setExtendedState(mp.getExtendedState() | JFrame.MAXIMIZED_BOTH);
     }//GEN-LAST:event_buttonPembayaranActionPerformed
 
     private void buttonRiwayatTransaksiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRiwayatTransaksiActionPerformed

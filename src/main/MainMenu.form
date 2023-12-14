@@ -100,6 +100,9 @@
       <SubComponents>
         <Component class="javax.swing.JButton" name="buttonInputBarang">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ac" green="9c" red="a6" type="rgb"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Input Barang"/>
           </Properties>
           <Events>
@@ -115,6 +118,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="buttonMember">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ac" green="9c" red="a6" type="rgb"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Member"/>
           </Properties>
           <Events>
@@ -123,6 +129,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="buttonPembayaran">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ac" green="9c" red="a6" type="rgb"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Pembayaran"/>
           </Properties>
           <Events>
@@ -131,6 +140,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="buttonRiwayatTransaksi">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ac" green="9c" red="a6" type="rgb"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Riwayat Transaksi"/>
           </Properties>
           <Events>
