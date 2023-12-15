@@ -1326,8 +1326,6 @@ public class Pembayaran extends javax.swing.JFrame {
                                             int jumlahBaris = tabelPembelianBarang.getRowCount();
 
                                             while (rs5.next()) {
-
-        //                                        for (int d = 0; d < jumlahBaris; d++) {
                                                     int jumlahBarangDatabase = rs5.getInt("jumlah_barang");
                                                     int jumlahBarangDibeli = Integer.parseInt(tabelPembelianBarang.getValueAt(i,4).toString());
         //                                            JOptionPane.showMessageDialog(this, "nama Barang : " + );
