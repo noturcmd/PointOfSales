@@ -53,19 +53,20 @@ public class RiwayatPembelian extends javax.swing.JFrame {
                 String[] getTotal = String.valueOf(this.tabelRiwayat.getValueAt(i, 8)).split(" - ");
                 String getTotal3 = "";
                 
-                for(String tes: getTotal){
-                    JOptionPane.showMessageDialog(this, "Pisah pisah penghasilan  :" + tes);
+                for(String tes23: getTotal){
                     
-                    String[] getTotal2 = tes.split(",");
-                    
+                    String[] getTotal2 = tes23.split(",");
+                    String getTotal4 = "";
+//                    JOptionPane.showMessageDialog(this, "Pisah pisah penghasilan  :" + tes23);
+//                    JOptionPane.showMessageDialog(this, "Contains  : " + tes23.contains(","));
                     for(String tes2 : getTotal2){
-                        if(Integer.parseInt(tes2) > 0){
-                            totalPenghasilan += Integer.parseInt(tes2);
-                        JOptionPane.showMessageDialog(this, "Total penghasilan  :" + totalPenghasilan);
-                        }
-//                        
+//                        JOptionPane.showMessageDialog(this, "Pisah pisah penghasilan 2 :" + tes2);
+                        getTotal4 += tes2;
                     }
+                    totalPenghasilan += Integer.parseInt(getTotal4);
+//                    JOptionPane.showMessageDialog(this, "Pisah pisah penghasilan 3 :" + getTotal3);
                 }
+//                totalPenghasilan += Integer.parseInt(getTotal3);
                 
             }
             
