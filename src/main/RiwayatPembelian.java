@@ -3,6 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package main;
+import java.awt.Color;
+import java.awt.event.KeyEvent;
 import java.sql.*;
 import java.text.DecimalFormat;
 import javax.swing.JOptionPane;
@@ -42,7 +44,7 @@ public class RiwayatPembelian extends javax.swing.JFrame {
             ResultSet rs1 = st1.executeQuery(query1);
             while(rs1.next()){
 //                System.out.println("HARIDWA");
-                this.modelTabelRiwayat.addRow(new Object[]{rs1.getString(1),rs1.getString(2),rs1.getString(3),rs1.getString(7),rs1.getString(6),rs1.getString(4),rs1.getString(5),rs1.getString(8),rs1.getString(9),rs1.getString(10)});
+                this.modelTabelRiwayat.addRow(new Object[]{rs1.getString(1),rs1.getString(2),rs1.getString(3),rs1.getString(7),rs1.getString(6),rs1.getString(4),rs1.getString(5),rs1.getString(8),rs1.getString(9),rs1.getString(10),rs1.getString(11),rs1.getString(12)});
             }
             
             int totalPenghasilan = 0;
@@ -65,6 +67,11 @@ public class RiwayatPembelian extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        dialogNota = new javax.swing.JDialog();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tabelNota = new javax.swing.JTable();
+        idTransaksiNota = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelRiwayat = new javax.swing.JTable();
@@ -73,6 +80,76 @@ public class RiwayatPembelian extends javax.swing.JFrame {
         showTotal = new javax.swing.JLabel();
         butKembali = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+
+        dialogNota.setBackground(new java.awt.Color(71, 73, 115));
+
+        tabelNota.setBackground(new java.awt.Color(166, 156, 172));
+        tabelNota.setForeground(new java.awt.Color(22, 27, 51));
+        tabelNota.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Nomor", "ID Admin", "ID Member", "ID Barang", "Nama Barang", "Waktu Transaksi", "Tanggal Transaksi", "Jumlah Barang", "Total Harga", "Nominal", "Kategori Barang", "Brand Barang"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tabelNota.getTableHeader().setReorderingAllowed(false);
+        jScrollPane2.setViewportView(tabelNota);
+        if (tabelNota.getColumnModel().getColumnCount() > 0) {
+            tabelNota.getColumnModel().getColumn(0).setResizable(false);
+            tabelNota.getColumnModel().getColumn(1).setResizable(false);
+            tabelNota.getColumnModel().getColumn(2).setResizable(false);
+            tabelNota.getColumnModel().getColumn(3).setResizable(false);
+            tabelNota.getColumnModel().getColumn(4).setResizable(false);
+            tabelNota.getColumnModel().getColumn(5).setResizable(false);
+            tabelNota.getColumnModel().getColumn(6).setResizable(false);
+            tabelNota.getColumnModel().getColumn(7).setResizable(false);
+            tabelNota.getColumnModel().getColumn(8).setResizable(false);
+            tabelNota.getColumnModel().getColumn(9).setResizable(false);
+            tabelNota.getColumnModel().getColumn(10).setResizable(false);
+            tabelNota.getColumnModel().getColumn(11).setResizable(false);
+        }
+
+        idTransaksiNota.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
+        idTransaksiNota.setText("ID Transaksi");
+
+        jLabel3.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
+        jLabel3.setText("ID Transaksi");
+
+        javax.swing.GroupLayout dialogNotaLayout = new javax.swing.GroupLayout(dialogNota.getContentPane());
+        dialogNota.getContentPane().setLayout(dialogNotaLayout);
+        dialogNotaLayout.setHorizontalGroup(
+            dialogNotaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dialogNotaLayout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(jScrollPane2)
+                .addContainerGap())
+            .addGroup(dialogNotaLayout.createSequentialGroup()
+                .addGap(584, 584, 584)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37)
+                .addComponent(idTransaksiNota, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(341, Short.MAX_VALUE))
+        );
+        dialogNotaLayout.setVerticalGroup(
+            dialogNotaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dialogNotaLayout.createSequentialGroup()
+                .addContainerGap(19, Short.MAX_VALUE)
+                .addGroup(dialogNotaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(idTransaksiNota)
+                    .addComponent(jLabel3))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(22, 22, 22))
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -86,11 +163,11 @@ public class RiwayatPembelian extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID Transaksi", "ID Admin", "ID Member", "ID Barang", "Nama Barang", "Waktu Transaksi", "Tanggal Transaksi", "Jumlah Barang", "Total Harga", "Nominal"
+                "ID Transaksi", "ID Admin", "ID Member", "ID Barang", "Nama Barang", "Waktu Transaksi", "Tanggal Transaksi", "Jumlah Barang", "Total Harga", "Nominal", "Kategori Barang", "Brand Barang"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -101,6 +178,11 @@ public class RiwayatPembelian extends javax.swing.JFrame {
         tabelRiwayat.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tabelRiwayatMouseClicked(evt);
+            }
+        });
+        tabelRiwayat.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tabelRiwayatKeyReleased(evt);
             }
         });
         jScrollPane1.setViewportView(tabelRiwayat);
@@ -115,6 +197,8 @@ public class RiwayatPembelian extends javax.swing.JFrame {
             tabelRiwayat.getColumnModel().getColumn(7).setResizable(false);
             tabelRiwayat.getColumnModel().getColumn(8).setResizable(false);
             tabelRiwayat.getColumnModel().getColumn(9).setResizable(false);
+            tabelRiwayat.getColumnModel().getColumn(10).setResizable(false);
+            tabelRiwayat.getColumnModel().getColumn(11).setResizable(false);
         }
 
         Hapus.setBackground(new java.awt.Color(241, 218, 196));
@@ -229,16 +313,44 @@ public class RiwayatPembelian extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.baris = tabelRiwayat.getSelectedRow();
     }//GEN-LAST:event_tabelRiwayatMouseClicked
+
+    private void tabelRiwayatKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tabelRiwayatKeyReleased
+        // TODO add your handling code here:
+        DefaultTableModel modelTabelNota = (DefaultTableModel) tabelNota.getModel();
+        modelTabelNota.setRowCount(0);
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            int selectedRow = tabelNota.getSelectedRow();
+            this.dialogNota.setVisible(true);
+            this.dialogNota.setSize(1500, 600);
+            this.dialogNota.getContentPane().setBackground(new Color(71,73,115));
+            this.dialogNota.setLocationRelativeTo(null);
+            this.dialogNota.setResizable(false);
+            String[] kategoriBarang = String.valueOf(this.tabelRiwayat.getValueAt(this.baris, 10)).split(" - ");
+            String[] brandBarang = String.valueOf(this.tabelRiwayat.getValueAt(this.baris, 11)).split(" - ");
+            this.idTransaksiNota.setText((String) this.tabelRiwayat.getValueAt(this.baris, 0));
+            
+            for(int i = 0; i < kategoriBarang.length; i++){
+                modelTabelNota.addRow(new Object[]{(i + 1), this.tabelRiwayat.getValueAt(this.baris, 1),this.tabelRiwayat.getValueAt(this.baris, 2),this.tabelRiwayat.getValueAt(this.baris, 3),this.tabelRiwayat.getValueAt(this.baris, 4),this.tabelRiwayat.getValueAt(this.baris, 5),this.tabelRiwayat.getValueAt(this.baris, 6),this.tabelRiwayat.getValueAt(this.baris, 7),this.tabelRiwayat.getValueAt(this.baris, 8),this.tabelRiwayat.getValueAt(this.baris, 9),kategoriBarang[i],brandBarang[i]});
+            }
+            
+            
+        }
+    }//GEN-LAST:event_tabelRiwayatKeyReleased
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Hapus;
     private javax.swing.JButton butKembali;
+    private javax.swing.JDialog dialogNota;
+    private javax.swing.JLabel idTransaksiNota;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel labelTotal;
     private javax.swing.JLabel showTotal;
+    private javax.swing.JTable tabelNota;
     private javax.swing.JTable tabelRiwayat;
     // End of variables declaration//GEN-END:variables
 }
