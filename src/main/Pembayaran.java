@@ -92,14 +92,16 @@ public class Pembayaran extends javax.swing.JFrame {
                     this.modelTblPbl.setValueAt(df.format(kalkulasiUlang), selectedRow, 5);
                     
                     Integer hitungUlang = 0;
-                    String tampungDulu = "";
+                    
                     for(int i = 0; i < this.tabelPembelianBarang.getRowCount(); i++){
+                        String tampungDulu = "";
                         String[] cekUp =  String.valueOf(this.tabelPembelianBarang.getValueAt(i, 5)).split(",");
                         for(String cek : cekUp){
                             tampungDulu += cek;
                             JOptionPane.showMessageDialog(this, "Capekk "+cek);
                         }
                         hitungUlang += Integer.parseInt(tampungDulu);
+                        
                     }
                     
 //                    JOptionPane.showMessageDialog(this, "Capekk "+hitungUlang);
