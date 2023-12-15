@@ -203,34 +203,37 @@ public class Pembayaran extends javax.swing.JFrame {
 
 
                             if(this.statusMember.getText().equals("Member")){
-                                int diskonPotong = (int)(0.1 * Integer.parseInt(harga4));
-                                this.potonganDiskon.setText("Rp" + df.format(diskonPotong));
-                                int hargaAfterDiskon = Integer.parseInt(harga4) - diskonPotong;
-                                this.totalHargaSemua = hargaAfterDiskon;
+                                
                                 JOptionPane.showMessageDialog(rootPane, "Harga all satu : " + totalHargaSemua);
                                 try{
                                 Statement rahasia = dbConnection.getConnection().createStatement();
                                 String rahasia2 = String.format("select point_member from tabel_member where id_member = \"%s\";", this.searchByID.getText());
                                 ResultSet rs3 = rahasia.executeQuery(rahasia2);
                                 if(rs3.next()){
-                                    if(Integer.parseInt(rs3.getString("point_member")) >= 4000){
-                                        int diskon2 = (int)(0.2 * this.totalHargaSemua);
-                                        JOptionPane.showMessageDialog(rootPane, "Besar diskon pertama : " + diskonPotong);
-                                        JOptionPane.showMessageDialog(rootPane, "Besar diskon kedua : " + diskon2);
-                                        this.totalHargaSemua = this.totalHargaSemua - diskon2;
-                                        JOptionPane.showMessageDialog(rootPane, "Harga All dua : " + this.totalHargaSemua);
-                                        this.potonganDiskon.setText("Rp" + df.format(diskonPotong + diskon2));
-                                        JOptionPane.showMessageDialog(rootPane, "Harga All terakhir : " + this.totalHargaSemua);
-                                        this.hargaAkhir.setText("Rp" + String.valueOf(df.format(this.totalHargaSemua)));
-                                    }else{
-                                        this.potonganDiskon.setText("Rp" + df.format(diskonPotong));
-                                        this.hargaAkhir.setText("Rp" + String.valueOf(df.format(this.totalHargaSemua - diskonPotong)));
+                                        if(Integer.parseInt(rs3.getString("point_member")) >= 4000){
+                                            int diskon2 = (int)(0.3 * this.totalHargaSemua);
+                                            JOptionPane.showMessageDialog(rootPane, "Besar diskon pertama : " + diskon2);
+                                            JOptionPane.showMessageDialog(rootPane, "Besar diskon kedua : " + diskon2);
+                                            this.totalHargaSemua = this.totalHargaSemua - diskon2;
+                                            JOptionPane.showMessageDialog(rootPane, "Harga All dua : " + this.totalHargaSemua);
+                                            this.potonganDiskon.setText("Rp" + df.format(diskon2));
+                                            JOptionPane.showMessageDialog(rootPane, "Harga All terakhir : " + this.totalHargaSemua);
+                                            this.hargaAkhir.setText("Rp" + String.valueOf(df.format(this.totalHargaSemua)));
+                                        }else{
+                                            int diskonPotong = (int)(0.1 * Integer.parseInt(harga4));
+                                            this.potonganDiskon.setText("Rp" + df.format(diskonPotong));
+                                            int hargaAfterDiskon = Integer.parseInt(harga4) - diskonPotong;
+                                            this.hargaAkhir.setText("Rp" + String.valueOf(df.format(this.totalHargaSemua - diskonPotong)));
+                                        }
                                     }
-                                }
-                    }catch(SQLException e){
-                        e.printStackTrace();
-                    }
-                            }       
+                                }catch(SQLException e){
+                                        e.printStackTrace();
+                                    }
+                            }else{
+                                this.potonganDiskon.setText("Rp" + df.format(this.totalHargaSemua));
+                                            this.potonganDiskon.setText("Rp" + df.format(0));
+                                            this.hargaAkhir.setText("Rp" + String.valueOf(df.format(this.totalHargaSemua)));
+                            }  
                         }
                       }
                     }
@@ -801,8 +804,8 @@ public class Pembayaran extends javax.swing.JFrame {
                     for(String tes: jumlahHarga3){
                         harga4 += tes;
                     }
-                    int diskon = (int)(0.1 * Integer.parseInt(harga4));
-                    this.totalHargaSemua = Integer.parseInt(harga4) - diskon;
+//                    int diskon = (int)(0.1 * Integer.parseInt(harga4));
+                    this.totalHargaSemua = Integer.parseInt(harga4);
                     JOptionPane.showMessageDialog(rootPane, "Harga all satu : " + totalHargaSemua);
                     Statement rahasia = dbConnection.getConnection().createStatement();
                     String rahasia2 = String.format("select point_member from tabel_member where id_member = \"%s\";", this.searchByID.getText());
@@ -810,23 +813,36 @@ public class Pembayaran extends javax.swing.JFrame {
                                 if(rs3.next()){
 //                                    JOptionPane.showMessageDialog(rootPane, "Bisa masuk");
                                     if(Integer.parseInt(rs3.getString("point_member")) >= 4000){
-                                        int diskon2 = (int)(0.2 * this.totalHargaSemua);
-                                        JOptionPane.showMessageDialog(rootPane, "Besar diskon pertama : " + diskon);
+                                        int diskon2 = (int)(0.3 * this.totalHargaSemua);
+                                        JOptionPane.showMessageDialog(rootPane, "Besar diskon pertama : " + diskon2);
                                         JOptionPane.showMessageDialog(rootPane, "Besar diskon kedua : " + diskon2);
                                         this.totalHargaSemua = this.totalHargaSemua - diskon2;
                                         JOptionPane.showMessageDialog(rootPane, "Harga All dua : " + this.totalHargaSemua);
-                                        this.potonganDiskon.setText("Rp" + df.format(diskon + diskon2));
+                                        this.potonganDiskon.setText("Rp" + df.format(diskon2));
+                                        System.out.println("Diskon 2 : " + diskon2);
                                         JOptionPane.showMessageDialog(rootPane, "Harga All terakhir : " + this.totalHargaSemua);
                                         this.hargaAkhir.setText("Rp" + String.valueOf(df.format(this.totalHargaSemua)));
                                     }else{
-                                        this.potonganDiskon.setText("Rp" + df.format(diskon));
+                                        int diskon2 = (int)(0.1 * this.totalHargaSemua);
+                                        this.potonganDiskon.setText("Rp" + df.format(diskon2));
                                         JOptionPane.showMessageDialog(rootPane, "Harga All terakhir : " + this.totalHargaSemua);
                                         this.hargaAkhir.setText("Rp" + String.valueOf(df.format(this.totalHargaSemua)));
                                     }
                                 }
                 }
                 }else{
+                    ArrayList<String> harga1 = new ArrayList<String>();
+                    String harga4 = "";
+                    String[] jumlahHarga2 = this.totalHargaKeseluruhan.getText().split("Rp");   
+                    String[] jumlahHarga3 = jumlahHarga2[1].split(",");
+                    for(String tes: jumlahHarga3){
+                        harga4 += tes;
+                    }
+                    this.totalHargaSemua = Integer.parseInt(harga4);
                     this.statusMember.setText("Bukan Member");
+                    this.potonganDiskon.setText("Rp" + df.format(harga4));
+                    JOptionPane.showMessageDialog(rootPane, "Harga All terakhir : " + this.totalHargaSemua);
+                    this.hargaAkhir.setText("Rp" + String.valueOf(df.format(this.totalHargaSemua)));
                 }
             }catch(SQLException e){
                 e.printStackTrace();
@@ -927,7 +943,7 @@ public class Pembayaran extends javax.swing.JFrame {
                                 String query1 = String.format("insert into tabel_riwayat_pembelian(id_admin, id_member, waktu_transaksi, tanggal_transaksi, id_barang, jumlah_beli_barang, total_harga, pembayaran, nama_barang) values(\"%s\",\"%s\", curtime(), curdate(), \"%s\", \"%s\", \"%s\", \"%s\", \"%s\");", this.idAdminS, this.idMemberS, this.idBarangs, jumlahBarang23, this.totalHargaSemua, Integer.parseInt(this.inputPembayaran.getText()), namaBarang2);
                                 st1.executeUpdate(query1);
 //                                JOptionPane.showMessageDialog(rootPane, "Jumlah PCS : " + jumlahPCS);
-                                int pointMember = (int) (0.2 * this.totalHargaSemua);
+                                int pointMember = (int) (0.02 * this.totalHargaSemua);
 //                                JOptionPane.showMessageDialog(rootPane, "PointMember : " + pointMember);
                                 Statement st2 = dbConnection.getConnection().createStatement();
                                 String query2 = String.format("Select point_member from tabel_member where id_member = \"%s\";", this.idMemberS);
@@ -1089,9 +1105,9 @@ public class Pembayaran extends javax.swing.JFrame {
                             try{
                                 System.out.println(this.idAdminS + " : "+this.idMemberS + " : "+ this.idBarangs + " : "+ jumlahPCS + " : "+this.totalHargaSemua + " : "+Integer.parseInt(this.inputPembayaran.getText()));
                                 Statement st1 = dbConnection.getConnection().createStatement();
-                                String query1 = String.format("insert into tabel_riwayat_pembelian(id_admin, id_member, waktu_transaksi, tanggal_transaksi, id_barang, jumlah_beli_barang, total_harga, pembayaran, nama_barang) values(\"%s\",\"%s\", curtime(), curdate(), \"%s\", \"%s\", \"%s\", \"%s\", \"%s\");", this.idAdminS, this.idMemberS, this.idBarangs, jumlahPCS, this.totalHargaSemua, Integer.parseInt(this.inputPembayaran.getText()),namaBarang2);
+                                String query1 = String.format("insert into tabel_riwayat_pembelian(id_admin, id_member, waktu_transaksi, tanggal_transaksi, id_barang, jumlah_beli_barang, total_harga, pembayaran, nama_barang) values(\"%s\",\"%s\", curtime(), curdate(), \"%s\", \"%s\", \"%s\", \"%s\", \"%s\");", this.idAdminS, this.idMemberS, this.idBarangs, jumlahBarang23, this.totalHargaSemua, Integer.parseInt(this.inputPembayaran.getText()),namaBarang2);
                                 st1.executeUpdate(query1);
-                                int pointMember = (int) (0.2 * this.totalHargaSemua);
+                                int pointMember = (int) (0.02 * this.totalHargaSemua);
                                 Statement st2 = dbConnection.getConnection().createStatement();
                                 String query2 = String.format("Select point_member from tabel_member where id_member = \"%s\";", this.idMemberS);
                                 ResultSet rs2 = st2.executeQuery(query2);
