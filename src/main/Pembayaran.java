@@ -28,6 +28,7 @@ public class Pembayaran extends javax.swing.JFrame {
     int jumlahBeliBarang;
     Integer baris;
     Integer baris2;
+    Integer baris3;
     
 //    Integer pointMember;
     
@@ -36,7 +37,7 @@ public class Pembayaran extends javax.swing.JFrame {
         this.dbConnection = KoneksiDatabase.getInstance();
 //        getDataBarang();
         System.out.println(getSize());
-        this.tombolSimpan.setVisible(false);
+//        this.tombolSimpan.setVisible(false);
         setLocationRelativeTo(null);
         getDataBarangAll();
         
@@ -60,15 +61,46 @@ public class Pembayaran extends javax.swing.JFrame {
    
     
     private void ubahDataBaris() {
-        int selectedRow = tabelPembelianBarang.getSelectedRow();
-        if (selectedRow == -1) {
-            JOptionPane.showMessageDialog(this, "Pilih baris yang akan diubah.", "Peringatan", JOptionPane.WARNING_MESSAGE);
-            return;
+        
+        try{
+            Statement st1 = dbConnection.getConnection().createStatement();
+            String query1 = String.format("select * from tabel_barang;");
+            ResultSet rs1 = st1.executeQuery(query1);
+            if(rs1.next()){
+                if(jumlahBarangYangDibeli.getText().isBlank()){
+                    JOptionPane.showMessageDialog(this, "Mohon tidak mengosongkan input jumlah!");
+                }
+                else if(Integer.parseInt(jumlahBarangYangDibeli.getText()) == 0){
+                    JOptionPane.showMessageDialog(this, "Mohon input angka yang valid!");
+                }else{
+                    if(Integer.parseInt(rs1.getString("jumlah_barang")) - Integer.parseInt(this.jumlahBarangYangDibeli.getText()) < 0){
+                    JOptionPane.showMessageDialog(this, "Jumlah stok tidak mencukupi!");
+                    }else{
+                    int selectedRow = tabelPembelianBarang.getSelectedRow();
+                    if (selectedRow == -1) {
+                        JOptionPane.showMessageDialog(this, "Pilih baris yang akan diubah.", "Peringatan", JOptionPane.WARNING_MESSAGE);
+                        return;
+                    }
+                    DefaultTableModel model = (DefaultTableModel) tabelPembelianBarang.getModel();
+                    model.setValueAt(this.jumlahBarangYangDibeli.getText(), selectedRow, 4);
+                    model.fireTableRowsUpdated(selectedRow, selectedRow);
+                    System.out.println("Kalkulasi Ulang 1:" + Integer.parseInt(String.valueOf(this.tabelDataBarang.getValueAt(selectedRow, 4))));
+                        System.out.println("Harga per pcs : " + String.valueOf(Integer.parseInt(rs1.getString("harga_barang"))));
+                    int kalkulasiUlang = (int) Integer.parseInt(this.jumlahBarangYangDibeli.getText()) * Integer.parseInt(rs1.getString("harga_barang"));
+                    System.out.println("Kalkulasi Ulang 2:" + this.tabelDataBarang.getValueAt(selectedRow, 4));
+                    this.modelTblPbl.setValueAt(kalkulasiUlang, selectedRow, 5);
+                    
+                    System.out.println("Kalkulasi Ulang 3:" + kalkulasiUlang);
+                    this.jumlahBarangYangDibeli.setText("");
+                    this.hargaAkhir.setText("Rp"+df.format(kalkulasiUlang));
+                    this.totalHargaKeseluruhan.setText("Rp"+df.format(kalkulasiUlang));
+                    }
+                }
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
         }
-        DefaultTableModel model = (DefaultTableModel) tabelPembelianBarang.getModel();
-        model.setValueAt("Value Baru", selectedRow, 0);
-        model.setValueAt("Value Baru", selectedRow, 3);
-        model.fireTableRowsUpdated(selectedRow, selectedRow);
+        
     }
     
     void getAdminBio(String nama, int id){
@@ -276,7 +308,6 @@ public class Pembayaran extends javax.swing.JFrame {
         statusMember = new javax.swing.JLabel();
         tombolSearch = new javax.swing.JButton();
         tombolReset = new javax.swing.JToggleButton();
-        tombolSimpan = new javax.swing.JButton();
         jLabel13 = new javax.swing.JLabel();
         inputPembayaran = new javax.swing.JTextField();
         tombolBayar = new javax.swing.JButton();
@@ -365,7 +396,7 @@ public class Pembayaran extends javax.swing.JFrame {
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(166, 156, 172));
-        jLabel8.setText("Diskon  10%");
+        jLabel8.setText("Diskon ");
 
         totalHargaKeseluruhan.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         totalHargaKeseluruhan.setForeground(new java.awt.Color(241, 218, 196));
@@ -459,14 +490,6 @@ public class Pembayaran extends javax.swing.JFrame {
             }
         });
 
-        tombolSimpan.setBackground(new java.awt.Color(241, 218, 196));
-        tombolSimpan.setText("Simpan");
-        tombolSimpan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tombolSimpanActionPerformed(evt);
-            }
-        });
-
         jLabel13.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(166, 156, 172));
         jLabel13.setText("Nominal Pembayaran");
@@ -555,7 +578,8 @@ public class Pembayaran extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(768, 768, 768)
-                                .addComponent(jLabel1))
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(25, 25, 25)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -564,12 +588,12 @@ public class Pembayaran extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(namaAdmin, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
-                                    .addComponent(idAdmin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
-                        .addComponent(teksTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(idAdmin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(teksTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(43, 43, 43)))
                         .addComponent(hargaAkhir, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(120, 120, 120))
+                        .addGap(28, 28, 28))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -594,9 +618,7 @@ public class Pembayaran extends javax.swing.JFrame {
                                     .addComponent(tombolSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jumlahBarangYangDibeli, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(tombolReset, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(tombolSimpan))))
+                                .addComponent(tombolReset, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(26, 26, 26)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -607,13 +629,13 @@ public class Pembayaran extends javax.swing.JFrame {
                             .addComponent(potonganDiskon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGap(229, 229, 229))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addGap(0, 130, Short.MAX_VALUE)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 730, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 730, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(127, 127, 127))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(17, 17, 17)
+                .addContainerGap()
                 .addComponent(tombolKembali, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(36, 36, 36)
                 .addComponent(daftarMember, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -645,7 +667,7 @@ public class Pembayaran extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(hargaAkhir)
                             .addComponent(teksTotal))
-                        .addGap(38, 38, 38)))
+                        .addGap(18, 18, 18)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -663,9 +685,8 @@ public class Pembayaran extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createSequentialGroup()
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jLabel5)
-                                .addComponent(jumlahBarangYangDibeli, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(tombolSimpan, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(9, 9, 9)
+                                .addComponent(jumlahBarangYangDibeli, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(11, 11, 11)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -685,14 +706,14 @@ public class Pembayaran extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(tombolBayar)
                         .addGap(48, 48, 48)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 174, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(buttonTambah)
                     .addComponent(tombolUbah)
                     .addComponent(tombolHapus)
                     .addComponent(daftarMember)
                     .addComponent(tombolKembali))
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addGap(19, 19, 19))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -704,9 +725,8 @@ public class Pembayaran extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 657, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(16, 16, 16))
+                .addGap(0, 6, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 817, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -716,13 +736,14 @@ public class Pembayaran extends javax.swing.JFrame {
         // TODO add your handling code here:
         modelTblPbl = (DefaultTableModel) tabelPembelianBarang.getModel();
         this.tambahBarang();
+        this.jumlahBarangYangDibeli.setText("");
     }//GEN-LAST:event_buttonTambahActionPerformed
 
     private void tombolUbahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tombolUbahActionPerformed
         // TODO add your handling code here:
         
         this.ubahDataBaris();
-        this.tombolSimpan.setVisible(true);
+//        this.tombolSimpan.setVisible(true);
     }//GEN-LAST:event_tombolUbahActionPerformed
 
     private void tombolHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tombolHapusActionPerformed
@@ -868,21 +889,9 @@ public class Pembayaran extends javax.swing.JFrame {
     private void tabelPembelianBarangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelPembelianBarangMouseClicked
         // TODO add your handling code here:
         this.baris = tabelPembelianBarang.getSelectedRow();
+        this.baris3 = tabelPembelianBarang.getSelectedRow();
+        this.jumlahBarangYangDibeli.setText((String) this.modelTblPbl.getValueAt(this.baris3, 4));
     }//GEN-LAST:event_tabelPembelianBarangMouseClicked
-
-    private void tombolSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tombolSimpanActionPerformed
-        // TODO add your handling code here:
-        JOptionPane jop = new JOptionPane();
-        int jawab = jop.showConfirmDialog(this, "Ingin menyimpan perubahan?");
-        switch(jawab){
-            case JOptionPane.YES_OPTION: 
-                                        tabelPembelianBarang.clearSelection();
-                                        this.tombolSimpan.setVisible(false);
-                                        break;
-            case JOptionPane.NO_OPTION: 
-                                        break;
-        }
-    }//GEN-LAST:event_tombolSimpanActionPerformed
 
     private void tombolBayarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tombolBayarActionPerformed
         // TODO add your handling code here:
@@ -1339,7 +1348,6 @@ public class Pembayaran extends javax.swing.JFrame {
     private javax.swing.JButton tombolKembali;
     private javax.swing.JToggleButton tombolReset;
     private javax.swing.JButton tombolSearch;
-    private javax.swing.JButton tombolSimpan;
     private javax.swing.JButton tombolUbah;
     private javax.swing.JLabel totalHargaKeseluruhan;
     // End of variables declaration//GEN-END:variables
