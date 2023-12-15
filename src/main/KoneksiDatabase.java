@@ -10,10 +10,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author acer_
- */
+
 public class KoneksiDatabase {
     private static KoneksiDatabase instance;
     private Connection connection;
