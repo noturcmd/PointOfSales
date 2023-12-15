@@ -126,7 +126,6 @@ public class DaftarMember extends javax.swing.JFrame {
                         st2.executeUpdate(query11);
                         JOptionPane.showMessageDialog(this, "Berhasil Mendaftar!");
                         this.dispose();
-
                     }
                 }catch(SQLException e){
                     e.printStackTrace();

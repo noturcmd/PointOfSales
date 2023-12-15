@@ -37,6 +37,7 @@ public class MainMenu extends javax.swing.JFrame {
         buttonMember = new javax.swing.JButton();
         buttonPembayaran = new javax.swing.JButton();
         buttonRiwayatTransaksi = new javax.swing.JButton();
+        tombolLogout = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -86,6 +87,16 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
 
+        tombolLogout.setBackground(new java.awt.Color(102, 102, 0));
+        tombolLogout.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
+        tombolLogout.setForeground(new java.awt.Color(204, 204, 204));
+        tombolLogout.setText("Logout");
+        tombolLogout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tombolLogoutActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelMainMenuLayout = new javax.swing.GroupLayout(panelMainMenu);
         panelMainMenu.setLayout(panelMainMenuLayout);
         panelMainMenuLayout.setHorizontalGroup(
@@ -102,7 +113,8 @@ public class MainMenu extends javax.swing.JFrame {
                             .addGroup(panelMainMenuLayout.createSequentialGroup()
                                 .addComponent(buttonInputBarang, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(buttonMember, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(buttonMember, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(tombolLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(panelMainMenuLayout.createSequentialGroup()
                         .addGap(14, 14, 14)
                         .addComponent(logo)))
@@ -121,7 +133,9 @@ public class MainMenu extends javax.swing.JFrame {
                 .addGroup(panelMainMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(buttonPembayaran, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(buttonRiwayatTransaksi, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
+                .addComponent(tombolLogout)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -132,7 +146,9 @@ public class MainMenu extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelMainMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(panelMainMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -170,6 +186,13 @@ public class MainMenu extends javax.swing.JFrame {
         lm.setVisible(true); 
     }//GEN-LAST:event_buttonMemberActionPerformed
 
+    private void tombolLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tombolLogoutActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        login lg = new login();
+        lg.setVisible(true);
+    }//GEN-LAST:event_tombolLogoutActionPerformed
+
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -179,5 +202,6 @@ public class MainMenu extends javax.swing.JFrame {
     private javax.swing.JButton buttonRiwayatTransaksi;
     private javax.swing.JLabel logo;
     private javax.swing.JPanel panelMainMenu;
+    private javax.swing.JButton tombolLogout;
     // End of variables declaration//GEN-END:variables
 }
