@@ -327,10 +327,11 @@ public class RiwayatPembelian extends javax.swing.JFrame {
             this.dialogNota.setResizable(false);
             String[] kategoriBarang = String.valueOf(this.tabelRiwayat.getValueAt(this.baris, 10)).split(" - ");
             String[] brandBarang = String.valueOf(this.tabelRiwayat.getValueAt(this.baris, 11)).split(" - ");
+            String[] namaBarang = String.valueOf(this.tabelRiwayat.getValueAt(this.baris, 4)).split(" - ");
             this.idTransaksiNota.setText((String) this.tabelRiwayat.getValueAt(this.baris, 0));
             
             for(int i = 0; i < kategoriBarang.length; i++){
-                modelTabelNota.addRow(new Object[]{(i + 1), this.tabelRiwayat.getValueAt(this.baris, 1),this.tabelRiwayat.getValueAt(this.baris, 2),this.tabelRiwayat.getValueAt(this.baris, 3),this.tabelRiwayat.getValueAt(this.baris, 4),this.tabelRiwayat.getValueAt(this.baris, 5),this.tabelRiwayat.getValueAt(this.baris, 6),this.tabelRiwayat.getValueAt(this.baris, 7),this.tabelRiwayat.getValueAt(this.baris, 8),this.tabelRiwayat.getValueAt(this.baris, 9),kategoriBarang[i],brandBarang[i]});
+                modelTabelNota.addRow(new Object[]{(i + 1), this.tabelRiwayat.getValueAt(this.baris, 1),this.tabelRiwayat.getValueAt(this.baris, 2),this.tabelRiwayat.getValueAt(this.baris, 3),namaBarang[i],this.tabelRiwayat.getValueAt(this.baris, 5),this.tabelRiwayat.getValueAt(this.baris, 6),this.tabelRiwayat.getValueAt(this.baris, 7),this.tabelRiwayat.getValueAt(this.baris, 8),this.tabelRiwayat.getValueAt(this.baris, 9),kategoriBarang[i],brandBarang[i]});
             }
             
             
