@@ -48,7 +48,6 @@ public class RiwayatPembelian extends javax.swing.JFrame {
             }
             
             int totalPenghasilan = 0;
-            String huh = "";
             for(int i = 0; i < tabelRiwayat.getRowCount(); i++){
 //                totalPenghasilan += Integer.parseInt((String) tabelRiwayat.getValueAt(i, 8));
                 String[] getTotal = String.valueOf(this.tabelRiwayat.getValueAt(i, 8)).split(" - ");
@@ -56,10 +55,10 @@ public class RiwayatPembelian extends javax.swing.JFrame {
                 for(String tes: getTotal){
                     String[] getTotal2 = tes.split(",");
                     for(String tes2 : getTotal2){
-                        huh += tes2;
+                        totalPenghasilan += Integer.parseInt(tes2);
                     }
                 }
-                totalPenghasilan += Integer.parseInt(huh);
+                
             }
             
             if(totalPenghasilan == 0){
@@ -338,11 +337,13 @@ public class RiwayatPembelian extends javax.swing.JFrame {
             String[] kategoriBarang = String.valueOf(this.tabelRiwayat.getValueAt(this.baris, 10)).split(" - ");
             String[] brandBarang = String.valueOf(this.tabelRiwayat.getValueAt(this.baris, 11)).split(" - ");
             String[] namaBarang = String.valueOf(this.tabelRiwayat.getValueAt(this.baris, 4)).split(" - ");
-            String[] jumlahBarang = String.valueOf(this.tabelRiwayat.getValueAt(this.baris, 8)).split(" - ");
+            String[] jumlahBarang = String.valueOf(this.tabelRiwayat.getValueAt(this.baris, 7)).split(" - ");
+            String[] idBarang = String.valueOf(this.tabelRiwayat.getValueAt(this.baris, 3)).split(" - ");
+            String[] hargaBarang = String.valueOf(this.tabelRiwayat.getValueAt(this.baris, 8)).split(" - ");
             this.idTransaksiNota.setText((String) this.tabelRiwayat.getValueAt(this.baris, 0));
             
             for(int i = 0; i < kategoriBarang.length; i++){
-                modelTabelNota.addRow(new Object[]{(i + 1), this.tabelRiwayat.getValueAt(this.baris, 1),this.tabelRiwayat.getValueAt(this.baris, 2),this.tabelRiwayat.getValueAt(this.baris, 3),namaBarang[i],this.tabelRiwayat.getValueAt(this.baris, 5),this.tabelRiwayat.getValueAt(this.baris, 6),this.tabelRiwayat.getValueAt(this.baris, 7),jumlahBarang[i],this.tabelRiwayat.getValueAt(this.baris, 9),kategoriBarang[i],brandBarang[i]});
+                modelTabelNota.addRow(new Object[]{(i + 1), this.tabelRiwayat.getValueAt(this.baris, 1),this.tabelRiwayat.getValueAt(this.baris, 2),idBarang[i],namaBarang[i],this.tabelRiwayat.getValueAt(this.baris, 5),this.tabelRiwayat.getValueAt(this.baris, 6),jumlahBarang[i],hargaBarang[i],this.tabelRiwayat.getValueAt(this.baris, 9),kategoriBarang[i],brandBarang[i]});
             }
             
             
