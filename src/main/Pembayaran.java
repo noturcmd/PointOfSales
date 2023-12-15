@@ -1005,9 +1005,9 @@ public class Pembayaran extends javax.swing.JFrame {
             hargaBarang2 += String.valueOf(tabelPembelianBarang.getValueAt(i, 5)+" - ");
         }
         
-        JOptionPane.showMessageDialog(this, hargaBarang2 + ", Harga per");
-        
-        JOptionPane.showMessageDialog(this, idBarangs + ", ID");
+//        JOptionPane.showMessageDialog(this, hargaBarang2 + ", Harga per");
+//        
+//        JOptionPane.showMessageDialog(this, idBarangs + ", ID");
         
         String[] idBarang2 = idBarang3.split(" - ");
         ArrayList<String> idBaru = new ArrayList<>();
@@ -1036,7 +1036,7 @@ public class Pembayaran extends javax.swing.JFrame {
                                 
                                 String query1 = String.format("insert into tabel_riwayat_pembelian(id_admin, id_member, waktu_transaksi, tanggal_transaksi, id_barang, jumlah_beli_barang, total_harga, pembayaran, nama_barang, kategori_barang, brand_barang) values(\"%s\",\"%s\", curtime(), curdate(), \"%s\", \"%s\", \"%s\", \"%s\", \"%s\",\"%s\",\"%s\");", this.idAdminS, this.idMemberS, idBarang3, jumlahBarang23,hargaBarang2, Integer.parseInt(this.inputPembayaran.getText()), namaBarang2,kategoriBarang2,brandBarang2);
                                 st1.executeUpdate(query1);
-                                JOptionPane.showMessageDialog(this, "Member == ");
+//                                JOptionPane.showMessageDialog(this, "Member == ");
 //                                JOptionPane.showMessageDialog(rootPane, "Jumlah PCS : " + jumlahPCS);
                                 int pointMember = (int) (0.02 * this.totalHargaSemua);
 //                                JOptionPane.showMessageDialog(rootPane, "PointMember : " + pointMember);
@@ -1151,7 +1151,7 @@ public class Pembayaran extends javax.swing.JFrame {
                                 System.out.println("HAHAHAH INI SUDAH LEBIH DALAM");
                                 String query1 = String.format("insert into tabel_riwayat_pembelian(id_admin, id_member, waktu_transaksi, tanggal_transaksi, id_barang, jumlah_beli_barang, total_harga, pembayaran, nama_barang, kategori_barang, brand_barang) values(\"%s\",\"%s\", curtime(), curdate(), \"%s\", \"%s\", \"%s\", \"%s\", \"%s\",\"%s\",\"%s\");", this.idAdminS, "0", idBarang3, jumlahBarang23, hargaBarang2, Integer.parseInt(this.inputPembayaran.getText()),namaBarang2, kategoriBarang2, brandBarang2);
                                 st1.executeUpdate(query1);
-                                JOptionPane.showMessageDialog(this, "bukan member == ");
+//                                JOptionPane.showMessageDialog(this, "bukan member == ");
                                 System.out.println("Jumlah Beli Barang bukan member dan sama dengan : " + jumlahPCS);
 
                                 for(int i = 0; i < idBaru.size(); i++){
@@ -1203,7 +1203,7 @@ public class Pembayaran extends javax.swing.JFrame {
                                 Statement st1 = dbConnection.getConnection().createStatement();
                                 String query1 = String.format("insert into tabel_riwayat_pembelian(id_admin, id_member, waktu_transaksi, tanggal_transaksi, id_barang, jumlah_beli_barang, total_harga, pembayaran, nama_barang, kategori_barang, brand_barang) values(\"%s\",\"%s\", curtime(), curdate(), \"%s\", \"%s\", \"%s\", \"%s\", \"%s\",\"%s\",\"%s\");", this.idAdminS, this.idMemberS, idBarang3, jumlahBarang23, hargaBarang2, Integer.parseInt(this.inputPembayaran.getText()),namaBarang2, kategoriBarang2, brandBarang2);
                                 st1.executeUpdate(query1);
-                                JOptionPane.showMessageDialog(this, "Member > ");
+//                                JOptionPane.showMessageDialog(this, "Member > ");
                                 int pointMember = (int) (0.02 * this.totalHargaSemua);
                                 Statement st2 = dbConnection.getConnection().createStatement();
                                 String query2 = String.format("Select point_member from tabel_member where id_member = \"%s\";", this.idMemberS);
@@ -1316,7 +1316,7 @@ public class Pembayaran extends javax.swing.JFrame {
                                 Statement st1 = dbConnection.getConnection().createStatement();
                                 String query1 = String.format("insert into tabel_riwayat_pembelian(id_admin, id_member, waktu_transaksi, tanggal_transaksi, id_barang, jumlah_beli_barang, total_harga, pembayaran, nama_barang, kategori_barang, brand_barang) values(\"%s\",\"%s\", curtime(), curdate(), \"%s\", \"%s\", \"%s\", \"%s\", \"%s\",\"%s\",\"%s\");", this.idAdminS, this.idMemberS, idBarang3, jumlahBarang23, hargaBarang2, Integer.parseInt(this.inputPembayaran.getText()),namaBarang2, kategoriBarang2, brandBarang2);
                                 st1.executeUpdate(query1);
-                                JOptionPane.showMessageDialog(this, "bukan member > ");
+//                                JOptionPane.showMessageDialog(this, "bukan member > ");
                                         for(int i = 0; i < idBaru.size(); i++){
                                             try (
                                             Statement st5 = dbConnection.getConnection().createStatement()) {

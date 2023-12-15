@@ -87,7 +87,7 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
 
-        tombolLogout.setBackground(new java.awt.Color(102, 102, 0));
+        tombolLogout.setBackground(new java.awt.Color(71, 73, 115));
         tombolLogout.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
         tombolLogout.setForeground(new java.awt.Color(204, 204, 204));
         tombolLogout.setText("Logout");

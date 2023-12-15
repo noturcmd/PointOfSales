@@ -18,7 +18,7 @@ public class DaftarMember extends javax.swing.JFrame {
         getContentPane().setBackground(new Color(14,41,84));
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
-        getContentPane().setBackground(new Color(14,41,84));
+        getContentPane().setBackground(new Color(71,73,115));
     }
 
     
