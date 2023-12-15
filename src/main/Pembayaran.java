@@ -892,20 +892,12 @@ public class Pembayaran extends javax.swing.JFrame {
         for(int i = 0; i < tabelPembelianBarang.getRowCount(); i++){
             jumlahBarang23 += Integer.parseInt((String) this.tabelPembelianBarang.getValueAt(i, 4));
         }
-//        String huhu = "";
-//        for(int i = 0; i < tabelPembelianBarang.getRowCount(); i++){
-//            String[] getHargaHu = String.valueOf(tabelPembelianBarang.getValueAt(i, 5)).split(",");
-//            for(String tes: getHargaHu){
-//                System.out.println("Tes tes :" + tes);
-//                huhu += tes;
-//            }
-//            System.out.println("Tes tes :" + huhu);
-//            jumlahPCS +=Integer.parseInt(getHargaHu[i]);
-//        }
+
         
         String namaBarang2 = "";
+        
         for(int i = 0; i < tabelPembelianBarang.getRowCount(); i++){
-            namaBarang2 += String.valueOf(tabelPembelianBarang.getValueAt(i, 1)) + ",";
+            namaBarang2 += String.valueOf(tabelPembelianBarang.getValueAt(i, 1)) + " - ";
         }
         
 //        JOptionPane.showMessageDialog(this, "namaBarang2 : " + namaBarang2);
