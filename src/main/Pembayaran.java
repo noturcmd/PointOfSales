@@ -260,8 +260,6 @@ public class Pembayaran extends javax.swing.JFrame {
                             if (idFound == false) {
                                 namaBarangs = (String) this.tabelDataBarang.getValueAt(this.baris2, 1);
                                 modelTblPbl.addRow(new Object[]{rs1.getString("id_barang"), namaBarangs, rs1.getString("kategori_barang"), rs1.getString("brand_barang"),this.jumlahBarangYangDibeli.getText(), df.format(Integer.parseInt(rs1.getString("harga_barang")) * Integer.parseInt(this.jumlahBarangYangDibeli.getText()))});
-                            }else{
-                                
                             }
 //                            JOptionPane.showMessageDialog(this, "Jumlah barang yang  dibeli 2:" + jumlahPCS);
 //                            for(int i = 0; i < tabelPembelianBarang.getRowCount(); i ++){
@@ -301,6 +299,7 @@ public class Pembayaran extends javax.swing.JFrame {
                             }
 
                             this.totalHargaSemua = Integer.parseInt(harga4);
+//                            JOptionPane.showMessageDialog(rootPane, "Harga");
 
 
                             if(this.statusMember.getText().equals("Member")){
@@ -322,9 +321,11 @@ public class Pembayaran extends javax.swing.JFrame {
                                             this.hargaAkhir.setText("Rp" + String.valueOf(df.format(this.totalHargaSemua)));
                                         }else{
                                             int diskonPotong = (int)(0.1 * Integer.parseInt(harga4));
+                                            
                                             this.potonganDiskon.setText("Rp" + df.format(diskonPotong));
                                             int hargaAfterDiskon = Integer.parseInt(harga4) - diskonPotong;
-                                            this.hargaAkhir.setText("Rp" + String.valueOf(df.format(this.totalHargaSemua - diskonPotong)));
+                                            this.totalHargaSemua = hargaAfterDiskon;
+                                            this.hargaAkhir.setText("Rp" + String.valueOf(df.format(this.totalHargaSemua)));
                                         }
                                     }
                                 }catch(SQLException e){
@@ -338,6 +339,7 @@ public class Pembayaran extends javax.swing.JFrame {
                         }
                       }
                     }
+                        JOptionPane.showMessageDialog(rootPane, "Harga AKhri semua : " + this.totalHargaSemua);
                     
                 } catch (SQLException e) {
                     e.printStackTrace();
@@ -915,8 +917,8 @@ public class Pembayaran extends javax.swing.JFrame {
                                     }else{
                                         int diskon2 = (int)(0.1 * this.totalHargaSemua);
                                         this.potonganDiskon.setText("Rp" + df.format(diskon2));
-//                                        JOptionPane.showMessageDialog(rootPane, "Harga All terakhir : " + this.totalHargaSemua);
-                                        this.hargaAkhir.setText("Rp" + String.valueOf(df.format(this.totalHargaSemua)));
+                                        JOptionPane.showMessageDialog(rootPane, "Harga All terakhir : " + this.totalHargaSemua);
+                                        this.hargaAkhir.setText("Rp" + String.valueOf(df.format(this.totalHargaSemua - diskon2)));
                                     }
                                 }
                 }
@@ -1028,6 +1030,7 @@ public class Pembayaran extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Mohon input nominal yang valid!");
             }else if(this.inputPembayaran.getText().matches("\\d*")){
                   if(Integer.parseInt(this.inputPembayaran.getText()) > 0 && Integer.parseInt(this.inputPembayaran.getText()) < this.totalHargaSemua){
+                      JOptionPane.showMessageDialog(this, "Harga semua : " + this.totalHargaSemua);
                         JOptionPane.showMessageDialog(this, "Uang Anda kurang : "+ df.format(this.totalHargaSemua - Integer.parseInt(this.inputPembayaran.getText())));
                     }else if(Integer.parseInt(this.inputPembayaran.getText()) == this.totalHargaSemua){
                         if(this.statusMember.getText().equals("Member")){
